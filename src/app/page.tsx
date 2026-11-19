@@ -5,6 +5,7 @@ import { POPULAR_CITIES, CityPreset, fetchLiveAirQuality, getSyntheticCityData }
 import { AirQualityData } from '@/types';
 import { Navbar } from '@/components/Navbar';
 import { AQIHero } from '@/components/AQIHero';
+import { TodaysSuggestions } from '@/components/TodaysSuggestions';
 import { RoutineArchitect } from '@/components/RoutineArchitect';
 import { IndoorHacksLab } from '@/components/IndoorHacksLab';
 import { AirSnapVision } from '@/components/AirSnapVision';
@@ -74,6 +75,14 @@ export default function AirAstraHome() {
           airData={airData}
           onOpenPurifier3D={() => setIsPurifier3DOpen(true)}
           onOpenEmergency={() => setIsEmergencyOpen(true)}
+        />
+
+        {/* PromptWars Reference Mockup Component: Urban Air Quality Assistant & Today's Suggestions */}
+        <TodaysSuggestions
+          airData={airData}
+          onOpenPurifier3D={() => setIsPurifier3DOpen(true)}
+          onOpenEmergency={() => setIsEmergencyOpen(true)}
+          onSelectTab={(tab) => setActiveTab(tab)}
         />
 
         {/* Navigation Tabs Bar */}
