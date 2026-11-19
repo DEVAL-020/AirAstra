@@ -1,86 +1,77 @@
 @import "tailwindcss";
 
 @layer base {
-  :root {
-    --bg-base: #0a1410;
-    --card-surface: #10211a;
-    --card-elevated: #162b22;
-    --border-subtle: rgba(255, 255, 255, 0.08);
-    --border-warm: rgba(52, 211, 153, 0.2);
-    --accent-emerald: #10b981;
-    --accent-sage: #34d399;
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --text-muted: #64748b;
-  }
-
   body {
-    background-color: #09120e;
-    color: #e2e8f0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #0b1118;
+    color: #f1f5f9;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
     overflow-x: hidden;
     background-image: 
-      radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.06), transparent 45%),
-      radial-gradient(circle at 85% 30%, rgba(15, 118, 110, 0.04), transparent 50%),
-      radial-gradient(circle at 15% 70%, rgba(185, 28, 28, 0.03), transparent 40%);
+      radial-gradient(ellipse 90% 60% at 50% 0%, #152230 0%, #0b1118 100%);
     background-attachment: fixed;
-    letter-spacing: -0.011em;
+    letter-spacing: -0.015em;
+    -webkit-font-smoothing: antialiased;
   }
 }
 
-/* Custom refined scrollbar */
+/* Minimalist weather scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: #09120e;
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1b3329;
-  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #254639;
+  background: rgba(255, 255, 255, 0.22);
 }
 
-/* Tactile human card styling */
-.human-card {
-  background: #102019;
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.2);
-  transition: all 0.2s ease-out;
-}
-
-.human-card:hover {
-  border-color: rgba(52, 211, 153, 0.25);
-  box-shadow: 0 8px 30px -4px rgba(0, 0, 0, 0.5), 0 2px 6px rgba(0, 0, 0, 0.25);
-}
-
-.human-pill {
-  background: #152921;
+/* Authentic Weather App Frosted Glass Card */
+.weather-card {
+  background: rgba(255, 255, 255, 0.045);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
   border: 1px solid rgba(255, 255, 255, 0.08);
-}
-.human-pill:hover {
-  background: #1c362b;
-  border-color: rgba(52, 211, 153, 0.3);
-}
-
-/* Subtle clean badge */
-.badge-clean {
-  background: rgba(16, 185, 129, 0.12);
-  border: 1px solid rgba(16, 185, 129, 0.22);
-  color: #a7f3d0;
+  border-radius: 1.25rem;
+  box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.35);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.badge-crimson {
-  background: rgba(185, 28, 28, 0.18);
-  border: 1px solid rgba(239, 68, 68, 0.3);
-  color: #fca5a5;
+.weather-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.14);
 }
 
-.badge-amber {
-  background: rgba(217, 119, 6, 0.16);
-  border: 1px solid rgba(245, 158, 11, 0.25);
-  color: #fde68a;
+.weather-card-solid {
+  background: rgba(20, 30, 42, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.25rem;
+}
+
+/* Segmented Control iOS Style */
+.ios-segment {
+  background: rgba(255, 255, 255, 0.06);
+  padding: 4px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.ios-segment-btn {
+  padding: 6px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.65);
+  transition: all 0.18s ease;
+}
+
+.ios-segment-btn.active {
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  font-weight: 600;
 }
