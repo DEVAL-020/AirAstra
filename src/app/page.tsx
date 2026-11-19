@@ -15,7 +15,7 @@ import { FamilyPlanExport } from '@/components/FamilyPlanExport';
 import { Purifier3DModal } from '@/components/Purifier3DModal';
 import { EmergencySmogModal } from '@/components/EmergencySmogModal';
 import { 
-  CalendarClock, 
+  Calendar, 
   Wrench, 
   Camera, 
   MessageSquare, 
@@ -23,12 +23,12 @@ import {
   Printer, 
   Wind,
   ShieldCheck,
-  HeartHandshake
+  Heart
 } from 'lucide-react';
 
 export default function AirAstraHome() {
   const [currentCity, setCurrentCity] = useState<CityPreset>(POPULAR_CITIES[0]); // Default: New Delhi
-  const [airData, setAirData] = useState<AirQualityData>(getSyntheticCityData(POPULAR_CITIES[0]));
+  const [airData, setAirData] = useState<AirQualityData>(() => getSyntheticCityData(POPULAR_CITIES[0], 8));
   const [activeTab, setActiveTab] = useState<'routine' | 'hacks' | 'vision' | 'chat' | 'community' | 'export'>('routine');
   
   // Modals
@@ -49,17 +49,17 @@ export default function AirAstraHome() {
   }, [currentCity]);
 
   const tabs = [
-    { id: 'routine', label: 'Daily Routine Architect', icon: CalendarClock },
-    { id: 'hacks', label: 'Indoor Hacks & DIY Lab', icon: Wrench },
-    { id: 'vision', label: 'AirSnap Vision AI', icon: Camera },
-    { id: 'chat', label: 'Astra Voice Advisor', icon: MessageSquare },
-    { id: 'community', label: 'BreatheTogether Pods', icon: Users },
-    { id: 'export', label: 'Family Smog Protocol', icon: Printer }
+    { id: 'routine', label: 'Daily Routine', icon: Calendar },
+    { id: 'hacks', label: 'DIY Filter Lab', icon: Wrench },
+    { id: 'vision', label: 'AirSnap Leak Scanner', icon: Camera },
+    { id: 'chat', label: 'Astra Health Advisor', icon: MessageSquare },
+    { id: 'community', label: 'Community Pods', icon: Users },
+    { id: 'export', label: 'Printable Family Plan', icon: Printer }
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#060b09] text-slate-100 selection:bg-emerald-500 selection:text-black">
-      {/* Top Navigation */}
+    <div className="min-h-screen flex flex-col bg-[#09140f] text-slate-100">
+      {/* Top Header */}
       <Navbar
         currentCity={currentCity}
         onSelectCity={(city) => setCurrentCity(city)}
@@ -68,16 +68,9 @@ export default function AirAstraHome() {
         onOpenEmergency={() => setIsEmergencyOpen(true)}
       />
 
-      {/* Main Content Container */}
-      <main className="flex-1 max-w-7xl mx-auto w-full px-4 md:px-8 py-6 space-y-8">
-        {/* Hero Section: Live AQI Dial + 3D GLSL Inversion Simulation */}
-        <AQIHero
-          airData={airData}
-          onOpenPurifier3D={() => setIsPurifier3DOpen(true)}
-          onOpenEmergency={() => setIsEmergencyOpen(true)}
-        />
-
-        {/* PromptWars Reference Mockup Component: Urban Air Quality Assistant & Today's Suggestions */}
+      {/* Main Container */}
+      <main className="flex-1 max-w-7xl mx-auto w-full px-4 md:px-8 py-6 space-y-6">
+        {/* Exact Visual Counterpart from Contest Image 2: Urban Air Quality Assistant & Today's Suggestions */}
         <TodaysSuggestions
           airData={airData}
           onOpenPurifier3D={() => setIsPurifier3DOpen(true)}
@@ -85,8 +78,15 @@ export default function AirAstraHome() {
           onSelectTab={(tab) => setActiveTab(tab)}
         />
 
+        {/* Hero Section: Live AQI Dial + 3D GLSL Inversion Simulation */}
+        <AQIHero
+          airData={airData}
+          onOpenPurifier3D={() => setIsPurifier3DOpen(true)}
+          onOpenEmergency={() => setIsEmergencyOpen(true)}
+        />
+
         {/* Navigation Tabs Bar */}
-        <div className="flex items-center space-x-2 overflow-x-auto pb-2 border-b border-white/10 scrollbar-none">
+        <div className="flex items-center space-x-1.5 overflow-x-auto p-1.5 bg-[#0d1e17] rounded-2xl border border-white/5 scrollbar-none">
           {tabs.map((t) => {
             const Icon = t.icon;
             const isActive = activeTab === t.id;
@@ -95,13 +95,13 @@ export default function AirAstraHome() {
               <button
                 key={t.id}
                 onClick={() => setActiveTab(t.id as any)}
-                className={`flex items-center space-x-2 px-4 py-2.5 rounded-2xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer border ${
+                className={`flex items-center space-x-2 px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
                   isActive
-                    ? 'bg-emerald-500 text-slate-950 border-emerald-400 shadow-lg shadow-emerald-500/25 scale-102 font-bold'
-                    : 'bg-slate-900/60 border-white/5 text-slate-400 hover:text-white hover:bg-slate-800/60'
+                    ? 'bg-emerald-600 text-white shadow-sm font-bold'
+                    : 'text-slate-400 hover:text-white hover:bg-white/5'
                 }`}
               >
-                <Icon className="w-4 h-4" />
+                <Icon className="w-3.5 h-3.5" />
                 <span>{t.label}</span>
               </button>
             );
@@ -109,7 +109,7 @@ export default function AirAstraHome() {
         </div>
 
         {/* Tab Body View */}
-        <section className="transition-all duration-300">
+        <section className="transition-all duration-200">
           {activeTab === 'routine' && <RoutineArchitect airData={airData} />}
           {activeTab === 'hacks' && <IndoorHacksLab onOpenPurifier3D={() => setIsPurifier3DOpen(true)} />}
           {activeTab === 'vision' && <AirSnapVision currentAQI={airData.aqi} />}
@@ -119,7 +119,7 @@ export default function AirAstraHome() {
         </section>
       </main>
 
-      {/* Modals */}
+      {/* 3D Simulation & Emergency Modals */}
       <Purifier3DModal
         isOpen={isPurifier3DOpen}
         onClose={() => setIsPurifier3DOpen(false)}
@@ -132,21 +132,20 @@ export default function AirAstraHome() {
         aqi={airData.aqi}
       />
 
-      {/* Footer */}
-      <footer className="mt-12 border-t border-white/10 py-8 px-4 md:px-8 bg-black/40 text-xs text-slate-500">
+      {/* Human Footer */}
+      <footer className="mt-12 border-t border-white/5 py-8 px-4 md:px-8 bg-[#070f0b] text-xs text-slate-500">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center space-x-2 text-slate-400">
-            <Wind className="w-4 h-4 text-emerald-400" />
             <span className="font-bold text-white">AirAstra</span>
             <span>• Built for severe winter urban smog mitigation</span>
           </div>
 
-          <div className="flex flex-wrap items-center gap-4 text-[11px]">
-            <span>Open-Meteo Air Quality API</span>
+          <div className="flex flex-wrap items-center gap-3 text-[11px] text-slate-400">
+            <span>Open-Meteo Air Quality Telemetry</span>
             <span>•</span>
-            <span>WHO 2021 Particulate Guidelines</span>
+            <span>WHO 2021 Guidelines</span>
             <span>•</span>
-            <span>Harvard T.H. Chan ACH Standards</span>
+            <span>Harvard Healthy Buildings ACH Standard</span>
             <span>•</span>
             <span>EPA Breakpoints</span>
           </div>

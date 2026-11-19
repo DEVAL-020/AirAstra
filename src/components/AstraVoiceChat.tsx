@@ -5,19 +5,17 @@ import { ChatMessage } from '@/types';
 import { sendAstraMessage } from '@/lib/gemini';
 import { soundFX } from '@/lib/sound';
 import { 
-  Bot, 
   Send, 
   Mic, 
   MicOff, 
   Volume2, 
   VolumeX, 
-  Sparkles, 
   User, 
   Loader2,
-  HelpCircle,
-  ShieldAlert
+  Stethoscope,
+  Sparkles,
+  HeartPulse
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
 
 interface AstraVoiceChatProps {
   currentAQI: number;
@@ -29,7 +27,7 @@ export const AstraVoiceChat: React.FC<AstraVoiceChatProps> = ({ currentAQI, city
     {
       id: 'init-1',
       sender: 'astra',
-      text: `Hello! I'm Astra, your AI atmospheric health companion. Outdoor air in ${city} is currently at AQI ${currentAQI}. How can I help protect your household or plan low-emission alternatives today?`,
+      text: `Hello, I'm Astra, your respiratory health and clean-air advisor. Outdoor air in ${city} is currently at AQI ${currentAQI} with active thermal trapping. How is your family feeling today, or what can I help you adjust?`,
       timestamp: 'Just now',
       suggestedActions: [
         'Child coughing in morning smog',
@@ -46,7 +44,6 @@ export const AstraVoiceChat: React.FC<AstraVoiceChatProps> = ({ currentAQI, city
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Auto-scroll to bottom of chat
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -55,7 +52,6 @@ export const AstraVoiceChat: React.FC<AstraVoiceChatProps> = ({ currentAQI, city
     scrollToBottom();
   }, [messages, isLoading]);
 
-  // Speech Recognition (Web Speech API)
   const toggleListening = () => {
     if (typeof window === 'undefined') return;
 
@@ -100,12 +96,10 @@ export const AstraVoiceChat: React.FC<AstraVoiceChatProps> = ({ currentAQI, city
     }
   };
 
-  // Text to Speech
   const speakText = (text: string) => {
     if (!ttsEnabled || typeof window === 'undefined' || !window.speechSynthesis) return;
 
     window.speechSynthesis.cancel();
-    // Strip markdown symbols for speech synthesis
     const cleanText = text.replace(/[#*_`]/g, '');
     const utterance = new SpeechSynthesisUtterance(cleanText);
     utterance.rate = 1.05;
@@ -129,7 +123,6 @@ export const AstraVoiceChat: React.FC<AstraVoiceChatProps> = ({ currentAQI, city
     setIsLoading(true);
 
     try {
-      // Map to Gemini history format
       const history = [...messages, userMsg].map((m) => ({
         role: (m.sender === 'user' ? 'user' : 'model') as 'user' | 'model',
         parts: [{ text: m.text }]
@@ -155,46 +148,45 @@ export const AstraVoiceChat: React.FC<AstraVoiceChatProps> = ({ currentAQI, city
   };
 
   return (
-    <div className="w-full glass-panel rounded-3xl p-6 md:p-8 border border-emerald-500/20 flex flex-col h-[650px] relative">
-      {/* Header */}
-      <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-4">
+    <div className="w-full bg-[#0b1813] rounded-3xl p-5 sm:p-7 border border-white/10 flex flex-col h-[640px] shadow-xl">
+      {/* Clinician Style Header */}
+      <div className="flex items-center justify-between border-b border-white/5 pb-4 mb-4">
         <div className="flex items-center space-x-3">
-          <div className="relative">
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center text-slate-950 font-black shadow-lg shadow-emerald-500/30">
-              <Bot className="w-5 h-5 text-slate-950" />
-            </div>
-            <span className="absolute -bottom-1 -right-1 w-3 h-3 rounded-full bg-emerald-400 border-2 border-slate-900" />
+          <div className="w-10 h-10 rounded-2xl bg-[#142e22] border border-emerald-500/30 flex items-center justify-center text-emerald-400 shadow-sm">
+            <Stethoscope className="w-5 h-5 text-emerald-300" />
           </div>
           <div>
             <h3 className="text-base font-bold text-white flex items-center gap-2">
-              Astra Smog & Respiratory Advisor
-              <span className="text-[10px] font-mono bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-500/30">
-                Live Voice AI
+              Astra
+              <span className="text-[10px] font-medium bg-emerald-950 text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-500/30">
+                Respiratory Advisor
               </span>
             </h3>
-            <p className="text-xs text-slate-400">Contextualized for {city} • Air Quality Index: {currentAQI}</p>
+            <p className="text-xs text-slate-400">
+              Guidance for {city} (AQI {currentAQI}) • WHO & Pediatric Respiratory Framework
+            </p>
           </div>
         </div>
 
-        {/* Voice TTS Toggle */}
+        {/* Audio Output Button */}
         <button
           onClick={() => {
             if (ttsEnabled && typeof window !== 'undefined') window.speechSynthesis.cancel();
             setTtsEnabled(!ttsEnabled);
           }}
-          className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all cursor-pointer ${
+          className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-medium border transition-all cursor-pointer ${
             ttsEnabled
               ? 'bg-emerald-500/15 border-emerald-500/30 text-emerald-300'
-              : 'bg-slate-800 border-white/10 text-slate-400'
+              : 'bg-[#10221a] border-white/10 text-slate-400'
           }`}
         >
           {ttsEnabled ? <Volume2 className="w-4 h-4 text-emerald-400" /> : <VolumeX className="w-4 h-4" />}
-          <span>{ttsEnabled ? 'Voice Output ON' : 'Muted'}</span>
+          <span>{ttsEnabled ? 'Voice ON' : 'Muted'}</span>
         </button>
       </div>
 
-      {/* Messages Stream */}
-      <div className="flex-1 overflow-y-auto space-y-4 pr-2 scrollbar-thin">
+      {/* Messages Feed */}
+      <div className="flex-1 overflow-y-auto space-y-4 pr-1 scrollbar-thin">
         {messages.map((m) => {
           const isAstra = m.sender === 'astra';
 
@@ -204,28 +196,28 @@ export const AstraVoiceChat: React.FC<AstraVoiceChatProps> = ({ currentAQI, city
               className={`flex items-start space-x-3 ${isAstra ? 'justify-start' : 'justify-end'}`}
             >
               {isAstra && (
-                <div className="w-7 h-7 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 flex items-center justify-center shrink-0 mt-1">
-                  <Bot className="w-4 h-4" />
+                <div className="w-7 h-7 rounded-lg bg-[#142e22] border border-emerald-500/25 text-emerald-400 flex items-center justify-center shrink-0 mt-1">
+                  <Stethoscope className="w-3.5 h-3.5" />
                 </div>
               )}
 
               <div
-                className={`max-w-[85%] md:max-w-[75%] rounded-2xl p-4 text-xs leading-relaxed space-y-2 ${
+                className={`max-w-[85%] md:max-w-[78%] rounded-2xl p-4 text-xs leading-relaxed space-y-2.5 ${
                   isAstra
-                    ? 'bg-slate-900/80 border border-emerald-500/20 text-slate-200'
-                    : 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-medium ml-auto'
+                    ? 'bg-[#10221a] border border-white/5 text-slate-200 shadow-sm'
+                    : 'bg-emerald-700 text-white font-medium ml-auto shadow-md'
                 }`}
               >
                 <div className="whitespace-pre-wrap">{m.text}</div>
 
-                {/* Suggested Action Chips */}
+                {/* Quick Suggestion Chips */}
                 {m.suggestedActions && (
-                  <div className="pt-2 flex flex-wrap gap-2 border-t border-white/10">
+                  <div className="pt-2 flex flex-wrap gap-1.5 border-t border-white/5">
                     {m.suggestedActions.map((chip, idx) => (
                       <button
                         key={idx}
                         onClick={() => handleSend(chip)}
-                        className="text-[11px] bg-emerald-500/10 hover:bg-emerald-500/25 border border-emerald-500/30 text-emerald-300 px-2.5 py-1 rounded-lg transition-all cursor-pointer"
+                        className="text-[11px] bg-[#162e23] hover:bg-[#1e3d2f] border border-emerald-500/20 text-emerald-300 px-2.5 py-1 rounded-lg transition-all cursor-pointer"
                       >
                         {chip}
                       </button>
@@ -239,8 +231,8 @@ export const AstraVoiceChat: React.FC<AstraVoiceChatProps> = ({ currentAQI, city
               </div>
 
               {!isAstra && (
-                <div className="w-7 h-7 rounded-lg bg-slate-800 border border-white/10 text-slate-300 flex items-center justify-center shrink-0 mt-1">
-                  <User className="w-4 h-4" />
+                <div className="w-7 h-7 rounded-lg bg-[#10221a] border border-white/10 text-slate-300 flex items-center justify-center shrink-0 mt-1">
+                  <User className="w-3.5 h-3.5" />
                 </div>
               )}
             </div>
@@ -248,17 +240,17 @@ export const AstraVoiceChat: React.FC<AstraVoiceChatProps> = ({ currentAQI, city
         })}
 
         {isLoading && (
-          <div className="flex items-center space-x-2 text-xs text-emerald-400 bg-slate-900/50 p-3 rounded-2xl w-fit border border-emerald-500/20">
-            <Loader2 className="w-4 h-4 animate-spin" />
-            <span>Astra is analyzing air composition & formulating advice...</span>
+          <div className="flex items-center space-x-2 text-xs text-emerald-300 bg-[#10221a] p-3 rounded-2xl w-fit border border-emerald-500/20">
+            <Loader2 className="w-3.5 h-3.5 animate-spin text-emerald-400" />
+            <span>Consulting atmospheric respiratory guidelines...</span>
           </div>
         )}
 
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input Bar with Mic & Send */}
-      <div className="pt-4 border-t border-white/10 space-y-2">
+      {/* Input */}
+      <div className="pt-3 border-t border-white/5 space-y-2">
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -270,31 +262,29 @@ export const AstraVoiceChat: React.FC<AstraVoiceChatProps> = ({ currentAQI, city
             type="text"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
-            placeholder={isListening ? "Listening... Speak clearly into your mic..." : "Ask Astra about masks, coughs, DIY purifiers, or commute windows..."}
-            className={`flex-1 bg-slate-900 border rounded-2xl px-4 py-3 text-xs text-white placeholder-slate-400 focus:outline-none transition-all ${
-              isListening ? 'border-red-500 ring-2 ring-red-500/20' : 'border-white/10 focus:border-emerald-500'
+            placeholder={isListening ? "Listening... Speak naturally..." : "Ask Astra about morning coughs, mask seals, or room filtration..."}
+            className={`flex-1 bg-[#0a1712] border rounded-2xl px-4 py-3 text-xs text-white placeholder-slate-500 focus:outline-none transition-all ${
+              isListening ? 'border-red-500 ring-1 ring-red-500' : 'border-white/10 focus:border-emerald-500'
             }`}
           />
 
-          {/* Speech-to-Text Button */}
           <button
             type="button"
             onClick={toggleListening}
             className={`p-3 rounded-2xl border transition-all cursor-pointer ${
               isListening
-                ? 'bg-rose-500 text-white border-rose-400 animate-pulse'
-                : 'bg-slate-800 text-slate-300 border-white/10 hover:bg-slate-700'
+                ? 'bg-red-500 text-white border-red-400'
+                : 'bg-[#10221a] text-slate-300 border-white/10 hover:bg-[#162e23]'
             }`}
-            title="Speak using microphone (Speech Recognition)"
+            title="Speech input"
           >
             {isListening ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
           </button>
 
-          {/* Send Button */}
           <button
             type="submit"
             disabled={!inputValue.trim() || isLoading}
-            className="p-3 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-bold transition-all disabled:opacity-40 cursor-pointer shadow-lg shadow-emerald-500/20"
+            className="p-3 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold transition-all disabled:opacity-40 cursor-pointer shadow-md"
           >
             <Send className="w-4 h-4" />
           </button>

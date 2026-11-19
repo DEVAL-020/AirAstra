@@ -6,17 +6,15 @@ import { AirQualityData } from '@/types';
 import { soundFX } from '@/lib/sound';
 import { getGeminiKey, saveGeminiKey } from '@/lib/gemini';
 import { 
-  Wind, 
   MapPin, 
   Volume2, 
   VolumeX, 
   Key, 
-  ShieldAlert, 
   Compass, 
-  Sparkles,
   X,
   Check,
-  Layers
+  ShieldAlert,
+  HelpCircle
 } from 'lucide-react';
 
 interface NavbarProps {
@@ -87,26 +85,31 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <>
-      <header className="sticky top-0 z-40 w-full glass-panel border-b border-emerald-500/20 px-4 md:px-8 py-3.5 backdrop-blur-xl">
+      <header className="sticky top-0 z-40 w-full bg-[#091510]/90 border-b border-white/10 px-4 md:px-8 py-3 backdrop-blur-md">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-          {/* Logo & Tagline */}
+          {/* Logo & Human Brand Name */}
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center text-slate-950 font-black shadow-lg shadow-emerald-500/30">
-              <Wind className="w-5 h-5 text-slate-950" />
+            <div className="w-9 h-9 rounded-xl bg-[#142e22] border border-emerald-500/30 flex items-center justify-center text-emerald-400 shadow-sm">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+                <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+                <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+              </svg>
             </div>
             <div>
-              <span className="text-xl font-extrabold tracking-tight text-white flex items-center gap-1.5">
-                AirAstra
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping inline-block" />
-              </span>
-              <span className="hidden sm:block text-[10px] text-emerald-300/80 font-mono">
-                Winter Smog & Community Clean Air OS
-              </span>
+              <div className="flex items-center space-x-2">
+                <span className="text-lg font-bold tracking-tight text-white">AirAstra</span>
+                <span className="text-[10px] font-medium bg-emerald-950/80 text-emerald-300 border border-emerald-500/30 px-2 py-0.2 rounded-full">
+                  Urban Health OS
+                </span>
+              </div>
+              <p className="hidden sm:block text-[11px] text-slate-400 leading-none">
+                Community Winter Smog & Clean Air Assistant
+              </p>
             </div>
           </div>
 
-          {/* City Selector & Geolocation */}
-          <div className="flex items-center space-x-2 bg-slate-900/80 border border-white/10 rounded-2xl px-3 py-1.5 text-xs">
+          {/* City Selector */}
+          <div className="flex items-center space-x-2 bg-[#10221a] border border-white/10 rounded-xl px-3 py-1.5 text-xs shadow-inner">
             <MapPin className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
             <select
               value={currentCity.name}
@@ -114,15 +117,15 @@ export const Navbar: React.FC<NavbarProps> = ({
                 const found = POPULAR_CITIES.find(c => c.name === e.target.value);
                 if (found) onSelectCity(found);
               }}
-              className="bg-transparent text-white font-medium focus:outline-none cursor-pointer pr-1"
+              className="bg-transparent text-white font-medium focus:outline-none cursor-pointer pr-1 text-xs"
             >
               {POPULAR_CITIES.map((c) => (
-                <option key={c.name} value={c.name} className="bg-slate-900 text-white">
+                <option key={c.name} value={c.name} className="bg-[#10221a] text-white">
                   {c.name}, {c.country}
                 </option>
               ))}
               {currentCity.name === 'My Location' && (
-                <option value="My Location" className="bg-slate-900 text-white">
+                <option value="My Location" className="bg-[#10221a] text-white">
                   My Location (GPS)
                 </option>
               )}
@@ -131,44 +134,42 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={handleGeoLocation}
               title="Detect my location"
-              className="p-1 rounded-lg hover:bg-white/10 text-slate-400 hover:text-emerald-400 transition-colors cursor-pointer"
+              className="p-1 rounded hover:bg-white/10 text-slate-400 hover:text-emerald-300 transition-colors cursor-pointer"
             >
               <Compass className="w-3.5 h-3.5" />
             </button>
           </div>
 
-          {/* Right Utilities */}
-          <div className="flex items-center space-x-2.5">
+          {/* Right Action Icons */}
+          <div className="flex items-center space-x-2">
             {/* Live AQI Badge */}
             <div className={`hidden md:flex items-center space-x-2 px-3 py-1 rounded-xl text-xs font-mono font-bold border ${
-              airData.aqi > 250
-                ? 'bg-rose-500/20 text-rose-300 border-rose-500/40'
-                : airData.aqi > 150
-                ? 'bg-amber-500/20 text-amber-300 border-amber-500/40'
-                : 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40'
+              airData.aqi > 200
+                ? 'bg-rose-950/80 text-rose-300 border-rose-500/40'
+                : 'bg-emerald-950/80 text-emerald-300 border-emerald-500/30'
             }`}>
+              <span className="w-2 h-2 rounded-full bg-current animate-pulse"></span>
               <span>AQI {airData.aqi}</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-current" />
             </div>
 
             {/* Ambient Purifier Sound FX Toggle */}
             <button
               onClick={toggleSound}
-              title={isAmbientOn ? 'Turn off HEPA filter white noise' : 'Play relaxing HEPA filter hum (pink noise)'}
+              title={isAmbientOn ? 'Turn off HEPA filter white noise' : 'Play relaxing HEPA filter hum'}
               className={`p-2 rounded-xl border text-xs font-medium transition-all cursor-pointer ${
                 isAmbientOn
-                  ? 'bg-emerald-500/25 border-emerald-400 text-emerald-300'
-                  : 'bg-slate-800/80 border-white/10 text-slate-400 hover:text-white'
+                  ? 'bg-emerald-500/20 border-emerald-400 text-emerald-300'
+                  : 'bg-[#12241c] border-white/10 text-slate-400 hover:text-white hover:bg-[#183126]'
               }`}
             >
-              {isAmbientOn ? <Volume2 className="w-4 h-4 text-emerald-400 animate-pulse" /> : <VolumeX className="w-4 h-4" />}
+              {isAmbientOn ? <Volume2 className="w-4 h-4 text-emerald-400" /> : <VolumeX className="w-4 h-4" />}
             </button>
 
-            {/* Gemini API Key Config */}
+            {/* API Key settings modal */}
             <button
               onClick={handleOpenKeyModal}
-              title="Configure Gemini GenAI Key"
-              className="p-2 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-white/10 text-slate-300 hover:text-emerald-400 transition-colors cursor-pointer"
+              title="Configure Gemini API Key (Optional)"
+              className="p-2 rounded-xl bg-[#12241c] hover:bg-[#183126] border border-white/10 text-slate-400 hover:text-emerald-300 transition-colors cursor-pointer"
             >
               <Key className="w-4 h-4" />
             </button>
@@ -176,19 +177,14 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
       </header>
 
-      {/* Gemini API Key Modal */}
+      {/* Key Setup Dialog */}
       {showKeyModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-          <div className="relative w-full max-w-md bg-slate-900 border border-emerald-500/30 rounded-3xl p-6 space-y-5 shadow-2xl">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm">
+          <div className="relative w-full max-w-md bg-[#10221a] border border-white/15 rounded-3xl p-6 space-y-4 shadow-2xl">
             <div className="flex items-start justify-between">
-              <div className="flex items-center space-x-2.5">
-                <div className="p-2.5 bg-emerald-500/20 text-emerald-400 rounded-xl">
-                  <Key className="w-5 h-5" />
-                </div>
-                <div>
-                  <h3 className="text-base font-bold text-white">Gemini GenAI Key Setup</h3>
-                  <p className="text-xs text-slate-400">Optional: Bring your own Gemini API key</p>
-                </div>
+              <div>
+                <h3 className="text-base font-bold text-white">Google Gemini API Key</h3>
+                <p className="text-xs text-slate-400 mt-0.5">Optional: Direct connection to live Gemini models</p>
               </div>
               <button
                 onClick={() => setShowKeyModal(false)}
@@ -199,25 +195,25 @@ export const Navbar: React.FC<NavbarProps> = ({
             </div>
 
             <p className="text-xs text-slate-300 leading-relaxed">
-              AirAstra comes with a full, calibrated atmospheric AI model that works out of the box. Adding your own Google Gemini API key enables direct live multimodal reasoning.
+              AirAstra comes with a calibrated atmospheric reasoning model pre-installed. Adding your Gemini API key enables direct multimodal vision parsing and conversational synthesis.
             </p>
 
             <form onSubmit={handleSaveKey} className="space-y-4">
               <div>
-                <label className="text-xs text-slate-400 block mb-1">Google Gemini API Key:</label>
+                <label className="text-xs text-slate-400 block mb-1">Your API Key:</label>
                 <input
                   type="password"
                   value={apiKeyInput}
                   onChange={(e) => setApiKeyInput(e.target.value)}
                   placeholder="AIzaSy..."
-                  className="w-full bg-slate-800 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500 font-mono"
+                  className="w-full bg-[#0a1712] border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500 font-mono"
                 />
               </div>
 
               {savedSuccess && (
-                <div className="flex items-center space-x-2 text-xs text-emerald-400 bg-emerald-950/40 p-2.5 rounded-xl border border-emerald-500/30">
-                  <Check className="w-4 h-4" />
-                  <span>Key saved securely to local browser storage!</span>
+                <div className="flex items-center space-x-2 text-xs text-emerald-300 bg-emerald-950/60 p-2.5 rounded-xl border border-emerald-500/30">
+                  <Check className="w-4 h-4 text-emerald-400" />
+                  <span>Key saved securely to your browser!</span>
                 </div>
               )}
 
@@ -225,13 +221,13 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <button
                   type="button"
                   onClick={() => setShowKeyModal(false)}
-                  className="px-4 py-2 rounded-xl text-xs text-slate-400 hover:text-white"
+                  className="px-4 py-2 rounded-xl text-xs text-slate-400 hover:text-white cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs shadow-lg shadow-emerald-500/20"
+                  className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-md cursor-pointer"
                 >
                   Save Key
                 </button>
