@@ -347,23 +347,23 @@ export const Purifier3DModal: React.FC<Purifier3DModalProps> = ({ isOpen, onClos
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
       <div className="card-chai relative w-full max-w-4xl overflow-hidden flex flex-col max-h-[90vh]">
         {/* Header */}
-        <div className="px-6 py-4 border-b border-border/40 flex items-center justify-between bg-black/30">
+        <div className="px-6 py-4 border-b border-border/60 flex items-center justify-between bg-neutral-100 dark:bg-black/30">
           <div className="flex items-center gap-3">
-            <div className="flex size-9 items-center justify-center rounded-lg border border-border bg-black/40 text-brand">
+            <div className="flex size-9 items-center justify-center rounded-lg border border-border bg-white dark:bg-black/40 text-brand shadow-xs">
               <Wind className="size-4" />
             </div>
             <div>
               <h3 className="text-lg font-bold text-foreground flex items-center gap-2">
                 3D Corsi-Rosenthal filter simulator
-                <span className="text-xs font-medium text-neutral-300 border border-border/40 px-2.5 py-0.5 rounded-full">Interactive CAD View</span>
+                <span className="text-xs font-bold text-neutral-700 dark:text-neutral-300 border border-neutral-300 dark:border-border/40 px-2.5 py-0.5 rounded-full bg-white dark:bg-transparent shadow-xs">Interactive CAD View</span>
               </h3>
-              <p className="text-xs text-neutral-400">Drag to rotate the box and inspect fluid mechanics</p>
+              <p className="text-xs font-medium text-neutral-600 dark:text-neutral-400">Drag to rotate the box and inspect fluid mechanics</p>
             </div>
           </div>
           <button
             type="button"
             onClick={onClose}
-            className="text-neutral-400 hover:text-foreground p-1 cursor-pointer"
+            className="text-neutral-500 hover:text-foreground p-1 cursor-pointer"
             aria-label="Close"
           >
             <X className="size-4" />
@@ -376,8 +376,8 @@ export const Purifier3DModal: React.FC<Purifier3DModalProps> = ({ isOpen, onClos
 
           {/* Left HUD: CAD Metrics */}
           <div className="absolute top-4 left-4 space-y-2 pointer-events-none">
-            <div className="rounded-lg border border-border/40 bg-black/60 backdrop-blur-sm p-3.5 text-xs text-neutral-200 space-y-2 max-w-[210px]">
-              <div className="flex items-center justify-between text-foreground font-semibold">
+            <div className="rounded-lg border border-border/40 bg-black/70 backdrop-blur-sm p-3.5 text-xs text-neutral-200 space-y-2 max-w-[210px] shadow-lg">
+              <div className="flex items-center justify-between text-white font-bold">
                 <span>Clean air delivery</span>
                 <span className="font-mono text-sm">{estimatedCadr} CFM</span>
               </div>
@@ -387,40 +387,40 @@ export const Purifier3DModal: React.FC<Purifier3DModalProps> = ({ isOpen, onClos
                   style={{ width: `${(estimatedCadr / 550) * 100}%` }}
                 />
               </div>
-              <div className="text-[11px] text-neutral-400 space-y-1 pt-1 border-t border-border/30">
-                <div className="flex justify-between"><span>Filtration grade:</span> <span className="text-foreground font-mono">MERV-13</span></div>
-                <div className="flex justify-between"><span>PM2.5 capture:</span> <span className="text-green-400 font-mono">92.4%</span></div>
-                <div className="flex justify-between"><span>Build cost:</span> <span className="text-foreground font-mono">~$28 total</span></div>
+              <div className="text-[11px] text-neutral-300 space-y-1 pt-1 border-t border-border/40">
+                <div className="flex justify-between"><span>Filtration grade:</span> <span className="text-white font-mono font-bold">MERV-13</span></div>
+                <div className="flex justify-between"><span>PM2.5 capture:</span> <span className="text-emerald-400 font-mono font-bold">92.4%</span></div>
+                <div className="flex justify-between"><span>Build cost:</span> <span className="text-white font-mono font-bold">~$28 total</span></div>
               </div>
             </div>
           </div>
 
           {/* Right Floating Quick Explainer */}
-          <div className="absolute top-4 right-4 max-w-xs rounded-lg border border-border/40 bg-black/60 backdrop-blur-sm p-3.5 text-xs text-neutral-300 space-y-1.5">
-            <div className="flex items-center gap-1.5 text-brand font-medium">
+          <div className="absolute top-4 right-4 max-w-xs rounded-lg border border-border/40 bg-black/70 backdrop-blur-sm p-3.5 text-xs text-neutral-200 space-y-1.5 shadow-lg">
+            <div className="flex items-center gap-1.5 text-brand font-bold">
               <ShieldCheck className="size-3.5" />
               <span>Fluid dynamics logic</span>
             </div>
-            <p className="text-[11px] leading-relaxed text-neutral-400">
+            <p className="text-[11px] leading-relaxed text-neutral-300 font-medium">
               Using 4 filters in a cube increases total surface area by 400 percent, reducing backpressure and allowing maximum clean air throughput.
             </p>
           </div>
         </div>
 
         {/* Interactive Controls Footer */}
-        <div className="px-6 py-3.5 bg-black/40 border-t border-border/40 flex flex-wrap items-center justify-between gap-4">
+        <div className="px-6 py-3.5 bg-neutral-100 dark:bg-black/40 border-t border-border/60 flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <span className="text-xs text-neutral-400 font-medium">Fan speed:</span>
+            <span className="text-xs font-bold text-neutral-800 dark:text-neutral-300">Fan speed:</span>
             <div className="flex items-center gap-1.5">
               {[1, 2, 3, 4, 5].map((lvl) => (
                 <button
                   key={lvl}
                   type="button"
                   onClick={() => setFanSpeed(lvl)}
-                  className={`size-7 rounded text-xs font-mono font-semibold transition-colors cursor-pointer border ${
+                  className={`size-7 rounded text-xs font-mono font-bold transition-colors cursor-pointer border shadow-xs ${
                     fanSpeed === lvl
                       ? 'border-brand text-brand bg-brand/10'
-                      : 'border-border/40 text-neutral-400 hover:text-foreground hover:bg-black/20'
+                      : 'border-neutral-300 dark:border-border/40 bg-white dark:bg-transparent text-neutral-800 dark:text-neutral-400 hover:text-foreground'
                   }`}
                 >
                   {lvl}
@@ -433,7 +433,7 @@ export const Purifier3DModal: React.FC<Purifier3DModalProps> = ({ isOpen, onClos
             <button
               type="button"
               onClick={() => setIsExploded(!isExploded)}
-              className="inline-flex h-8 items-center gap-1.5 rounded-md border border-border/40 bg-black/20 px-3 text-xs text-neutral-300 hover:text-foreground hover:bg-black/30 transition-colors cursor-pointer"
+              className="inline-flex h-8 items-center gap-1.5 rounded-md border border-neutral-300 dark:border-border/50 bg-white dark:bg-black/20 px-3 text-xs font-bold text-neutral-800 dark:text-neutral-300 hover:text-foreground transition-colors cursor-pointer shadow-xs"
             >
               <Layers className="size-3.5" />
               <span>{isExploded ? 'Assemble unit' : 'Exploded CAD view'}</span>
@@ -442,7 +442,7 @@ export const Purifier3DModal: React.FC<Purifier3DModalProps> = ({ isOpen, onClos
             <button
               type="button"
               onClick={() => setIsRotating(!isRotating)}
-              className="inline-flex h-8 items-center gap-1.5 rounded-md border border-border/40 bg-black/20 px-3 text-xs text-neutral-300 hover:text-foreground hover:bg-black/30 transition-colors cursor-pointer"
+              className="inline-flex h-8 items-center gap-1.5 rounded-md border border-neutral-300 dark:border-border/50 bg-white dark:bg-black/20 px-3 text-xs font-bold text-neutral-800 dark:text-neutral-300 hover:text-foreground transition-colors cursor-pointer shadow-xs"
             >
               {isRotating ? <Pause className="size-3.5" /> : <Play className="size-3.5" />}
               <span>{isRotating ? 'Pause orbit' : 'Auto orbit'}</span>

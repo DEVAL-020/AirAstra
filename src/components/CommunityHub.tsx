@@ -99,12 +99,12 @@ export function CommunityHub() {
   return (
     <div className="card-chai p-6 space-y-6">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-border/40 pb-4">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-border/60 pb-4">
         <div>
           <h2 className="text-2xl sm:text-3xl font-bold text-foreground">
             BreatheTogether community hub
           </h2>
-          <p className="text-sm sm:text-base text-neutral-300 mt-1 max-w-xl leading-relaxed">
+          <p className="text-sm sm:text-base font-medium text-neutral-700 dark:text-neutral-300 mt-1 max-w-xl leading-relaxed">
             Coordinated neighborhood action across housing pods to maintain <Highlight>collective smog defense</Highlight> during cold inversions.
           </p>
         </div>
@@ -114,28 +114,28 @@ export function CommunityHub() {
 
       {/* Impact Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-        <div className="rounded-xl border border-border/40 bg-black/20 p-4 flex items-center justify-between">
+        <div className="rounded-xl border border-border/70 bg-neutral-100/60 dark:bg-black/20 p-4 flex items-center justify-between shadow-xs">
           <div>
-            <span className="text-xs text-neutral-400">Community CO₂ prevented</span>
-            <div className="font-mono text-2xl font-semibold text-foreground mt-1 flex items-baseline">
-              <span ref={co2Ref}>14,680</span> <span className="text-xs ml-1 font-normal text-neutral-400">kg</span>
+            <span className="text-xs font-bold text-neutral-600 dark:text-neutral-400">Community CO₂ prevented</span>
+            <div className="font-mono text-2xl font-bold text-foreground mt-1 flex items-baseline">
+              <span ref={co2Ref}>14,680</span> <span className="text-xs ml-1 font-semibold text-neutral-600 dark:text-neutral-400">kg</span>
             </div>
-            <span className="text-[11px] text-neutral-500 mt-0.5 block">Equivalent to 680 mature urban trees</span>
+            <span className="text-[11px] font-medium text-neutral-600 dark:text-neutral-400 mt-0.5 block">Equivalent to 680 mature urban trees</span>
           </div>
-          <div className="flex size-9 items-center justify-center rounded-md border border-border bg-black/30 text-brand">
+          <div className="flex size-9 items-center justify-center rounded-lg border border-border bg-white dark:bg-black/30 text-brand shadow-xs">
             <Leaf className="size-4" />
           </div>
         </div>
 
-        <div className="rounded-xl border border-border/40 bg-black/20 p-4 flex items-center justify-between">
+        <div className="rounded-xl border border-border/70 bg-neutral-100/60 dark:bg-black/20 p-4 flex items-center justify-between shadow-xs">
           <div>
-            <span className="text-xs text-neutral-400">Ground PM2.5 avoided</span>
-            <div className="font-mono text-2xl font-semibold text-foreground mt-1 flex items-baseline">
-              <span ref={pmRef}>68,400</span> <span className="text-xs ml-1 font-normal text-neutral-400">grams</span>
+            <span className="text-xs font-bold text-neutral-600 dark:text-neutral-400">Ground PM2.5 avoided</span>
+            <div className="font-mono text-2xl font-bold text-foreground mt-1 flex items-baseline">
+              <span ref={pmRef}>68,400</span> <span className="text-xs ml-1 font-semibold text-neutral-600 dark:text-neutral-400">grams</span>
             </div>
-            <span className="text-[11px] text-neutral-500 mt-0.5 block">Spared from neighborhood children lungs</span>
+            <span className="text-[11px] font-medium text-neutral-600 dark:text-neutral-400 mt-0.5 block">Spared from neighborhood children lungs</span>
           </div>
-          <div className="flex size-9 items-center justify-center rounded-md border border-border bg-black/30 text-brand">
+          <div className="flex size-9 items-center justify-center rounded-lg border border-border bg-white dark:bg-black/30 text-brand shadow-xs">
             <TrendingDown className="size-4" />
           </div>
         </div>
@@ -144,10 +144,10 @@ export function CommunityHub() {
       {/* Pods Grid */}
       <div className="space-y-3.5">
         <div className="flex items-center justify-between">
-          <h3 className="font-montserrat text-sm font-semibold text-foreground">
+          <h3 className="font-montserrat text-sm font-bold text-foreground">
             Active neighborhood pods
           </h3>
-          <button type="button" className="text-xs text-brand hover:text-white flex items-center gap-1 cursor-pointer">
+          <button type="button" className="text-xs font-bold text-brand hover:underline flex items-center gap-1 cursor-pointer">
             <Plus className="size-3.5" />
             <span>Create new pod</span>
           </button>
@@ -157,27 +157,27 @@ export function CommunityHub() {
           {pods.map((pod) => (
             <div
               key={pod.id}
-              className="rounded-xl border border-border/40 bg-black/20 p-4 flex flex-col justify-between space-y-3 transition-colors hover:border-border"
+              className="rounded-xl border border-border/70 bg-neutral-100/60 dark:bg-black/20 p-4 flex flex-col justify-between space-y-3 transition-colors hover:border-border shadow-xs"
             >
               <div>
                 <div className="flex items-start justify-between">
-                  <h4 className="font-montserrat text-sm font-semibold text-foreground">{pod.name}</h4>
+                  <h4 className="font-montserrat text-sm font-bold text-foreground">{pod.name}</h4>
                   <Chip tone="default">{pod.membersCount} members</Chip>
                 </div>
-                <div className="flex items-center gap-1.5 text-[11px] text-neutral-400 mt-1">
+                <div className="flex items-center gap-1.5 text-[11px] font-medium text-neutral-600 dark:text-neutral-400 mt-1">
                   <MapPin className="size-3.5 text-neutral-500 shrink-0" />
                   <span>{pod.neighborhood}</span>
                 </div>
-                <p className="text-xs text-neutral-300 mt-2.5 rounded-lg border border-border/30 bg-black/30 p-2.5 leading-relaxed">
+                <p className="text-xs font-medium text-neutral-800 dark:text-neutral-300 mt-2.5 rounded-lg border border-border/60 bg-white dark:bg-black/30 p-2.5 leading-relaxed shadow-xs">
                   &ldquo;{pod.recentReport}&rdquo;
                 </p>
               </div>
 
-              <div className="pt-2 border-t border-border/30 flex items-center justify-between text-xs">
-                <span className="text-neutral-400 text-[11px]">Carpools: <strong className="text-foreground">{pod.activeCarpools}</strong></span>
+              <div className="pt-2 border-t border-border/50 flex items-center justify-between text-xs">
+                <span className="text-neutral-600 dark:text-neutral-400 text-[11px] font-medium">Carpools: <strong className="text-foreground">{pod.activeCarpools}</strong></span>
                 <button
                   type="button"
-                  className="inline-flex h-7 items-center rounded-md bg-primary px-3 text-xs font-semibold text-primary-foreground hover:bg-primary/90 transition-colors cursor-pointer"
+                  className="inline-flex h-7 items-center rounded-md bg-neutral-900 text-white dark:bg-white dark:text-black px-3 text-xs font-bold hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors cursor-pointer shadow-xs"
                 >
                   Join pod
                 </button>
@@ -188,25 +188,25 @@ export function CommunityHub() {
       </div>
 
       {/* Incident Reporting */}
-      <div className="rounded-xl border border-red-500/20 bg-red-950/5 p-4 space-y-3">
+      <div className="rounded-xl border border-red-500/40 bg-red-100/60 dark:bg-red-950/10 p-4 space-y-3 shadow-xs">
         <div className="flex items-center gap-2">
-          <AlertTriangle className="size-4 text-red-400" />
-          <h3 className="font-montserrat text-sm font-semibold text-foreground">Community air warden alert</h3>
+          <AlertTriangle className="size-4 text-red-700 dark:text-red-400" />
+          <h3 className="font-montserrat text-sm font-bold text-foreground">Community air warden alert</h3>
         </div>
 
         {reportSubmitted ? (
-          <div className="p-3 rounded-lg border border-green-500/30 bg-green-950/20 flex items-center gap-2 text-green-300 text-xs">
-            <CheckCircle2 className="size-4 text-green-400 shrink-0" />
+          <div className="p-3 rounded-lg border border-green-500/40 bg-green-100/80 dark:bg-green-950/20 flex items-center gap-2 text-green-900 dark:text-green-300 text-xs font-semibold shadow-xs">
+            <CheckCircle2 className="size-4 text-green-600 dark:text-green-400 shrink-0" />
             <span>Alert notified to local wardens. Thank you for protecting neighborhood clean air.</span>
           </div>
         ) : (
           <form onSubmit={handleReportSubmit} className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs">
             <div>
-              <label className="text-neutral-400 block mb-1">Issue type</label>
+              <label className="text-neutral-700 dark:text-neutral-300 font-bold block mb-1">Issue type</label>
               <select
                 value={reportType}
                 onChange={(e) => setReportType(e.target.value)}
-                className="w-full h-9 rounded-md border border-border bg-black/30 px-3 text-xs text-foreground focus:outline-none focus:border-brand cursor-pointer"
+                className="w-full h-9 rounded-md border border-neutral-300 dark:border-border bg-white dark:bg-black/30 px-3 text-xs font-semibold text-foreground focus:outline-none focus:border-brand cursor-pointer shadow-xs"
               >
                 <option value="Open Biomass / Trash Burning">Open biomass or trash burning</option>
                 <option value="Industrial Diesel Generator Idling">Diesel generator idling</option>
@@ -216,13 +216,13 @@ export function CommunityHub() {
             </div>
 
             <div>
-              <label className="text-neutral-400 block mb-1">Location or landmark</label>
+              <label className="text-neutral-700 dark:text-neutral-300 font-bold block mb-1">Location or landmark</label>
               <input
                 type="text"
                 value={reportLocation}
                 onChange={(e) => setReportLocation(e.target.value)}
                 placeholder="e.g. Ring Road Overpass, Sector 7"
-                className="w-full h-9 rounded-md border border-border bg-black/30 px-3 text-xs text-foreground focus:outline-none focus:border-brand"
+                className="w-full h-9 rounded-md border border-neutral-300 dark:border-border bg-white dark:bg-black/30 px-3 text-xs font-semibold text-foreground focus:outline-none focus:border-brand shadow-xs"
                 required
               />
             </div>
@@ -230,7 +230,7 @@ export function CommunityHub() {
             <div className="flex items-end">
               <button
                 type="submit"
-                className="w-full h-9 inline-flex items-center justify-center rounded-md bg-red-600 text-white font-semibold text-xs hover:bg-red-500 transition-colors cursor-pointer"
+                className="w-full h-9 inline-flex items-center justify-center rounded-md bg-red-600 text-white font-bold text-xs hover:bg-red-500 transition-colors cursor-pointer shadow-xs"
               >
                 <Send className="size-3.5 mr-1.5" />
                 <span>Submit alert</span>

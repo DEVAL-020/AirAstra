@@ -68,7 +68,7 @@ export function EmergencySmogModal({ isOpen, onClose, city, aqi }: EmergencySmog
                 </h3>
                 <Chip tone="danger">Level 4</Chip>
               </div>
-              <p className="text-xs text-neutral-400 mt-0.5">
+              <p className="text-xs font-semibold text-neutral-600 dark:text-neutral-400 mt-0.5">
                 Active alert for {city} (AQI {aqi})
               </p>
             </div>
@@ -76,7 +76,7 @@ export function EmergencySmogModal({ isOpen, onClose, city, aqi }: EmergencySmog
           <button
             type="button"
             onClick={onClose}
-            className="text-neutral-400 hover:text-foreground p-1 cursor-pointer"
+            className="text-neutral-500 hover:text-foreground p-1 cursor-pointer"
             aria-label="Close"
           >
             <X className="size-4" />
@@ -84,8 +84,8 @@ export function EmergencySmogModal({ isOpen, onClose, city, aqi }: EmergencySmog
         </div>
 
         {/* Warning callout */}
-        <div className="p-3.5 rounded-lg border border-red-500/20 bg-red-950/10 text-xs text-red-300 flex items-start gap-2.5">
-          <AlertTriangle className="size-4 text-red-400 shrink-0 mt-0.5" />
+        <div className="p-3.5 rounded-lg border border-red-500/40 bg-red-100/80 dark:bg-red-950/20 text-xs text-red-900 dark:text-red-300 flex items-start gap-2.5 font-medium shadow-xs">
+          <AlertTriangle className="size-4 text-red-600 dark:text-red-400 shrink-0 mt-0.5" />
           <p className="leading-relaxed">
             Cold thermal inversion has collapsed the ground boundary layer. Cease outdoor physical exertion and maintain continuous HEPA or Corsi-Rosenthal filtration.
           </p>
@@ -93,7 +93,7 @@ export function EmergencySmogModal({ isOpen, onClose, city, aqi }: EmergencySmog
 
         {/* Checklist */}
         <div className="flex-1 overflow-y-auto space-y-2.5 pr-1 [scrollbar-width:none]">
-          <span className="text-xs font-semibold text-foreground block">
+          <span className="text-xs font-bold text-foreground block">
             Tactical defense checklist
           </span>
           {protocols.map((p) => {
@@ -105,24 +105,24 @@ export function EmergencySmogModal({ isOpen, onClose, city, aqi }: EmergencySmog
                 onClick={() => toggleCheck(p.id)}
                 role="button"
                 tabIndex={0}
-                className={`p-3.5 rounded-lg border transition-colors cursor-pointer flex items-start gap-3 ${
+                className={`p-3.5 rounded-lg border transition-colors cursor-pointer flex items-start gap-3 shadow-xs ${
                   isDone
-                    ? 'border-border/20 bg-black/10 opacity-70'
-                    : 'border-border/40 bg-black/20 hover:border-border'
+                    ? 'border-border/30 bg-neutral-100/40 dark:bg-black/10 opacity-70'
+                    : 'border-border/70 bg-white dark:bg-black/20 hover:border-border'
                 }`}
               >
-                <div className="mt-0.5 text-neutral-400">
+                <div className="mt-0.5 text-neutral-500">
                   {isDone ? (
-                    <CheckCircle2 className="size-4 text-green-400" />
+                    <CheckCircle2 className="size-4 text-emerald-600 dark:text-green-400" />
                   ) : (
-                    <Circle className="size-4" />
+                    <Circle className="size-4 text-neutral-400" />
                   )}
                 </div>
                 <div>
-                  <h4 className={`text-xs font-semibold text-foreground ${isDone ? 'line-through text-neutral-500' : ''}`}>
+                  <h4 className={`text-xs font-bold text-foreground ${isDone ? 'line-through text-neutral-500' : ''}`}>
                     {p.title}
                   </h4>
-                  <p className="text-xs text-neutral-400 mt-0.5 leading-relaxed">{p.desc}</p>
+                  <p className="text-xs font-medium text-neutral-700 dark:text-neutral-300 mt-0.5 leading-relaxed">{p.desc}</p>
                 </div>
               </div>
             );
@@ -130,14 +130,14 @@ export function EmergencySmogModal({ isOpen, onClose, city, aqi }: EmergencySmog
         </div>
 
         {/* Footer */}
-        <div className="pt-4 border-t border-border/40 flex items-center justify-between">
-          <span className="text-xs text-neutral-400 font-mono">
+        <div className="pt-4 border-t border-border/60 flex items-center justify-between">
+          <span className="text-xs font-bold text-neutral-700 dark:text-neutral-400 font-mono">
             {Object.values(checkedItems).filter(Boolean).length} / {protocols.length} completed
           </span>
           <button
             type="button"
             onClick={onClose}
-            className="inline-flex h-8 items-center rounded-md bg-primary px-4 text-xs font-semibold text-primary-foreground hover:bg-primary/90 transition-colors cursor-pointer"
+            className="inline-flex h-9 items-center rounded-md bg-neutral-900 text-white dark:bg-white dark:text-black px-4 text-xs font-bold hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors cursor-pointer shadow-xs"
           >
             {allCompleted ? 'Lockdown secured' : 'Acknowledge protocol'}
           </button>

@@ -141,9 +141,9 @@ export function AstraVoiceChat({ currentAQI, city }: AstraVoiceChatProps) {
   return (
     <div className="card-chai p-6 flex flex-col h-[600px]">
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-border/40 pb-4 mb-4">
+      <div className="flex items-center justify-between border-b border-border/60 pb-4 mb-4">
         <div className="flex items-center gap-3">
-          <div className="flex size-9 items-center justify-center rounded-lg border border-border bg-black/30 text-brand">
+          <div className="flex size-9 items-center justify-center rounded-lg border border-border bg-neutral-100 dark:bg-black/30 text-brand shadow-xs">
             <Stethoscope className="size-4" />
           </div>
           <div>
@@ -151,7 +151,7 @@ export function AstraVoiceChat({ currentAQI, city }: AstraVoiceChatProps) {
               <h3 className="text-xl sm:text-2xl font-bold text-foreground">Astra</h3>
               <Chip tone="default" className="text-xs sm:text-sm font-semibold">Respiratory advisor</Chip>
             </div>
-            <p className="text-sm sm:text-base text-neutral-300 mt-0.5">
+            <p className="text-sm sm:text-base font-medium text-neutral-700 dark:text-neutral-300 mt-0.5">
               Personalized guidance for {city} (AQI {currentAQI}) based on <Highlight>pediatric respiratory safety</Highlight>.
             </p>
           </div>
@@ -163,7 +163,7 @@ export function AstraVoiceChat({ currentAQI, city }: AstraVoiceChatProps) {
             if (ttsEnabled && typeof window !== 'undefined') window.speechSynthesis.cancel();
             setTtsEnabled(!ttsEnabled);
           }}
-          className="inline-flex h-8 items-center gap-1.5 rounded-md border border-border/40 px-2.5 text-xs text-neutral-400 hover:text-foreground hover:bg-black/20 transition-colors"
+          className="inline-flex h-8 items-center gap-1.5 rounded-md border border-neutral-300 dark:border-border/60 bg-neutral-100 dark:bg-black/20 px-2.5 text-xs font-semibold text-neutral-800 dark:text-neutral-400 hover:text-foreground transition-colors shadow-xs"
         >
           {ttsEnabled ? <Volume2 className="size-3.5 text-brand" /> : <VolumeX className="size-3.5" />}
           <span>{ttsEnabled ? 'Voice on' : 'Muted'}</span>
@@ -181,28 +181,28 @@ export function AstraVoiceChat({ currentAQI, city }: AstraVoiceChatProps) {
               className={`flex items-start gap-2.5 ${isAstra ? 'justify-start' : 'justify-end'}`}
             >
               {isAstra && (
-                <div className="flex size-6 shrink-0 items-center justify-center rounded border border-border bg-black/40 text-brand mt-1">
+                <div className="flex size-6 shrink-0 items-center justify-center rounded border border-border bg-neutral-100 dark:bg-black/40 text-brand mt-1 shadow-xs">
                   <Stethoscope className="size-3" />
                 </div>
               )}
 
               <div
-                className={`max-w-[85%] md:max-w-[78%] rounded-xl p-3.5 text-xs leading-relaxed space-y-2 border ${
+                className={`max-w-[85%] md:max-w-[78%] rounded-xl p-3.5 text-xs leading-relaxed space-y-2 border shadow-xs ${
                   isAstra
-                    ? 'border-border/40 bg-black/30 text-neutral-200'
-                    : 'border-border/20 bg-neutral-900 text-white font-medium ml-auto'
+                    ? 'border-border/70 bg-neutral-100/90 dark:bg-black/30 text-neutral-800 dark:text-neutral-200 font-medium'
+                    : 'border-neutral-800 bg-neutral-900 text-white font-semibold ml-auto'
                 }`}
               >
                 <div className="whitespace-pre-wrap">{m.text}</div>
 
                 {m.suggestedActions && (
-                  <div className="pt-2 flex flex-wrap gap-1.5 border-t border-border/30">
+                  <div className="pt-2 flex flex-wrap gap-1.5 border-t border-border/40">
                     {m.suggestedActions.map((chip, idx) => (
                       <button
                         key={idx}
                         type="button"
                         onClick={() => handleSend(chip)}
-                        className="rounded border border-border/40 bg-black/20 px-2.5 py-1 text-[11px] text-neutral-300 hover:border-brand hover:text-brand transition-colors cursor-pointer"
+                        className="rounded border border-neutral-300 dark:border-border/50 bg-white dark:bg-black/20 px-2.5 py-1 text-[11px] font-semibold text-neutral-800 dark:text-neutral-300 hover:border-brand hover:text-brand transition-colors cursor-pointer shadow-xs"
                       >
                         {chip}
                       </button>
@@ -210,13 +210,13 @@ export function AstraVoiceChat({ currentAQI, city }: AstraVoiceChatProps) {
                   </div>
                 )}
 
-                <div className="text-[10px] text-neutral-500 text-right">
+                <div className="text-[10px] font-medium text-neutral-500 text-right">
                   {m.timestamp}
                 </div>
               </div>
 
               {!isAstra && (
-                <div className="flex size-6 shrink-0 items-center justify-center rounded border border-border bg-black/40 text-neutral-400 mt-1">
+                <div className="flex size-6 shrink-0 items-center justify-center rounded border border-border bg-neutral-200 dark:bg-black/40 text-neutral-700 dark:text-neutral-400 mt-1 shadow-xs">
                   <User className="size-3" />
                 </div>
               )}
@@ -225,7 +225,7 @@ export function AstraVoiceChat({ currentAQI, city }: AstraVoiceChatProps) {
         })}
 
         {isLoading && (
-          <div className="flex items-center gap-2 text-xs text-neutral-400 p-3 rounded-lg border border-border/30 bg-black/20 w-fit">
+          <div className="flex items-center gap-2 text-xs font-medium text-neutral-700 dark:text-neutral-400 p-3 rounded-lg border border-border/60 bg-neutral-100/80 dark:bg-black/20 w-fit shadow-xs">
             <Loader2 className="size-3.5 animate-spin text-brand" />
             <span>Consulting atmospheric respiratory guidelines...</span>
           </div>
@@ -235,7 +235,7 @@ export function AstraVoiceChat({ currentAQI, city }: AstraVoiceChatProps) {
       </div>
 
       {/* Input */}
-      <div className="pt-3 border-t border-border/40 space-y-2">
+      <div className="pt-3 border-t border-border/60 space-y-2">
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -248,22 +248,22 @@ export function AstraVoiceChat({ currentAQI, city }: AstraVoiceChatProps) {
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             placeholder={isListening ? "Listening... Speak naturally..." : "Ask Astra about morning coughs, mask seals, or room filtration..."}
-            className="flex-1 h-11 rounded-lg border-2 border-neutral-700 bg-neutral-900 px-3.5 text-sm font-medium text-white placeholder-neutral-400 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand"
+            className="flex-1 h-11 rounded-lg border-2 border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 px-3.5 text-sm font-semibold text-neutral-900 dark:text-white placeholder-neutral-500 focus:outline-none focus:border-brand shadow-xs"
           />
 
           <button
             type="button"
             onClick={toggleListening}
-            className="flex size-11 items-center justify-center rounded-lg border-2 border-neutral-700 bg-neutral-800 text-neutral-200 hover:text-white transition-colors cursor-pointer"
+            className="flex size-11 items-center justify-center rounded-lg border-2 border-neutral-300 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 hover:text-foreground transition-colors cursor-pointer shadow-xs"
             title="Speech input"
           >
-            {isListening ? <MicOff className="size-5 text-red-400" /> : <Mic className="size-5" />}
+            {isListening ? <MicOff className="size-5 text-red-600 dark:text-red-400" /> : <Mic className="size-5" />}
           </button>
 
           <button
             type="submit"
             disabled={!inputValue.trim() || isLoading}
-            className="inline-flex h-11 px-4 items-center justify-center rounded-lg bg-white text-black hover:bg-neutral-200 transition-colors disabled:opacity-40 cursor-pointer font-semibold"
+            className="inline-flex h-11 px-4 items-center justify-center rounded-lg bg-neutral-900 text-white dark:bg-white dark:text-black hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors disabled:opacity-40 cursor-pointer font-bold shadow-xs"
           >
             <Send className="size-4" />
           </button>

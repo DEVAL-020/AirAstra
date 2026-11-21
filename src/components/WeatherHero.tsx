@@ -41,28 +41,28 @@ export function WeatherHero({
         </AnimatedBadge>
 
         <h1 className="text-5xl font-bold tracking-tight max-md:leading-tight md:text-7xl lg:text-8xl text-foreground">
-          {airData.city} <span className="font-mono text-3xl md:text-5xl font-light text-neutral-400">({airData.aqi} AQI)</span>
+          {airData.city} <span className="font-mono text-3xl md:text-5xl font-light text-neutral-600 dark:text-neutral-400">({airData.aqi} AQI)</span>
         </h1>
 
-        <p className="max-w-3xl text-lg text-neutral-300 md:text-2xl leading-relaxed">
+        <p className="max-w-3xl text-lg text-neutral-700 dark:text-neutral-300 font-medium md:text-2xl leading-relaxed">
           Cold winter surface air traps toxic particulates. Protect your household with <Highlight>proven low-emission routines</Highlight> and clean air hacks.
         </p>
 
         {/* Live Data Source and Timestamp Verification Badge */}
         <div className="flex flex-wrap items-center justify-center gap-2.5 pt-1 text-xs sm:text-sm">
-          <div className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-neutral-900/80 px-3.5 py-1.5 backdrop-blur-md">
+          <div className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-neutral-100/90 dark:bg-neutral-900/80 px-3.5 py-1.5 backdrop-blur-md shadow-xs">
             <span className="relative flex size-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex size-2 rounded-full bg-emerald-500"></span>
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75"></span>
+              <span className="relative inline-flex size-2 rounded-full bg-emerald-600 dark:bg-emerald-500"></span>
             </span>
-            <span className="text-neutral-400 font-medium">Live Telemetry:</span>
+            <span className="text-neutral-600 dark:text-neutral-400 font-medium">Live Telemetry:</span>
             <span className="font-mono font-bold text-foreground">{airData.timestamp}</span>
           </div>
 
-          <div className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-neutral-900/80 px-3.5 py-1.5 backdrop-blur-md">
-            <Radio className="size-3.5 text-blue-400" />
-            <span className="text-neutral-400 font-medium">Verified Source:</span>
-            <span className="font-semibold text-foreground">
+          <div className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-neutral-100/90 dark:bg-neutral-900/80 px-3.5 py-1.5 backdrop-blur-md shadow-xs">
+            <Radio className="size-3.5 text-blue-600 dark:text-blue-400" />
+            <span className="text-neutral-600 dark:text-neutral-400 font-medium">Verified Source:</span>
+            <span className="font-bold text-foreground">
               {airData.dataSource || 'Open-Meteo & CPCB Global Atmospheric Network'}
             </span>
           </div>
@@ -73,7 +73,7 @@ export function WeatherHero({
           <button
             type="button"
             onClick={onOpenPurifier3D}
-            className="btn-asym inline-flex h-11 items-center gap-2 bg-white px-6 text-base font-semibold text-black transition-colors hover:bg-neutral-200 cursor-pointer"
+            className="btn-asym inline-flex h-11 items-center gap-2 bg-neutral-900 text-white dark:bg-white dark:text-black px-6 text-base font-semibold transition-colors hover:bg-neutral-800 dark:hover:bg-neutral-200 cursor-pointer shadow-xs"
           >
             Open 3D filter simulator <ArrowUpRight className="-ml-1 size-4" aria-hidden="true" />
           </button>
@@ -82,9 +82,9 @@ export function WeatherHero({
             <button
               type="button"
               onClick={onOpenEmergency}
-              className="btn-asym-mirror inline-flex h-11 items-center gap-2 border border-border bg-transparent px-5 text-base font-medium text-foreground transition-colors hover:bg-black/90 cursor-pointer"
+              className="btn-asym-mirror inline-flex h-11 items-center gap-2 border border-border bg-transparent px-5 text-base font-semibold text-foreground transition-colors hover:bg-neutral-100 dark:hover:bg-neutral-900 cursor-pointer"
             >
-              <ShieldAlert className="size-5 text-red-400" />
+              <ShieldAlert className="size-5 text-red-600 dark:text-red-400" />
               Smog protocol
             </button>
           )}
@@ -93,13 +93,13 @@ export function WeatherHero({
 
       {/* Hourly Forecast Strip */}
       <div className="card-chai p-6 space-y-4">
-        <div className="flex items-center justify-between border-b border-border/40 pb-3">
-          <div className="flex items-center gap-2 text-sm text-neutral-300">
-            <Clock className="size-4 text-neutral-400" />
+        <div className="flex items-center justify-between border-b border-border/60 pb-3">
+          <div className="flex items-center gap-2 text-sm text-neutral-800 dark:text-neutral-200 font-semibold">
+            <Clock className="size-4 text-neutral-600 dark:text-neutral-400" />
             <span className="font-semibold text-foreground">24-hour inversion forecast</span>
           </div>
           <div className="flex items-center gap-2.5">
-            <span className="text-sm text-neutral-400 font-medium">Safe flush window:</span>
+            <span className="text-sm text-neutral-600 dark:text-neutral-400 font-medium">Safe flush window:</span>
             <Chip tone="success" className="text-xs sm:text-sm font-semibold">{airData.ventilationSafeWindow}</Chip>
           </div>
         </div>
@@ -113,19 +113,19 @@ export function WeatherHero({
             return (
               <div
                 key={hour.hour + idx}
-                className="flex-shrink-0 flex flex-col items-center justify-between min-w-[72px] p-3 rounded-xl border border-border/30 bg-black/20 text-center space-y-2"
+                className="flex-shrink-0 flex flex-col items-center justify-between min-w-[72px] p-3 rounded-xl border border-border/60 bg-neutral-100/60 dark:bg-black/20 text-center space-y-2"
               >
-                <span className="text-xs sm:text-sm text-neutral-300 font-semibold">
+                <span className="text-xs sm:text-sm text-neutral-800 dark:text-neutral-300 font-bold">
                   {isNow ? 'Now' : hour.hour.replace(':00', '')}
                 </span>
 
                 <div className="text-foreground my-0.5">
                   {hour.inversionTrapped ? (
-                    <CloudFog className="size-5 text-red-400" />
+                    <CloudFog className="size-5 text-red-600 dark:text-red-400" />
                   ) : isNight ? (
-                    <Moon className="size-5 text-neutral-400" />
+                    <Moon className="size-5 text-neutral-600 dark:text-neutral-400" />
                   ) : (
-                    <Sun className="size-5 text-amber-300" />
+                    <Sun className="size-5 text-amber-500 dark:text-amber-300" />
                   )}
                 </div>
 
@@ -133,7 +133,7 @@ export function WeatherHero({
                   {hour.aqi}
                 </span>
 
-                <span className="text-xs text-neutral-400 font-mono">
+                <span className="text-xs text-neutral-600 dark:text-neutral-400 font-mono font-semibold">
                   {hour.temperature}°C
                 </span>
               </div>

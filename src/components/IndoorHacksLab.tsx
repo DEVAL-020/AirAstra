@@ -157,11 +157,11 @@ export function IndoorHacksLab({ onOpenPurifier3D, currentAQI = 210 }: IndoorHac
       </div>
 
       {/* CAD Calculator */}
-      <div className="rounded-xl border border-border/40 bg-black/20 p-5 space-y-4">
+      <div className="rounded-xl border border-border/70 bg-neutral-100/60 dark:bg-black/20 p-5 space-y-4 shadow-xs">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div className="flex items-center gap-2">
             <Cpu className="size-4 text-brand" />
-            <h3 className="font-montserrat text-sm font-semibold text-foreground">
+            <h3 className="font-montserrat text-sm font-bold text-foreground">
               Room sizing and CADR calculator
             </h3>
           </div>
@@ -170,71 +170,71 @@ export function IndoorHacksLab({ onOpenPurifier3D, currentAQI = 210 }: IndoorHac
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
           <div>
-            <label className="text-neutral-400 block mb-1">Room length (feet)</label>
+            <label className="text-neutral-700 dark:text-neutral-300 font-bold block mb-1">Room length (feet)</label>
             <input
               type="number"
               value={roomLength}
               onChange={(e) => setRoomLength(Math.max(6, Number(e.target.value)))}
-              className="w-full h-9 rounded-md border border-border bg-black/30 px-3 text-xs font-mono text-foreground focus:outline-none focus:border-brand"
+              className="w-full h-9 rounded-md border border-neutral-300 dark:border-border bg-white dark:bg-black/30 px-3 text-xs font-mono font-bold text-foreground focus:outline-none focus:border-brand shadow-xs"
             />
           </div>
           <div>
-            <label className="text-neutral-400 block mb-1">Room width (feet)</label>
+            <label className="text-neutral-700 dark:text-neutral-300 font-bold block mb-1">Room width (feet)</label>
             <input
               type="number"
               value={roomWidth}
               onChange={(e) => setRoomWidth(Math.max(6, Number(e.target.value)))}
-              className="w-full h-9 rounded-md border border-border bg-black/30 px-3 text-xs font-mono text-foreground focus:outline-none focus:border-brand"
+              className="w-full h-9 rounded-md border border-neutral-300 dark:border-border bg-white dark:bg-black/30 px-3 text-xs font-mono font-bold text-foreground focus:outline-none focus:border-brand shadow-xs"
             />
           </div>
           <div>
-            <label className="text-neutral-400 block mb-1">Ceiling height (feet)</label>
+            <label className="text-neutral-700 dark:text-neutral-300 font-bold block mb-1">Ceiling height (feet)</label>
             <input
               type="number"
               value={roomHeight}
               onChange={(e) => setRoomHeight(Math.max(7, Number(e.target.value)))}
-              className="w-full h-9 rounded-md border border-border bg-black/30 px-3 text-xs font-mono text-foreground focus:outline-none focus:border-brand"
+              className="w-full h-9 rounded-md border border-neutral-300 dark:border-border bg-white dark:bg-black/30 px-3 text-xs font-mono font-bold text-foreground focus:outline-none focus:border-brand shadow-xs"
             />
           </div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-3 border-t border-border/30 text-xs">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-3 border-t border-border/50 text-xs">
           <div>
-            <span className="text-[10px] text-neutral-400 block">Room volume</span>
-            <span className="font-mono text-sm font-semibold text-foreground">{roomVolumeCuFt.toLocaleString()} cu ft</span>
+            <span className="text-[10px] font-bold text-neutral-600 dark:text-neutral-400 block">Room volume</span>
+            <span className="font-mono text-sm font-bold text-foreground">{roomVolumeCuFt.toLocaleString()} cu ft</span>
           </div>
 
           <div>
-            <span className="text-[10px] text-neutral-400 block">Required baseline CADR</span>
-            <span className="font-mono text-sm font-semibold text-brand">{requiredCadr} CFM</span>
+            <span className="text-[10px] font-bold text-neutral-600 dark:text-neutral-400 block">Required baseline CADR</span>
+            <span className="font-mono text-sm font-bold text-brand">{requiredCadr} CFM</span>
           </div>
 
           <div>
-            <span className="text-[10px] text-neutral-400 block">Recommended build</span>
-            <span className="text-xs font-semibold text-foreground block">
+            <span className="text-[10px] font-bold text-neutral-600 dark:text-neutral-400 block">Recommended build</span>
+            <span className="text-xs font-bold text-foreground block">
               {requiredCadr > 350 ? '4-Filter Corsi-Rosenthal cube' : '2-Filter wedge'}
             </span>
           </div>
 
           <div>
-            <span className="text-[10px] text-neutral-400 block">Estimated build cost</span>
-            <span className="font-mono text-sm font-semibold text-foreground">~$28 total</span>
+            <span className="text-[10px] font-bold text-neutral-600 dark:text-neutral-400 block">Estimated build cost</span>
+            <span className="font-mono text-sm font-bold text-foreground">~$28 total</span>
           </div>
         </div>
 
         {/* Dynamic Fan Speed Mode & Room Clearance Physics */}
-        <div className="pt-3 border-t border-border/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+        <div className="pt-3 border-t border-border/50 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
           <div className="flex items-center gap-2">
-            <span className="text-neutral-400 font-medium">Fan Speed Mode:</span>
+            <span className="text-neutral-700 dark:text-neutral-300 font-bold">Fan Speed Mode:</span>
             {(['whisper', 'medium', 'turbo'] as const).map((mode) => (
               <button
                 key={mode}
                 type="button"
                 onClick={() => setFanSpeed(mode)}
-                className={`px-2.5 py-1 rounded text-xs capitalize transition-colors font-semibold cursor-pointer border ${
+                className={`px-2.5 py-1 rounded text-xs capitalize transition-colors font-bold cursor-pointer border shadow-xs ${
                   fanSpeed === mode
                     ? 'border-brand bg-brand/20 text-brand'
-                    : 'border-border/50 bg-neutral-800 text-neutral-300 hover:text-white'
+                    : 'border-neutral-300 dark:border-border/50 bg-white dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:text-foreground'
                 }`}
               >
                 {mode}
@@ -242,10 +242,10 @@ export function IndoorHacksLab({ onOpenPurifier3D, currentAQI = 210 }: IndoorHac
             ))}
           </div>
 
-          <div className="flex items-center gap-3 text-neutral-300">
-            <span>Airflow: <strong className="font-mono text-foreground">{deliveredCadr} CFM</strong> ({currentAch} ACH)</span>
-            <span className="text-neutral-500">•</span>
-            <span>90% Clearance: <strong className="font-mono text-emerald-400">{minutesToClear} mins</strong></span>
+          <div className="flex items-center gap-3 text-neutral-800 dark:text-neutral-300 font-medium">
+            <span>Airflow: <strong className="font-mono text-foreground font-bold">{deliveredCadr} CFM</strong> ({currentAch} ACH)</span>
+            <span className="text-neutral-400">•</span>
+            <span>90% Clearance: <strong className="font-mono text-emerald-700 dark:text-emerald-400 font-bold">{minutesToClear} mins</strong></span>
           </div>
         </div>
       </div>
@@ -263,10 +263,10 @@ export function IndoorHacksLab({ onOpenPurifier3D, currentAQI = 210 }: IndoorHac
             key={cat.id}
             type="button"
             onClick={() => setActiveCategory(cat.id as any)}
-            className={`rounded px-3 py-1 text-xs transition-colors cursor-pointer border ${
+            className={`rounded px-3 py-1 text-xs font-semibold transition-colors cursor-pointer border shadow-xs ${
               activeCategory === cat.id
-                ? 'border-brand text-brand bg-brand/5'
-                : 'border-border/40 text-neutral-400 hover:text-foreground hover:bg-black/20'
+                ? 'border-brand text-brand bg-brand/10'
+                : 'border-neutral-300 dark:border-border/50 bg-white dark:bg-black/20 text-neutral-700 dark:text-neutral-400 hover:text-foreground'
             }`}
           >
             {cat.label}
@@ -282,7 +282,7 @@ export function IndoorHacksLab({ onOpenPurifier3D, currentAQI = 210 }: IndoorHac
           return (
             <div
               key={hack.id}
-              className="rounded-xl border border-border/40 bg-black/20 transition-colors"
+              className="rounded-xl border border-border/70 bg-neutral-100/50 dark:bg-black/20 transition-colors shadow-xs"
             >
               <button
                 type="button"
@@ -290,23 +290,23 @@ export function IndoorHacksLab({ onOpenPurifier3D, currentAQI = 210 }: IndoorHac
                 className="w-full p-4 text-left flex items-center justify-between cursor-pointer"
               >
                 <div className="flex items-center gap-3">
-                  <div className="flex size-8 shrink-0 items-center justify-center rounded-md border border-border bg-black/30 text-brand">
+                  <div className="flex size-8 shrink-0 items-center justify-center rounded-md border border-border bg-white dark:bg-black/30 text-brand">
                     {hack.category === 'purifier' && <Wind className="size-4" />}
                     {hack.category === 'sealing' && <ShieldCheck className="size-4" />}
                     {hack.category === 'botanical' && <Flower2 className="size-4" />}
                     {hack.category === 'cooking' && <Flame className="size-4" />}
                   </div>
                   <div>
-                    <h4 className="font-montserrat text-sm font-semibold text-foreground">{hack.title}</h4>
+                    <h4 className="font-montserrat text-sm font-bold text-foreground">{hack.title}</h4>
                     <div className="flex items-center gap-2 mt-1">
                       <Chip tone="default">{hack.cost}</Chip>
-                      <span className="text-[11px] text-neutral-400">{hack.difficulty}</span>
-                      <span className="text-[11px] text-neutral-400 font-mono">{hack.cadr}</span>
+                      <span className="text-[11px] font-semibold text-neutral-600 dark:text-neutral-400">{hack.difficulty}</span>
+                      <span className="text-[11px] font-bold text-neutral-600 dark:text-neutral-400 font-mono">{hack.cadr}</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="text-neutral-400">
+                <div className="text-neutral-600 dark:text-neutral-400">
                   {isOpen ? <ChevronUp className="size-4" /> : <ChevronDown className="size-4" />}
                 </div>
               </button>
@@ -320,10 +320,10 @@ export function IndoorHacksLab({ onOpenPurifier3D, currentAQI = 210 }: IndoorHac
                     transition={{ duration: 0.2 }}
                     className="overflow-hidden"
                   >
-                    <div className="p-4 pt-0 border-t border-border/30 space-y-4 text-xs">
+                    <div className="p-4 pt-0 border-t border-border/50 space-y-4 text-xs">
                       <div>
-                        <span className="font-semibold text-neutral-300 block mb-1.5">Materials needed</span>
-                        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1 text-neutral-400">
+                        <span className="font-bold text-neutral-900 dark:text-neutral-200 block mb-1.5">Materials needed</span>
+                        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1 text-neutral-700 dark:text-neutral-400 font-medium">
                           {hack.materials.map((m, i) => (
                             <li key={i} className="flex items-center gap-2">
                               <span className="size-1 rounded-full bg-brand" />
@@ -334,21 +334,21 @@ export function IndoorHacksLab({ onOpenPurifier3D, currentAQI = 210 }: IndoorHac
                       </div>
 
                       <div>
-                        <span className="font-semibold text-neutral-300 block mb-1.5">Build steps</span>
+                        <span className="font-bold text-neutral-900 dark:text-neutral-200 block mb-1.5">Build steps</span>
                         <div className="space-y-1.5">
                           {hack.steps.map((st, i) => (
-                            <div key={i} className="flex items-start gap-2.5 p-2 rounded-lg bg-black/20 text-neutral-300">
-                              <span className="font-mono text-[11px] text-neutral-400 shrink-0 font-semibold">
+                            <div key={i} className="flex items-start gap-2.5 p-2 rounded-lg bg-white dark:bg-black/20 text-neutral-800 dark:text-neutral-300 border border-border/50 shadow-xs">
+                              <span className="font-mono text-[11px] text-neutral-600 dark:text-neutral-400 shrink-0 font-bold">
                                 {i + 1}.
                               </span>
-                              <p className="leading-relaxed">{st}</p>
+                              <p className="leading-relaxed font-medium">{st}</p>
                             </div>
                           ))}
                         </div>
                       </div>
 
-                      <div className="p-3 rounded-lg border border-border/30 bg-black/30 text-neutral-400 leading-relaxed">
-                        <strong className="text-neutral-200 block mb-0.5">Physical mechanics</strong>
+                      <div className="p-3 rounded-lg border border-border/60 bg-white dark:bg-black/30 text-neutral-800 dark:text-neutral-300 leading-relaxed shadow-xs font-medium">
+                        <strong className="text-foreground font-bold block mb-0.5">Physical mechanics</strong>
                         {hack.science}
                       </div>
                     </div>
