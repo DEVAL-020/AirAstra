@@ -17,7 +17,7 @@ import {
 } from 'lucide-react';
 
 interface FooterProps {
-  onSelectTab: (tab: 'overview' | 'routine' | 'hacks' | 'vision' | 'chat' | 'community' | 'export') => void;
+  onSelectTab: (tab: 'overview' | 'personas' | 'trips' | 'routine' | 'hacks' | 'vision' | 'chat' | 'community' | 'export') => void;
   onOpenEmergency: () => void;
   onOpenPurifier3D: () => void;
   currentCity: string;
@@ -77,6 +77,26 @@ export function Footer({
               Platform tools
             </span>
             <ul className="space-y-2 text-sm text-neutral-300">
+              <li>
+                <button
+                  type="button"
+                  onClick={() => onSelectTab('personas')}
+                  className="hover:text-brand transition-colors text-left cursor-pointer flex items-center gap-1.5"
+                >
+                  <Users className="size-3.5 text-neutral-400" />
+                  <span>Persona safety guard</span>
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => onSelectTab('trips')}
+                  className="hover:text-brand transition-colors text-left cursor-pointer flex items-center gap-1.5"
+                >
+                  <Activity className="size-3.5 text-neutral-400" />
+                  <span>Smart trip combiner</span>
+                </button>
+              </li>
               <li>
                 <button
                   type="button"

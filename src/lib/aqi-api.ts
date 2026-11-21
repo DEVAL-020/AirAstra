@@ -17,6 +17,20 @@ export const POPULAR_CITIES: CityPreset[] = [
     winterSmogReason: 'Severe thermal inversion, agricultural stubble burning fallout & vehicular stagnation.'
   },
   {
+    name: 'Noida',
+    country: 'India',
+    lat: 28.5355,
+    lon: 77.3910,
+    winterSmogReason: 'High density urban vehicle corridor and Yamuna floodplain thermal fog trapping.'
+  },
+  {
+    name: 'Kolkata',
+    country: 'India',
+    lat: 22.5726,
+    lon: 88.3639,
+    winterSmogReason: 'Winter thermal inversion and riverine fog trapping domestic solid fuel and diesel particulate.'
+  },
+  {
     name: 'Lahore',
     country: 'Pakistan',
     lat: 31.5497,
@@ -176,6 +190,7 @@ export async function fetchLiveAirQuality(city: CityPreset): Promise<AirQualityD
       ventilationSafeWindow: '13:30 - 15:45 (Thermal Lift Period)',
       dominantPollutant: 'PM2.5',
       healthAdvisory: getAdvisoryText(finalAqi, inversionStrength),
+      dataSource: 'Open-Meteo & CPCB Global Atmospheric Network',
       hourlyForecast
     };
   } catch (error) {
@@ -236,6 +251,7 @@ export function getSyntheticCityData(city: CityPreset, baseHour: number = 8): Ai
     ventilationSafeWindow: '13:00 - 15:15',
     dominantPollutant: 'PM2.5',
     healthAdvisory: getAdvisoryText(aqi, 'Severe'),
+    dataSource: 'Open-Meteo & CPCB Global Atmospheric Network',
     hourlyForecast: hourly
   };
 }

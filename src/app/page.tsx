@@ -7,6 +7,8 @@ import { Navbar } from '@/components/Navbar';
 import { WeatherHero } from '@/components/WeatherHero';
 import { WeatherWidgetsGrid } from '@/components/WeatherWidgetsGrid';
 import { TodaysSuggestions } from '@/components/TodaysSuggestions';
+import { PersonaAdvisor } from '@/components/PersonaAdvisor';
+import { TripCombiner } from '@/components/TripCombiner';
 import { RoutineArchitect } from '@/components/RoutineArchitect';
 import { IndoorHacksLab } from '@/components/IndoorHacksLab';
 import { AirSnapVision } from '@/components/AirSnapVision';
@@ -22,7 +24,7 @@ import { Segmented } from '@/components/ui/segmented';
 export default function AirAstraHome() {
   const [currentCity, setCurrentCity] = useState<CityPreset>(POPULAR_CITIES[0]);
   const [airData, setAirData] = useState<AirQualityData>(() => getSyntheticCityData(POPULAR_CITIES[0], 8));
-  const [activeTab, setActiveTab] = useState<'overview' | 'routine' | 'hacks' | 'vision' | 'chat' | 'community' | 'export'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'personas' | 'trips' | 'routine' | 'hacks' | 'vision' | 'chat' | 'community' | 'export'>('overview');
   
   const [isPurifier3DOpen, setIsPurifier3DOpen] = useState(false);
   const [isEmergencyOpen, setIsEmergencyOpen] = useState(false);
@@ -41,6 +43,8 @@ export default function AirAstraHome() {
 
   const segmentedOptions = [
     { value: 'overview' as const, label: 'Air weather' },
+    { value: 'personas' as const, label: 'Persona safety' },
+    { value: 'trips' as const, label: 'Trip combiner' },
     { value: 'routine' as const, label: 'Daily routine' },
     { value: 'hacks' as const, label: 'DIY filter lab' },
     { value: 'vision' as const, label: 'Room scanner' },
@@ -82,6 +86,8 @@ export default function AirAstraHome() {
               onOpenEmergency={() => setIsEmergencyOpen(true)}
             />
 
+            <PersonaAdvisor airData={airData} />
+
             <TodaysSuggestions
               airData={airData}
               onOpenPurifier3D={() => setIsPurifier3DOpen(true)}
@@ -96,8 +102,10 @@ export default function AirAstraHome() {
           </div>
         )}
 
+        {activeTab === 'personas' && <PersonaAdvisor airData={airData} />}
+        {activeTab === 'trips' && <TripCombiner airData={airData} />}
         {activeTab === 'routine' && <RoutineArchitect airData={airData} />}
-        {activeTab === 'hacks' && <IndoorHacksLab onOpenPurifier3D={() => setIsPurifier3DOpen(true)} />}
+        {activeTab === 'hacks' && <IndoorHacksLab onOpenPurifier3D={() => setIsPurifier3DOpen(true)} currentAQI={airData.aqi} />}
         {activeTab === 'vision' && <AirSnapVision currentAQI={airData.aqi} />}
         {activeTab === 'chat' && <AstraVoiceChat currentAQI={airData.aqi} city={airData.city} />}
         {activeTab === 'community' && <CommunityHub />}

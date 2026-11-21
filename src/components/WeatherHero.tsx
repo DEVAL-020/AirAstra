@@ -9,7 +9,9 @@ import {
   Moon, 
   ArrowUpRight,
   ShieldAlert,
-  Layers
+  Layers,
+  Radio,
+  CheckCircle2
 } from 'lucide-react';
 import { AnimatedBadge } from '@/components/ui/animated-badge';
 import { Highlight } from '@/components/ui/highlight';
@@ -46,8 +48,28 @@ export function WeatherHero({
           Cold winter surface air traps toxic particulates. Protect your household with <Highlight>proven low-emission routines</Highlight> and clean air hacks.
         </p>
 
+        {/* Live Data Source and Timestamp Verification Badge */}
+        <div className="flex flex-wrap items-center justify-center gap-2.5 pt-1 text-xs sm:text-sm">
+          <div className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-neutral-900/80 px-3.5 py-1.5 backdrop-blur-md">
+            <span className="relative flex size-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex size-2 rounded-full bg-emerald-500"></span>
+            </span>
+            <span className="text-neutral-400 font-medium">Live Telemetry:</span>
+            <span className="font-mono font-bold text-foreground">{airData.timestamp}</span>
+          </div>
+
+          <div className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-neutral-900/80 px-3.5 py-1.5 backdrop-blur-md">
+            <Radio className="size-3.5 text-blue-400" />
+            <span className="text-neutral-400 font-medium">Verified Source:</span>
+            <span className="font-semibold text-foreground">
+              {airData.dataSource || 'Open-Meteo & CPCB Global Atmospheric Network'}
+            </span>
+          </div>
+        </div>
+
         {/* Action Buttons */}
-        <div className="flex items-center justify-center gap-4 pt-3">
+        <div className="flex items-center justify-center gap-4 pt-2">
           <button
             type="button"
             onClick={onOpenPurifier3D}

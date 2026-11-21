@@ -18,18 +18,30 @@ import { Highlight } from '@/components/ui/highlight';
 
 interface IndoorHacksLabProps {
   onOpenPurifier3D: () => void;
+  currentAQI?: number;
 }
 
-export function IndoorHacksLab({ onOpenPurifier3D }: IndoorHacksLabProps) {
+export function IndoorHacksLab({ onOpenPurifier3D, currentAQI = 210 }: IndoorHacksLabProps) {
   const [roomLength, setRoomLength] = useState<number>(15);
   const [roomWidth, setRoomWidth] = useState<number>(12);
   const [roomHeight, setRoomHeight] = useState<number>(9);
+  const [fanSpeed, setFanSpeed] = useState<'turbo' | 'medium' | 'whisper'>('medium');
   const [activeCategory, setActiveCategory] = useState<'all' | 'purifier' | 'sealing' | 'botanical' | 'cooking'>('all');
   const [expandedHack, setExpandedHack] = useState<string | null>('h1');
 
   const roomVolumeCuFt = roomLength * roomWidth * roomHeight;
   const targetAch = 5;
   const requiredCadr = Math.round((roomVolumeCuFt * targetAch) / 60);
+
+  // Speed-dependent CADR multiplier
+  const speedMultipliers = {
+    turbo: 1.45,
+    medium: 1.0,
+    whisper: 0.55
+  };
+  const deliveredCadr = Math.round(requiredCadr * speedMultipliers[fanSpeed]);
+  const currentAch = Number(((deliveredCadr * 60) / roomVolumeCuFt).toFixed(1));
+  const minutesToClear = Math.round((2.303 / (currentAch || 1)) * 60);
 
   const hacks = [
     {
@@ -193,7 +205,7 @@ export function IndoorHacksLab({ onOpenPurifier3D }: IndoorHacksLabProps) {
           </div>
 
           <div>
-            <span className="text-[10px] text-neutral-400 block">Target CADR</span>
+            <span className="text-[10px] text-neutral-400 block">Required baseline CADR</span>
             <span className="font-mono text-sm font-semibold text-brand">{requiredCadr} CFM</span>
           </div>
 
@@ -207,6 +219,33 @@ export function IndoorHacksLab({ onOpenPurifier3D }: IndoorHacksLabProps) {
           <div>
             <span className="text-[10px] text-neutral-400 block">Estimated build cost</span>
             <span className="font-mono text-sm font-semibold text-foreground">~$28 total</span>
+          </div>
+        </div>
+
+        {/* Dynamic Fan Speed Mode & Room Clearance Physics */}
+        <div className="pt-3 border-t border-border/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+          <div className="flex items-center gap-2">
+            <span className="text-neutral-400 font-medium">Fan Speed Mode:</span>
+            {(['whisper', 'medium', 'turbo'] as const).map((mode) => (
+              <button
+                key={mode}
+                type="button"
+                onClick={() => setFanSpeed(mode)}
+                className={`px-2.5 py-1 rounded text-xs capitalize transition-colors font-semibold cursor-pointer border ${
+                  fanSpeed === mode
+                    ? 'border-brand bg-brand/20 text-brand'
+                    : 'border-border/50 bg-neutral-800 text-neutral-300 hover:text-white'
+                }`}
+              >
+                {mode}
+              </button>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-3 text-neutral-300">
+            <span>Airflow: <strong className="font-mono text-foreground">{deliveredCadr} CFM</strong> ({currentAch} ACH)</span>
+            <span className="text-neutral-500">•</span>
+            <span>90% Clearance: <strong className="font-mono text-emerald-400">{minutesToClear} mins</strong></span>
           </div>
         </div>
       </div>

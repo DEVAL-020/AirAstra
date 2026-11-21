@@ -19,6 +19,7 @@ export interface AirQualityData {
   ventilationSafeWindow: string; // e.g. "13:00 - 15:30"
   dominantPollutant: 'PM2.5' | 'PM10' | 'NO2';
   healthAdvisory: string;
+  dataSource?: string;
   hourlyForecast: {
     hour: string;
     aqi: number;
