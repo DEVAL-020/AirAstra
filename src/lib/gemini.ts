@@ -179,7 +179,7 @@ Return ONLY a JSON object:
       'Position a Peace Lily or Snake Plant in indirect light to absorb ambient volatile organics',
       'Run mechanical exhaust fan for 5 minutes only during mid-afternoon thermal lift'
     ],
-    botanicalPlacementTip: 'Place a Snake Plant (Sansevieria) in the bedroom — it releases oxygen and purifies formaldehyde during night inversion.'
+    botanicalPlacementTip: 'Place a Snake Plant (Sansevieria) in the bedroom: it releases oxygen and purifies formaldehyde during night inversion.'
   };
 }
 
@@ -229,7 +229,7 @@ Guidelines:
     return `### 🛡️ Mask Science for Winter Smog:
 - **Cloth/Surgical Masks**: Only capture 15-25% of fine PM2.5. The gaps on the cheeks let microscopic soot enter unchecked.
 - **Certified N95 / FFP2 / KF94**: Electrostatic melt-blown fibers capture over **95% of particles down to 0.3 microns**.
-- **Fit Check**: Press the metal nose clip tightly. Cup your hands over the mask and exhale sharply — if air leaks around your eyes or jaw, readjust the straps. A poor fit destroys 50% of the mask's protective rating!`;
+- **Fit Check**: Press the metal nose clip tightly. Cup your hands over the mask and exhale sharply: if air leaks around your eyes or jaw, readjust the straps. A poor fit destroys 50% of the mask's protective rating!`;
   }
 
   if (userText.includes('plant') || userText.includes('purifier') || userText.includes('diy') || userText.includes('filter')) {

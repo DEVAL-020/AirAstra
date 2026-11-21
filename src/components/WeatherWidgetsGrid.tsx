@@ -8,45 +8,45 @@ import {
   Droplets, 
   Eye, 
   Gauge, 
-  Thermometer, 
   Layers,
   ArrowUpRight
 } from 'lucide-react';
+import { Chip } from '@/components/ui/chip';
+import { Highlight } from '@/components/ui/highlight';
 
 interface WeatherWidgetsGridProps {
   airData: AirQualityData;
   onOpenPurifier3D: () => void;
 }
 
-export const WeatherWidgetsGrid: React.FC<WeatherWidgetsGridProps> = ({
+export function WeatherWidgetsGrid({
   airData,
   onOpenPurifier3D
-}) => {
-  // Calculate percentage on EPA 0 - 500 scale
+}: WeatherWidgetsGridProps) {
   const scalePercent = Math.min(Math.max((airData.aqi / 500) * 100, 2), 98);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      {/* Widget 1: Air Quality Index & Pollutant Breakdown */}
-      <div className="weather-card p-5 flex flex-col justify-between space-y-4 lg:col-span-1">
+      {/* Widget 1: Air Quality Breakdown */}
+      <div className="card-chai p-5 flex flex-col justify-between space-y-4 lg:col-span-1">
         <div className="space-y-3">
-          <div className="flex items-center space-x-1.5 text-[11px] uppercase tracking-wider text-white/50 font-semibold">
-            <Gauge className="w-3.5 h-3.5 text-white/60" />
-            <span>Air Quality Index</span>
+          <div className="flex items-center justify-between text-xs text-neutral-400">
+            <span className="font-medium text-foreground">Air quality index</span>
+            <Chip tone={airData.aqi > 200 ? 'danger' : 'default'}>{airData.category}</Chip>
           </div>
 
           <div>
-            <span className="text-3xl font-light tracking-tight text-white font-mono">
+            <span className="font-mono text-3xl font-light text-foreground">
               {airData.aqi}
             </span>
-            <span className="text-xs text-white/60 ml-2 font-medium">
-              • {airData.category}
+            <span className="ml-2 font-mono text-xs text-neutral-400">
+              EPA US standard
             </span>
           </div>
 
-          {/* Clean Apple Weather Style Gradient Scale Bar */}
+          {/* Scale bar */}
           <div className="space-y-1.5">
-            <div className="relative h-2 w-full rounded-full bg-slate-800 overflow-hidden">
+            <div className="relative h-1.5 w-full rounded-full bg-neutral-800 overflow-hidden">
               <div 
                 className="absolute inset-0 h-full w-full rounded-full"
                 style={{
@@ -54,121 +54,119 @@ export const WeatherWidgetsGrid: React.FC<WeatherWidgetsGridProps> = ({
                 }}
               />
             </div>
-            {/* Indicator pin */}
             <div className="relative w-full h-2">
               <div 
-                className="absolute top-0 -ml-1.5 w-3 h-3 bg-white rounded-full shadow-md border border-black/30 transition-all duration-300"
+                className="absolute top-0 -ml-1 size-2.5 bg-white rounded-full border border-black/40 transition-all duration-300"
                 style={{ left: `${scalePercent}%` }}
               />
             </div>
           </div>
         </div>
 
-        {/* Detailed Pollutants Table */}
-        <div className="pt-3 border-t border-white/5 space-y-2 text-xs">
-          <div className="flex justify-between text-white/70">
-            <span>PM2.5 (Fine particulate)</span>
-            <span className="font-mono text-white font-medium">{airData.pm25} µg/m³</span>
+        {/* Pollutants list */}
+        <div className="pt-3 border-t border-border/40 space-y-2 text-xs">
+          <div className="flex justify-between text-neutral-400">
+            <span>PM2.5 (Fine soot)</span>
+            <span className="font-mono font-medium text-foreground">{airData.pm25} µg/m³</span>
           </div>
-          <div className="flex justify-between text-white/70">
+          <div className="flex justify-between text-neutral-400">
             <span>PM10 (Coarse dust)</span>
-            <span className="font-mono text-white font-medium">{airData.pm10} µg/m³</span>
+            <span className="font-mono font-medium text-foreground">{airData.pm10} µg/m³</span>
           </div>
-          <div className="flex justify-between text-white/70">
-            <span>Nitrogen Dioxide (NO₂)</span>
-            <span className="font-mono text-white font-medium">{airData.no2} µg/m³</span>
+          <div className="flex justify-between text-neutral-400">
+            <span>Nitrogen dioxide (NO₂)</span>
+            <span className="font-mono font-medium text-foreground">{airData.no2} µg/m³</span>
           </div>
-          <div className="flex justify-between text-white/70">
+          <div className="flex justify-between text-neutral-400">
             <span>Ozone (O₃)</span>
-            <span className="font-mono text-white font-medium">{airData.o3} µg/m³</span>
+            <span className="font-mono font-medium text-foreground">{airData.o3} µg/m³</span>
           </div>
         </div>
       </div>
 
-      {/* Widget 2: 3D Atmospheric Inversion Simulation */}
-      <div className="weather-card p-5 flex flex-col justify-between space-y-3 lg:col-span-2">
-        <div className="flex items-center justify-between text-[11px] uppercase tracking-wider text-white/50 font-semibold">
-          <div className="flex items-center space-x-1.5">
-            <Layers className="w-3.5 h-3.5 text-white/60" />
-            <span>Atmospheric Inversion Simulation</span>
+      {/* Widget 2: 3D Inversion Shader Canvas */}
+      <div className="card-chai p-5 flex flex-col justify-between space-y-3 lg:col-span-2">
+        <div className="flex items-center justify-between text-xs text-neutral-400">
+          <div className="flex items-center gap-1.5 font-medium text-foreground">
+            <Layers className="size-3.5" />
+            <span>Atmospheric inversion simulation</span>
           </div>
-          <span className="text-white/40 font-mono normal-case">
-            Boundary Height ~180m
+          <span className="font-mono text-xs text-neutral-400">
+            Boundary ceiling at ~180m
           </span>
         </div>
 
-        {/* Embedded clean Three.js canvas */}
-        <div className="relative flex-1 min-h-[170px] rounded-xl overflow-hidden bg-black/20 border border-white/5">
+        <div className="relative flex-1 min-h-[170px] rounded-lg overflow-hidden border border-border/30 bg-black/40">
           <SmogShaderCanvas aqi={airData.aqi} inversionStrength={airData.inversionStrength} />
         </div>
 
-        <p className="text-xs text-white/60 leading-relaxed pt-1">
-          Cold winter surface air is trapped beneath a warmer atmospheric layer. Trapped particulates cannot disperse until the afternoon solar heating cycle.
+        <p className="text-xs text-neutral-400 leading-relaxed">
+          Ground-level cold lake traps particulate matter. Dispersal happens during <Highlight>afternoon solar heating</Highlight> when thermal updrafts open.
         </p>
       </div>
 
-      {/* Widget 3: Wind & Aerosol Stagnation */}
-      <div className="weather-card p-5 flex flex-col justify-between space-y-3">
-        <div className="flex items-center space-x-1.5 text-[11px] uppercase tracking-wider text-white/50 font-semibold">
-          <Wind className="w-3.5 h-3.5 text-white/60" />
-          <span>Wind & Movement</span>
+      {/* Widget 3: Wind */}
+      <div className="card-chai p-5 flex flex-col justify-between space-y-3">
+        <div className="flex items-center gap-1.5 text-xs font-medium text-foreground">
+          <Wind className="size-3.5 text-neutral-400" />
+          <span>Surface wind</span>
         </div>
 
         <div>
-          <span className="text-3xl font-light tracking-tight text-white font-mono">
+          <span className="font-mono text-3xl font-light text-foreground">
             {airData.windSpeed}
           </span>
-          <span className="text-xs text-white/60 ml-1.5 font-medium">
+          <span className="ml-1.5 font-mono text-xs text-neutral-400">
             km/h • NW
           </span>
         </div>
 
-        <div className="pt-2 border-t border-white/5 text-xs text-white/65 leading-relaxed">
-          Calm wind speed is causing localized smoke stagnation over neighborhoods.
-        </div>
+        <p className="pt-2 border-t border-border/40 text-xs text-neutral-400 leading-relaxed">
+          Calm surface wind allows vehicular exhaust and solid fuels to stagnate.
+        </p>
       </div>
 
-      {/* Widget 4: Humidity & Aerosol Suspension */}
-      <div className="weather-card p-5 flex flex-col justify-between space-y-3">
-        <div className="flex items-center space-x-1.5 text-[11px] uppercase tracking-wider text-white/50 font-semibold">
-          <Droplets className="w-3.5 h-3.5 text-white/60" />
-          <span>Humidity & Fog</span>
+      {/* Widget 4: Humidity */}
+      <div className="card-chai p-5 flex flex-col justify-between space-y-3">
+        <div className="flex items-center gap-1.5 text-xs font-medium text-foreground">
+          <Droplets className="size-3.5 text-neutral-400" />
+          <span>Relative humidity</span>
         </div>
 
         <div>
-          <span className="text-3xl font-light tracking-tight text-white font-mono">
+          <span className="font-mono text-3xl font-light text-foreground">
             {airData.humidity}%
           </span>
-          <span className="text-xs text-white/60 ml-1.5 font-medium">
-            Relative Humidity
+          <span className="ml-1.5 font-mono text-xs text-neutral-400">
+            Moisture saturation
           </span>
         </div>
 
-        <div className="pt-2 border-t border-white/5 text-xs text-white/65 leading-relaxed">
-          High relative humidity bonds with chemical nitrates, creating heavy winter haze droplets.
-        </div>
+        <p className="pt-2 border-t border-border/40 text-xs text-neutral-400 leading-relaxed">
+          High humidity bonds with ambient sulfates, creating visible smog aerosol droplets.
+        </p>
       </div>
 
-      {/* Widget 5: Visibility & Safe Ventilation */}
-      <div className="weather-card p-5 flex flex-col justify-between space-y-3">
-        <div className="flex items-center space-x-1.5 text-[11px] uppercase tracking-wider text-white/50 font-semibold">
-          <Eye className="w-3.5 h-3.5 text-white/60" />
+      {/* Widget 5: Visibility */}
+      <div className="card-chai p-5 flex flex-col justify-between space-y-3">
+        <div className="flex items-center gap-1.5 text-xs font-medium text-foreground">
+          <Eye className="size-3.5 text-neutral-400" />
           <span>Visibility</span>
         </div>
 
         <div>
-          <span className="text-3xl font-light tracking-tight text-white font-mono">
+          <span className="font-mono text-3xl font-light text-foreground">
             1.1
           </span>
-          <span className="text-xs text-white/60 ml-1.5 font-medium">
-            km • Reduced by Smog
+          <span className="ml-1.5 font-mono text-xs text-neutral-400">
+            km (Reduced by haze)
           </span>
         </div>
 
-        <div className="pt-2 border-t border-white/5 text-xs text-white/65 leading-relaxed">
-          Optimal indoor airing recommended at <strong className="text-emerald-400 font-normal">{airData.ventilationSafeWindow}</strong>.
-        </div>
+        <p className="pt-2 border-t border-border/40 text-xs text-neutral-400 leading-relaxed">
+          Safe indoor cross ventilation window scheduled for {airData.ventilationSafeWindow}.
+        </p>
       </div>
     </div>
   );
-};
+}

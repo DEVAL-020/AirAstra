@@ -12,22 +12,22 @@ import {
   VolumeX, 
   User, 
   Loader2,
-  Stethoscope,
-  Sparkles,
-  HeartPulse
+  Stethoscope
 } from 'lucide-react';
+import { Chip } from '@/components/ui/chip';
+import { Highlight } from '@/components/ui/highlight';
 
 interface AstraVoiceChatProps {
   currentAQI: number;
   city: string;
 }
 
-export const AstraVoiceChat: React.FC<AstraVoiceChatProps> = ({ currentAQI, city }) => {
+export function AstraVoiceChat({ currentAQI, city }: AstraVoiceChatProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: 'init-1',
       sender: 'astra',
-      text: `Hello, I'm Astra, your respiratory health and clean-air advisor. Outdoor air in ${city} is currently at AQI ${currentAQI} with active thermal trapping. How is your family feeling today, or what can I help you adjust?`,
+      text: `Hello, I am Astra, your respiratory health and clean air advisor. Outdoor air in ${city} is currently at AQI ${currentAQI} with active thermal trapping. How is your family feeling today, or what can I help you adjust?`,
       timestamp: 'Just now',
       suggestedActions: [
         'Child coughing in morning smog',
@@ -72,23 +72,14 @@ export const AstraVoiceChat: React.FC<AstraVoiceChatProps> = ({ currentAQI, city
       recognition.interimResults = false;
       recognition.maxAlternatives = 1;
 
-      recognition.onstart = () => {
-        setIsListening(true);
-      };
-
+      recognition.onstart = () => setIsListening(true);
       recognition.onresult = (event: any) => {
         const transcript = event.results[0][0].transcript;
         setInputValue(transcript);
         setIsListening(false);
       };
-
-      recognition.onerror = () => {
-        setIsListening(false);
-      };
-
-      recognition.onend = () => {
-        setIsListening(false);
-      };
+      recognition.onerror = () => setIsListening(false);
+      recognition.onend = () => setIsListening(false);
 
       recognition.start();
     } catch {
@@ -148,76 +139,70 @@ export const AstraVoiceChat: React.FC<AstraVoiceChatProps> = ({ currentAQI, city
   };
 
   return (
-    <div className="w-full bg-[#0b1813] rounded-3xl p-5 sm:p-7 border border-white/10 flex flex-col h-[640px] shadow-xl">
-      {/* Clinician Style Header */}
-      <div className="flex items-center justify-between border-b border-white/5 pb-4 mb-4">
-        <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 rounded-2xl bg-[#142e22] border border-emerald-500/30 flex items-center justify-center text-emerald-400 shadow-sm">
-            <Stethoscope className="w-5 h-5 text-emerald-300" />
+    <div className="card-chai p-6 flex flex-col h-[600px]">
+      {/* Header */}
+      <div className="flex items-center justify-between border-b border-border/40 pb-4 mb-4">
+        <div className="flex items-center gap-3">
+          <div className="flex size-9 items-center justify-center rounded-lg border border-border bg-black/30 text-brand">
+            <Stethoscope className="size-4" />
           </div>
           <div>
-            <h3 className="text-base font-bold text-white flex items-center gap-2">
-              Astra
-              <span className="text-[10px] font-medium bg-emerald-950 text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-500/30">
-                Respiratory Advisor
-              </span>
-            </h3>
-            <p className="text-xs text-slate-400">
-              Guidance for {city} (AQI {currentAQI}) • WHO & Pediatric Respiratory Framework
+            <div className="flex items-center gap-2">
+              <h3 className="font-montserrat text-base font-semibold text-foreground">Astra</h3>
+              <Chip tone="default">Respiratory advisor</Chip>
+            </div>
+            <p className="text-xs text-neutral-400">
+              Personalized guidance for {city} (AQI {currentAQI}) based on <Highlight>pediatric respiratory safety</Highlight>.
             </p>
           </div>
         </div>
 
-        {/* Audio Output Button */}
         <button
+          type="button"
           onClick={() => {
             if (ttsEnabled && typeof window !== 'undefined') window.speechSynthesis.cancel();
             setTtsEnabled(!ttsEnabled);
           }}
-          className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-medium border transition-all cursor-pointer ${
-            ttsEnabled
-              ? 'bg-emerald-500/15 border-emerald-500/30 text-emerald-300'
-              : 'bg-[#10221a] border-white/10 text-slate-400'
-          }`}
+          className="inline-flex h-8 items-center gap-1.5 rounded-md border border-border/40 px-2.5 text-xs text-neutral-400 hover:text-foreground hover:bg-black/20 transition-colors"
         >
-          {ttsEnabled ? <Volume2 className="w-4 h-4 text-emerald-400" /> : <VolumeX className="w-4 h-4" />}
-          <span>{ttsEnabled ? 'Voice ON' : 'Muted'}</span>
+          {ttsEnabled ? <Volume2 className="size-3.5 text-brand" /> : <VolumeX className="size-3.5" />}
+          <span>{ttsEnabled ? 'Voice on' : 'Muted'}</span>
         </button>
       </div>
 
       {/* Messages Feed */}
-      <div className="flex-1 overflow-y-auto space-y-4 pr-1 scrollbar-thin">
+      <div className="flex-1 overflow-y-auto space-y-3.5 pr-1 [scrollbar-width:none]">
         {messages.map((m) => {
           const isAstra = m.sender === 'astra';
 
           return (
             <div
               key={m.id}
-              className={`flex items-start space-x-3 ${isAstra ? 'justify-start' : 'justify-end'}`}
+              className={`flex items-start gap-2.5 ${isAstra ? 'justify-start' : 'justify-end'}`}
             >
               {isAstra && (
-                <div className="w-7 h-7 rounded-lg bg-[#142e22] border border-emerald-500/25 text-emerald-400 flex items-center justify-center shrink-0 mt-1">
-                  <Stethoscope className="w-3.5 h-3.5" />
+                <div className="flex size-6 shrink-0 items-center justify-center rounded border border-border bg-black/40 text-brand mt-1">
+                  <Stethoscope className="size-3" />
                 </div>
               )}
 
               <div
-                className={`max-w-[85%] md:max-w-[78%] rounded-2xl p-4 text-xs leading-relaxed space-y-2.5 ${
+                className={`max-w-[85%] md:max-w-[78%] rounded-xl p-3.5 text-xs leading-relaxed space-y-2 border ${
                   isAstra
-                    ? 'bg-[#10221a] border border-white/5 text-slate-200 shadow-sm'
-                    : 'bg-emerald-700 text-white font-medium ml-auto shadow-md'
+                    ? 'border-border/40 bg-black/30 text-neutral-200'
+                    : 'border-border/20 bg-neutral-900 text-white font-medium ml-auto'
                 }`}
               >
                 <div className="whitespace-pre-wrap">{m.text}</div>
 
-                {/* Quick Suggestion Chips */}
                 {m.suggestedActions && (
-                  <div className="pt-2 flex flex-wrap gap-1.5 border-t border-white/5">
+                  <div className="pt-2 flex flex-wrap gap-1.5 border-t border-border/30">
                     {m.suggestedActions.map((chip, idx) => (
                       <button
                         key={idx}
+                        type="button"
                         onClick={() => handleSend(chip)}
-                        className="text-[11px] bg-[#162e23] hover:bg-[#1e3d2f] border border-emerald-500/20 text-emerald-300 px-2.5 py-1 rounded-lg transition-all cursor-pointer"
+                        className="rounded border border-border/40 bg-black/20 px-2.5 py-1 text-[11px] text-neutral-300 hover:border-brand hover:text-brand transition-colors cursor-pointer"
                       >
                         {chip}
                       </button>
@@ -225,14 +210,14 @@ export const AstraVoiceChat: React.FC<AstraVoiceChatProps> = ({ currentAQI, city
                   </div>
                 )}
 
-                <div className="text-[10px] text-slate-400 text-right opacity-60">
+                <div className="text-[10px] text-neutral-500 text-right">
                   {m.timestamp}
                 </div>
               </div>
 
               {!isAstra && (
-                <div className="w-7 h-7 rounded-lg bg-[#10221a] border border-white/10 text-slate-300 flex items-center justify-center shrink-0 mt-1">
-                  <User className="w-3.5 h-3.5" />
+                <div className="flex size-6 shrink-0 items-center justify-center rounded border border-border bg-black/40 text-neutral-400 mt-1">
+                  <User className="size-3" />
                 </div>
               )}
             </div>
@@ -240,8 +225,8 @@ export const AstraVoiceChat: React.FC<AstraVoiceChatProps> = ({ currentAQI, city
         })}
 
         {isLoading && (
-          <div className="flex items-center space-x-2 text-xs text-emerald-300 bg-[#10221a] p-3 rounded-2xl w-fit border border-emerald-500/20">
-            <Loader2 className="w-3.5 h-3.5 animate-spin text-emerald-400" />
+          <div className="flex items-center gap-2 text-xs text-neutral-400 p-3 rounded-lg border border-border/30 bg-black/20 w-fit">
+            <Loader2 className="size-3.5 animate-spin text-brand" />
             <span>Consulting atmospheric respiratory guidelines...</span>
           </div>
         )}
@@ -250,46 +235,40 @@ export const AstraVoiceChat: React.FC<AstraVoiceChatProps> = ({ currentAQI, city
       </div>
 
       {/* Input */}
-      <div className="pt-3 border-t border-white/5 space-y-2">
+      <div className="pt-3 border-t border-border/40 space-y-2">
         <form
           onSubmit={(e) => {
             e.preventDefault();
             handleSend();
           }}
-          className="flex items-center space-x-2"
+          className="flex items-center gap-2"
         >
           <input
             type="text"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             placeholder={isListening ? "Listening... Speak naturally..." : "Ask Astra about morning coughs, mask seals, or room filtration..."}
-            className={`flex-1 bg-[#0a1712] border rounded-2xl px-4 py-3 text-xs text-white placeholder-slate-500 focus:outline-none transition-all ${
-              isListening ? 'border-red-500 ring-1 ring-red-500' : 'border-white/10 focus:border-emerald-500'
-            }`}
+            className="flex-1 h-9 rounded-md border border-border bg-black/30 px-3 text-xs text-foreground placeholder-neutral-500 focus:outline-none focus:border-brand"
           />
 
           <button
             type="button"
             onClick={toggleListening}
-            className={`p-3 rounded-2xl border transition-all cursor-pointer ${
-              isListening
-                ? 'bg-red-500 text-white border-red-400'
-                : 'bg-[#10221a] text-slate-300 border-white/10 hover:bg-[#162e23]'
-            }`}
+            className="flex size-9 items-center justify-center rounded-md border border-border bg-black/20 text-neutral-400 hover:text-foreground transition-colors cursor-pointer"
             title="Speech input"
           >
-            {isListening ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
+            {isListening ? <MicOff className="size-4 text-red-400" /> : <Mic className="size-4" />}
           </button>
 
           <button
             type="submit"
             disabled={!inputValue.trim() || isLoading}
-            className="p-3 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold transition-all disabled:opacity-40 cursor-pointer shadow-md"
+            className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-3 text-xs font-semibold text-primary-foreground hover:bg-primary/90 transition-colors disabled:opacity-40 cursor-pointer"
           >
-            <Send className="w-4 h-4" />
+            <Send className="size-3.5" />
           </button>
         </form>
       </div>
     </div>
   );
-};
+}

@@ -4,14 +4,16 @@ import React from 'react';
 import { AirQualityData } from '@/types';
 import { 
   Clock, 
-  AlertTriangle, 
   Sun, 
   CloudFog, 
   Moon, 
-  Wind,
+  ArrowUpRight,
   ShieldAlert,
   Layers
 } from 'lucide-react';
+import { AnimatedBadge } from '@/components/ui/animated-badge';
+import { Highlight } from '@/components/ui/highlight';
+import { Chip } from '@/components/ui/chip';
 
 interface WeatherHeroProps {
   airData: AirQualityData;
@@ -19,93 +21,68 @@ interface WeatherHeroProps {
   onOpenEmergency: () => void;
 }
 
-export const WeatherHero: React.FC<WeatherHeroProps> = ({
+export function WeatherHero({
   airData,
   onOpenPurifier3D,
   onOpenEmergency
-}) => {
-  const getCategoryColor = (aqi: number) => {
-    if (aqi > 300) return 'text-purple-400';
-    if (aqi > 200) return 'text-rose-400';
-    if (aqi > 150) return 'text-orange-400';
-    if (aqi > 100) return 'text-amber-400';
-    if (aqi > 50) return 'text-yellow-400';
-    return 'text-emerald-400';
-  };
-
-  const getAqiDotBg = (aqi: number) => {
-    if (aqi > 300) return 'bg-purple-500';
-    if (aqi > 200) return 'bg-rose-500';
-    if (aqi > 150) return 'bg-orange-500';
-    if (aqi > 100) return 'bg-amber-500';
-    return 'bg-emerald-400';
-  };
-
-  // Find max & min predicted AQI for the day
-  const aqiList = airData.hourlyForecast.map(h => h.aqi);
+}: WeatherHeroProps) {
+  const aqiList = airData.hourlyForecast.map((h) => h.aqi);
   const maxAqi = Math.max(...aqiList, airData.aqi);
   const minAqi = Math.min(...aqiList, airData.aqi);
 
   return (
-    <div className="w-full space-y-6 pt-2 pb-4">
-      {/* Apple Weather Style Centered Hero Header */}
-      <div className="text-center space-y-1.5 py-4">
-        <h1 className="text-2xl sm:text-3xl font-normal tracking-tight text-white/90">
-          {airData.city}
+    <section className="space-y-8 pt-4 pb-2">
+      {/* Hero Lead Section in ChaiUI style */}
+      <div className="flex flex-col items-center text-center space-y-4">
+        <AnimatedBadge>
+          <span>Urban Smog & Inversion Monitor</span>
+        </AnimatedBadge>
+
+        <h1 className="text-[42px] font-semibold tracking-tight max-md:leading-11 md:text-6xl lg:text-7xl text-foreground">
+          {airData.city} <span className="font-mono text-3xl md:text-5xl font-light text-neutral-400">({airData.aqi} AQI)</span>
         </h1>
 
-        {/* Big Apple Weather Style Number */}
-        <div className="flex items-center justify-center">
-          <span className="text-7xl sm:text-8xl font-extralight tracking-tighter text-white font-mono">
-            {airData.aqi}
-          </span>
-        </div>
+        <p className="max-w-2xl text-base text-neutral-400 md:text-xl leading-relaxed">
+          Cold winter surface air traps toxic particulates. Protect your household with <Highlight>proven low-emission routines</Highlight> and clean air hacks.
+        </p>
 
-        {/* Condition Text */}
-        <div className="space-y-0.5">
-          <p className={`text-lg sm:text-xl font-medium tracking-tight ${getCategoryColor(airData.aqi)}`}>
-            {airData.category} Air Quality
-          </p>
-          <p className="text-xs sm:text-sm text-white/60">
-            H: {maxAqi} • L: {minAqi} • Ground PM2.5: <span className="font-mono text-white/80">{airData.pm25} µg/m³</span>
-          </p>
-        </div>
-
-        {/* Minimalist Action Buttons */}
-        <div className="pt-3 flex items-center justify-center gap-2.5">
+        {/* ChaiUI Solid + Outline Asymmetric Buttons */}
+        <div className="flex items-center justify-center gap-3 pt-2">
           <button
+            type="button"
             onClick={onOpenPurifier3D}
-            className="px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/15 text-white/90 text-xs font-medium border border-white/10 transition-colors flex items-center gap-1.5 cursor-pointer shadow-sm"
+            className="btn-asym inline-flex h-9 items-center gap-2 bg-white px-5 text-sm font-semibold text-black transition-colors hover:bg-neutral-200 cursor-pointer"
           >
-            <Layers className="w-3.5 h-3.5 text-emerald-400" />
-            <span>3D Air Filter CAD</span>
+            Open 3D filter simulator <ArrowUpRight className="-ml-1 size-4" aria-hidden="true" />
           </button>
 
           {airData.aqi > 200 && (
             <button
+              type="button"
               onClick={onOpenEmergency}
-              className="px-3.5 py-1.5 rounded-full bg-rose-500/20 hover:bg-rose-500/30 text-rose-200 text-xs font-medium border border-rose-500/30 transition-colors flex items-center gap-1.5 cursor-pointer"
+              className="btn-asym-mirror inline-flex h-9 items-center gap-2 border border-border bg-transparent px-4 text-sm font-medium text-foreground transition-colors hover:bg-black/90 cursor-pointer"
             >
-              <ShieldAlert className="w-3.5 h-3.5 text-rose-400" />
-              <span>Smog Advisory</span>
+              <ShieldAlert className="size-4 text-red-400" />
+              Smog protocol
             </button>
           )}
         </div>
       </div>
 
-      {/* Hourly Air Quality Weather Strip (Apple Weather Style) */}
-      <div className="weather-card p-4 sm:p-5 space-y-3">
-        <div className="flex items-center justify-between text-[11px] uppercase tracking-wider text-white/50 font-semibold border-b border-white/5 pb-2.5">
-          <div className="flex items-center space-x-1.5">
-            <Clock className="w-3.5 h-3.5 text-white/60" />
-            <span>Hourly Smog & Inversion Forecast</span>
+      {/* Hourly Strip in ChaiUI Card style */}
+      <div className="card-chai p-5 space-y-4">
+        <div className="flex items-center justify-between border-b border-border/40 pb-3">
+          <div className="flex items-center gap-2 text-xs text-neutral-400">
+            <Clock className="size-3.5 text-neutral-400" />
+            <span className="font-medium text-foreground">24-hour inversion forecast</span>
           </div>
-          <span className="text-white/40 normal-case">
-            Safe ventilation window: <strong className="text-emerald-400 font-mono font-normal">{airData.ventilationSafeWindow}</strong>
-          </span>
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-neutral-400">Safe flush window:</span>
+            <Chip tone="success">{airData.ventilationSafeWindow}</Chip>
+          </div>
         </div>
 
-        <div className="flex gap-4 overflow-x-auto pb-1 pt-1 scrollbar-none">
+        <div className="flex gap-4 overflow-x-auto pb-1 [scrollbar-width:none]">
           {airData.hourlyForecast.map((hour, idx) => {
             const isNow = idx === 0;
             const hourNum = parseInt(hour.hour.split(':')[0]);
@@ -114,39 +91,34 @@ export const WeatherHero: React.FC<WeatherHeroProps> = ({
             return (
               <div
                 key={hour.hour + idx}
-                className="flex-shrink-0 flex flex-col items-center justify-between min-w-[56px] space-y-2 text-center"
+                className="flex-shrink-0 flex flex-col items-center justify-between min-w-[62px] p-2.5 rounded-lg border border-border/30 bg-black/20 text-center space-y-1.5"
               >
-                <span className="text-xs text-white/70 font-medium">
+                <span className="text-xs text-neutral-400 font-medium">
                   {isNow ? 'Now' : hour.hour.replace(':00', '')}
                 </span>
 
-                {/* Weather icon */}
-                <div className="text-white/80 my-0.5">
+                <div className="text-foreground my-0.5">
                   {hour.inversionTrapped ? (
-                    <CloudFog className="w-4 h-4 text-rose-300/80" />
+                    <CloudFog className="size-4 text-red-400" />
                   ) : isNight ? (
-                    <Moon className="w-4 h-4 text-slate-300" />
+                    <Moon className="size-4 text-neutral-400" />
                   ) : (
-                    <Sun className="w-4 h-4 text-amber-300" />
+                    <Sun className="size-4 text-amber-300" />
                   )}
                 </div>
 
-                {/* AQI Pill */}
-                <div className="flex flex-col items-center space-y-1">
-                  <span className="w-1.5 h-1.5 rounded-full inline-block" style={{ backgroundColor: hour.aqi > 250 ? '#f43f5e' : hour.aqi > 150 ? '#f97316' : '#10b981' }} />
-                  <span className="text-xs font-mono font-semibold text-white/90">
-                    {hour.aqi}
-                  </span>
-                </div>
+                <span className="text-xs font-mono font-semibold text-foreground">
+                  {hour.aqi}
+                </span>
 
-                <span className="text-[11px] text-white/45 font-mono">
-                  {hour.temperature}°
+                <span className="text-[11px] text-neutral-500 font-mono">
+                  {hour.temperature}°C
                 </span>
               </div>
             );
           })}
         </div>
       </div>
-    </div>
+    </section>
   );
-};
+}

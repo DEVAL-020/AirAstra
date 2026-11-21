@@ -15,17 +15,17 @@ import { CommunityHub } from '@/components/CommunityHub';
 import { FamilyPlanExport } from '@/components/FamilyPlanExport';
 import { Purifier3DModal } from '@/components/Purifier3DModal';
 import { EmergencySmogModal } from '@/components/EmergencySmogModal';
+import { Backdrop } from '@/components/ui/backdrop';
+import { Segmented } from '@/components/ui/segmented';
 
 export default function AirAstraHome() {
-  const [currentCity, setCurrentCity] = useState<CityPreset>(POPULAR_CITIES[0]); // Default: New Delhi
+  const [currentCity, setCurrentCity] = useState<CityPreset>(POPULAR_CITIES[0]);
   const [airData, setAirData] = useState<AirQualityData>(() => getSyntheticCityData(POPULAR_CITIES[0], 8));
   const [activeTab, setActiveTab] = useState<'overview' | 'routine' | 'hacks' | 'vision' | 'chat' | 'community' | 'export'>('overview');
   
-  // Modals
-  const [isPurifier3DOpen, setIsPurifier3DOpen] = useState<boolean>(false);
-  const [isEmergencyOpen, setIsEmergencyOpen] = useState<boolean>(false);
+  const [isPurifier3DOpen, setIsPurifier3DOpen] = useState(false);
+  const [isEmergencyOpen, setIsEmergencyOpen] = useState(false);
 
-  // Fetch live AQI whenever selected city changes
   useEffect(() => {
     let isMounted = true;
     fetchLiveAirQuality(currentCity).then((data) => {
@@ -38,57 +38,49 @@ export default function AirAstraHome() {
     };
   }, [currentCity]);
 
-  const tabs = [
-    { id: 'overview', label: 'Air Weather' },
-    { id: 'routine', label: 'Daily Routine' },
-    { id: 'hacks', label: 'DIY Filter Lab' },
-    { id: 'vision', label: 'Room Scanner' },
-    { id: 'chat', label: 'Air Doctor' },
-    { id: 'community', label: 'Neighborhood' },
-    { id: 'export', label: 'Family Plan' }
+  const segmentedOptions = [
+    { value: 'overview' as const, label: 'Air weather' },
+    { value: 'routine' as const, label: 'Daily routine' },
+    { value: 'hacks' as const, label: 'DIY filter lab' },
+    { value: 'vision' as const, label: 'Room scanner' },
+    { value: 'chat' as const, label: 'Air doctor' },
+    { value: 'community' as const, label: 'Neighborhood' },
+    { value: 'export' as const, label: 'Family plan' }
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#0b1118] text-slate-100">
-      {/* Weather App Top Bar */}
+    <div className="relative isolate min-h-screen overflow-x-clip bg-background font-sans text-foreground antialiased selection:bg-brand selection:text-white">
+      {/* ChaiUI Page Background SVG with hexagon glow */}
+      <Backdrop />
+
+      {/* Sticky Navbar */}
       <Navbar
         currentCity={currentCity}
         onSelectCity={(city) => setCurrentCity(city)}
         airData={airData}
-        onOpenPurifier3D={() => setIsPurifier3DOpen(true)}
-        onOpenEmergency={() => setIsEmergencyOpen(true)}
       />
 
-      {/* Main Weather App Container */}
-      <main className="flex-1 max-w-5xl mx-auto w-full px-4 sm:px-6 py-4 space-y-6">
-        {/* iOS Style Segmented Control Tab Switcher */}
+      {/* Main Container: max-w-6xl with p-6 sm:p-12 */}
+      <main className="mx-auto w-full max-w-6xl p-6 sm:p-12 space-y-8">
+        {/* ChaiUI Segmented Toolbar Control */}
         <div className="flex justify-center">
-          <div className="ios-segment inline-flex items-center overflow-x-auto max-w-full scrollbar-none">
-            {tabs.map((t) => (
-              <button
-                key={t.id}
-                onClick={() => setActiveTab(t.id as any)}
-                className={`ios-segment-btn whitespace-nowrap cursor-pointer ${
-                  activeTab === t.id ? 'active' : ''
-                }`}
-              >
-                {t.label}
-              </button>
-            ))}
-          </div>
+          <Segmented
+            label="AirAstra views"
+            options={segmentedOptions}
+            value={activeTab}
+            onChange={(val) => setActiveTab(val)}
+          />
         </div>
 
         {/* Tab Views */}
         {activeTab === 'overview' && (
-          <div className="space-y-6">
-            {/* Apple Weather Style Centered Hero & Hourly Forecast Strip */}
+          <div className="space-y-8">
             <WeatherHero
               airData={airData}
               onOpenPurifier3D={() => setIsPurifier3DOpen(true)}
               onOpenEmergency={() => setIsEmergencyOpen(true)}
             />
 
-            {/* PromptWars Reference Mockup Component: Urban Air Quality Assistant & Today's Suggestions */}
             <TodaysSuggestions
               airData={airData}
               onOpenPurifier3D={() => setIsPurifier3DOpen(true)}
@@ -96,7 +88,6 @@ export default function AirAstraHome() {
               onSelectTab={(tab) => setActiveTab(tab)}
             />
 
-            {/* Apple Weather Style Environmental Metric Widgets Grid */}
             <WeatherWidgetsGrid
               airData={airData}
               onOpenPurifier3D={() => setIsPurifier3DOpen(true)}
@@ -125,10 +116,20 @@ export default function AirAstraHome() {
         aqi={airData.aqi}
       />
 
-      {/* Minimalist Weather App Footer */}
-      <footer className="mt-12 border-t border-white/5 py-6 px-4 text-center text-xs text-white/40">
-        <p>AirAstra Weather • Real-time meteorological telemetry & atmospheric inversion science</p>
-        <p className="mt-1 text-[11px] text-white/25">EPA Breakpoints • Harvard T.H. Chan Standards • WHO Guidelines</p>
+      {/* ChaiUI Footer with 10% hairline */}
+      <footer className="relative mt-20 border-t border-border/40 py-10 text-center text-xs text-neutral-400 before:absolute before:top-0 before:left-1/2 before:h-px before:w-1/2 before:-translate-x-1/2 before:bg-linear-to-r before:from-transparent before:via-orange-500/30 before:to-transparent">
+        <div className="mx-auto max-w-6xl px-6 sm:px-12 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-2">
+            <span className="font-brand font-bold text-foreground">AirAstra</span>
+            <span className="text-neutral-500">•</span>
+            <span>Built in the ChaiCode design system</span>
+          </div>
+          <div className="flex items-center gap-4 text-[11px] text-neutral-500">
+            <span>Open-Meteo telemetry</span>
+            <span>EPA breakpoints</span>
+            <span>Harvard ACH standards</span>
+          </div>
+        </div>
       </footer>
     </div>
   );

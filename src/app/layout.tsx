@@ -39,7 +39,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/icon.svg" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
-      <body className="min-h-screen bg-[#060b09] text-slate-100 antialiased selection:bg-emerald-500 selection:text-black">
+      <body className="min-h-screen bg-background text-foreground font-sans antialiased selection:bg-brand selection:text-white">
         {children}
       </body>
     </html>
