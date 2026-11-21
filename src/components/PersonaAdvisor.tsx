@@ -145,7 +145,7 @@ export function PersonaAdvisor({ airData }: PersonaAdvisorProps) {
       </div>
 
       {/* Dynamic Persona Panel Content */}
-      <div className="rounded-xl border border-border/70 bg-neutral-100/50 dark:bg-neutral-900/40 p-6 sm:p-7 space-y-6">
+      <div className="rounded-xl border-2 border-neutral-200 dark:border-border/70 bg-white dark:bg-neutral-900/40 p-6 sm:p-7 space-y-6 shadow-xs">
         {/* PARENTS & SCHOOL CHILDREN */}
         {selectedPersona === 'parents' && (
           <div className="space-y-6">
