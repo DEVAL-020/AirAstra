@@ -20,6 +20,17 @@ import { EmergencySmogModal } from '@/components/EmergencySmogModal';
 import { Footer } from '@/components/Footer';
 import { Backdrop } from '@/components/backdrop';
 import { Segmented } from '@/components/ui/segmented';
+import { 
+  Activity, 
+  Users, 
+  Navigation, 
+  Clock, 
+  Sparkles, 
+  Scan, 
+  Stethoscope, 
+  ShieldCheck, 
+  Printer 
+} from 'lucide-react';
 
 export default function AirAstraHome() {
   const [currentCity, setCurrentCity] = useState<CityPreset>(POPULAR_CITIES[0]);
@@ -42,15 +53,15 @@ export default function AirAstraHome() {
   }, [currentCity]);
 
   const segmentedOptions = [
-    { value: 'overview' as const, label: 'Air weather' },
-    { value: 'personas' as const, label: 'Persona safety' },
-    { value: 'trips' as const, label: 'Trip combiner' },
-    { value: 'routine' as const, label: 'Daily routine' },
-    { value: 'hacks' as const, label: 'DIY filter lab' },
-    { value: 'vision' as const, label: 'Room scanner' },
-    { value: 'chat' as const, label: 'Air doctor' },
-    { value: 'community' as const, label: 'Neighborhood' },
-    { value: 'export' as const, label: 'Family plan' }
+    { value: 'overview' as const, label: 'Air weather', icon: Activity },
+    { value: 'personas' as const, label: 'Persona safety', icon: Users, badge: 'Targeted' },
+    { value: 'trips' as const, label: 'Trip combiner', icon: Navigation, badge: 'Save CO₂' },
+    { value: 'routine' as const, label: 'Daily routine', icon: Clock },
+    { value: 'hacks' as const, label: 'DIY filter lab', icon: Sparkles },
+    { value: 'vision' as const, label: 'Room scanner', icon: Scan },
+    { value: 'chat' as const, label: 'Air doctor', icon: Stethoscope },
+    { value: 'community' as const, label: 'Neighborhood', icon: ShieldCheck },
+    { value: 'export' as const, label: 'Family plan', icon: Printer }
   ];
 
   return (
