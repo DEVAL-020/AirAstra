@@ -18,6 +18,7 @@ import {
 import { motion } from 'framer-motion';
 import { Chip } from '@/components/ui/chip';
 import { Highlight } from '@/components/ui/highlight';
+import { Button } from '@/components/ui/button';
 
 interface AirSnapVisionProps {
   currentAQI: number;
@@ -151,11 +152,13 @@ export function AirSnapVision({ currentAQI }: AirSnapVisionProps) {
             )}
           </div>
 
-          <button
-            type="button"
+          <Button
+            variant="solid"
+            size="lg"
             onClick={runDiagnostic}
             disabled={!selectedImage || loading}
-            className="btn-asym w-full inline-flex h-11 items-center justify-center bg-neutral-900 text-white dark:bg-white text-sm font-bold dark:text-black hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors disabled:opacity-40 cursor-pointer shadow-xs"
+            iconRight={null}
+            className="w-full text-sm font-bold shadow-xs"
           >
             {loading ? (
               <>
@@ -165,7 +168,7 @@ export function AirSnapVision({ currentAQI }: AirSnapVisionProps) {
             ) : (
               <span>Run room inspection</span>
             )}
-          </button>
+          </Button>
         </div>
 
         {/* Right Column */}

@@ -65,6 +65,7 @@ export function ThemeToggle() {
   const selectTheme = (newMode: ThemeMode) => {
     setTheme(newMode);
     localStorage.setItem('airastra-theme', newMode);
+    localStorage.setItem('chaiui-theme', newMode === 'system' ? 'dark' : newMode);
     applyTheme(newMode);
     setIsOpen(false);
   };

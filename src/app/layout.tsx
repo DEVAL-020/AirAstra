@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Plus_Jakarta_Sans, Montserrat, Onest } from 'next/font/google';
 import './globals.css';
+import { ThemeProvider } from '@/components/theme-provider';
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -77,7 +78,9 @@ export default function RootLayout({
         />
       </head>
       <body className={`${plusJakartaSans.variable} ${montserrat.variable} ${onest.variable} font-sans min-h-screen bg-background text-foreground text-[17px] leading-relaxed antialiased selection:bg-brand selection:text-white`}>
-        {children}
+        <ThemeProvider defaultTheme="dark" storageKey="airastra-theme">
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

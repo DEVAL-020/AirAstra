@@ -15,6 +15,7 @@ import {
   Sparkles
 } from 'lucide-react';
 import { Chip } from '@/components/ui/chip';
+import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Highlight } from '@/components/ui/highlight';
 import { cn } from '@/lib/utils';
@@ -232,11 +233,13 @@ export function RoutineArchitect({ airData }: RoutineArchitectProps) {
             })}
           </div>
 
-          <button
-            type="button"
+          <Button
+            variant="solid"
+            size="lg"
             onClick={handleGenerate}
             disabled={loading}
-            className="btn-asym inline-flex h-11 items-center justify-center bg-neutral-900 text-white dark:bg-white dark:text-black px-6 text-sm font-bold hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors cursor-pointer disabled:opacity-50 shadow-xs"
+            iconRight={null}
+            className="text-sm font-bold shadow-xs"
           >
             {loading ? (
               <>
@@ -249,7 +252,7 @@ export function RoutineArchitect({ airData }: RoutineArchitectProps) {
                 Update routine
               </span>
             )}
-          </button>
+          </Button>
         </div>
       </div>
 

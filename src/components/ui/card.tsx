@@ -1,10 +1,12 @@
-import * as React from 'react';
+import * as React from 'react'
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils'
 
 /**
- * The listing card from chaicode.com: a warm hairline, a faint fill with
- * a touch of blur, and no shadow.
+ * The listing card from chaicode.com (routes/udemy UdemyCourseCard): a warm
+ * hairline, a faint fill with a touch of blur, and no shadow. It sits a
+ * little dimmed on wide screens and comes to full on hover; the media zooms
+ * 3% over 300ms.
  */
 function Card({ className, ...props }: React.ComponentProps<'div'>) {
   return (
@@ -16,9 +18,10 @@ function Card({ className, ...props }: React.ComponentProps<'div'>) {
       )}
       {...props}
     />
-  );
+  )
 }
 
+/** An aspect-video frame for the card's image. Pass the <img> as the child. */
 function CardMedia({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
@@ -29,35 +32,36 @@ function CardMedia({ className, ...props }: React.ComponentProps<'div'>) {
       )}
       {...props}
     />
-  );
+  )
 }
 
 function CardBody({ className, ...props }: React.ComponentProps<'div'>) {
-  return <div data-slot="card-body" className={cn('flex min-w-0 flex-1 flex-col gap-1.5 p-4', className)} {...props} />;
+  return <div data-slot="card-body" className={cn('flex min-w-0 flex-1 flex-col gap-1.5 p-4', className)} {...props} />
 }
 
 function CardTitle({ className, ...props }: React.ComponentProps<'h3'>) {
   return (
     <h3
       data-slot="card-title"
-      className={cn('font-montserrat text-base leading-snug font-semibold text-gray-900 dark:text-gray-50', className)}
+      className={cn('font-montserrat text-base leading-snug font-bold text-foreground', className)}
       {...props}
     />
-  );
+  )
 }
 
 function CardText({ className, ...props }: React.ComponentProps<'p'>) {
   return (
     <p
       data-slot="card-text"
-      className={cn('line-clamp-2 text-xs leading-relaxed text-gray-600 dark:text-gray-400', className)}
+      className={cn('line-clamp-2 text-xs leading-relaxed text-neutral-700 dark:text-neutral-300 font-medium', className)}
       {...props}
     />
-  );
+  )
 }
 
+/** Pinned to the bottom: a note or price on the left, the action on the right. */
 function CardFooter({ className, ...props }: React.ComponentProps<'div'>) {
-  return <div data-slot="card-footer" className={cn('mt-auto flex items-end justify-between gap-3 pt-3', className)} {...props} />;
+  return <div data-slot="card-footer" className={cn('mt-auto flex items-end justify-between gap-3 pt-3', className)} {...props} />
 }
 
-export { Card, CardBody, CardFooter, CardMedia, CardText, CardTitle };
+export { Card, CardBody, CardFooter, CardMedia, CardText, CardTitle }

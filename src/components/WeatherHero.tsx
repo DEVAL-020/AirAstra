@@ -16,6 +16,7 @@ import {
 import { AnimatedBadge } from '@/components/ui/animated-badge';
 import { Highlight } from '@/components/ui/highlight';
 import { Chip } from '@/components/ui/chip';
+import { Button } from '@/components/ui/button';
 
 interface WeatherHeroProps {
   airData: AirQualityData;
@@ -70,23 +71,25 @@ export function WeatherHero({
 
         {/* Action Buttons */}
         <div className="flex items-center justify-center gap-4 pt-2">
-          <button
-            type="button"
+          <Button
+            variant="solid"
+            size="lg"
             onClick={onOpenPurifier3D}
-            className="btn-asym inline-flex h-11 items-center gap-2 bg-neutral-900 text-white dark:bg-white dark:text-black px-6 text-base font-semibold transition-colors hover:bg-neutral-800 dark:hover:bg-neutral-200 cursor-pointer shadow-xs"
+            className="text-base font-semibold shadow-xs"
           >
-            Open 3D filter simulator <ArrowUpRight className="-ml-1 size-4" aria-hidden="true" />
-          </button>
+            Open 3D filter simulator
+          </Button>
 
           {airData.aqi > 200 && (
-            <button
-              type="button"
+            <Button
+              variant="outline"
+              size="lg"
               onClick={onOpenEmergency}
-              className="btn-asym-mirror inline-flex h-11 items-center gap-2 border border-border bg-transparent px-5 text-base font-semibold text-foreground transition-colors hover:bg-neutral-100 dark:hover:bg-neutral-900 cursor-pointer"
+              className="text-base font-semibold"
             >
               <ShieldAlert className="size-5 text-red-600 dark:text-red-400" />
               Smog protocol
-            </button>
+            </Button>
           )}
         </div>
       </div>

@@ -1,10 +1,22 @@
-import { Slot, Slottable } from '@radix-ui/react-slot';
-import { cva, type VariantProps } from 'class-variance-authority';
-import { ArrowUpRight } from 'lucide-react';
-import * as React from 'react';
+import { Slot, Slottable } from '@radix-ui/react-slot'
+import { cva, type VariantProps } from 'class-variance-authority'
+import { ArrowUpRight } from 'lucide-react'
+import * as React from 'react'
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils'
 
+/**
+ * chaicode.com's buttons (ui/button.tsx and landing/hero.tsx).
+ *
+ * - `soft` is the default: the shadcn primary, light grey on dark. It is the
+ *   button on cards ("View details", "Start").
+ * - `solid` is the white one with asymmetric corners. Use it once per screen,
+ *   for the main action. It carries ArrowUpRight unless `iconRight={null}`.
+ * - `outline` mirrors the corners and sits beside `solid`.
+ * - `danger` is only for the confirm button of a destructive action.
+ *
+ * There is no colour prop on purpose: orange never fills a button.
+ */
 const buttonVariants = cva(
   "inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 text-sm font-medium whitespace-nowrap transition-colors duration-200 outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
@@ -31,17 +43,18 @@ const buttonVariants = cva(
       size: 'md',
     },
   },
-);
+)
 
 type ButtonProps = React.ComponentProps<'button'> &
   VariantProps<typeof buttonVariants> & {
-    asChild?: boolean;
-    iconRight?: React.ReactNode;
-  };
+    asChild?: boolean
+    /** An icon after the label, tucked in with -ml-1. `solid` defaults to ArrowUpRight; pass null to drop it. */
+    iconRight?: React.ReactNode
+  }
 
 function Button({ className, variant, size, asChild = false, iconRight, children, ...props }: ButtonProps) {
-  const Comp = asChild ? Slot : 'button';
-  const icon = iconRight === undefined && variant === 'solid' && size !== 'icon' ? <ArrowUpRight /> : iconRight;
+  const Comp = asChild ? Slot : 'button'
+  const icon = iconRight === undefined && variant === 'solid' && size !== 'icon' ? <ArrowUpRight /> : iconRight
   return (
     <Comp data-slot="button" className={cn(buttonVariants({ variant, size }), className)} {...props}>
       <Slottable>{children}</Slottable>
@@ -51,7 +64,7 @@ function Button({ className, variant, size, asChild = false, iconRight, children
         </span>
       ) : null}
     </Comp>
-  );
+  )
 }
 
-export { Button, buttonVariants };
+export { Button, buttonVariants }

@@ -18,7 +18,7 @@ import { FamilyPlanExport } from '@/components/FamilyPlanExport';
 import { Purifier3DModal } from '@/components/Purifier3DModal';
 import { EmergencySmogModal } from '@/components/EmergencySmogModal';
 import { Footer } from '@/components/Footer';
-import { Backdrop } from '@/components/ui/backdrop';
+import { Backdrop } from '@/components/backdrop';
 import { Segmented } from '@/components/ui/segmented';
 
 export default function AirAstraHome() {

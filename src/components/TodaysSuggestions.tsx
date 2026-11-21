@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { Chip } from '@/components/ui/chip';
 import { Highlight } from '@/components/ui/highlight';
+import { Card, CardBody, CardTitle, CardText } from '@/components/ui/card';
 
 interface TodaysSuggestionsProps {
   airData: AirQualityData;
@@ -113,34 +114,34 @@ export function TodaysSuggestions({
           const Icon = item.icon;
 
           return (
-            <div
+            <Card
               key={item.id}
               onClick={item.action}
               role="button"
               tabIndex={0}
-              className="group flex cursor-pointer items-center justify-between gap-3.5 rounded-xl border border-border/70 bg-neutral-100/70 dark:bg-black/20 p-4 transition-colors hover:border-border hover:bg-neutral-200/50 dark:hover:bg-black/30 shadow-xs"
+              className="cursor-pointer transition-all hover:border-brand/40 shadow-xs"
             >
-              <div className="flex items-center gap-3.5 min-w-0">
-                <div className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-border bg-white dark:bg-black/30 text-brand">
-                  <Icon className="size-5" />
-                </div>
-                <div className="min-w-0">
-                  <div className="flex items-center gap-2">
-                    <span className="truncate text-base sm:text-lg font-bold text-foreground group-hover:text-brand transition-colors">
-                      {item.title}
-                    </span>
+              <CardBody className="flex-row items-center justify-between gap-3.5 p-4">
+                <div className="flex items-center gap-3.5 min-w-0">
+                  <div className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-border bg-white dark:bg-black/30 text-brand">
+                    <Icon className="size-5" />
                   </div>
-                  <p className="truncate text-sm font-medium text-neutral-700 dark:text-neutral-300 mt-0.5">
-                    {item.caption}
-                  </p>
+                  <div className="min-w-0">
+                    <CardTitle className="truncate text-base sm:text-lg font-bold text-foreground group-hover:text-brand transition-colors">
+                      {item.title}
+                    </CardTitle>
+                    <CardText className="truncate text-sm font-medium text-neutral-700 dark:text-neutral-300 mt-0.5">
+                      {item.caption}
+                    </CardText>
+                  </div>
                 </div>
-              </div>
 
-              <div className="flex items-center gap-2 shrink-0">
-                <Chip tone={item.chipTone} className="text-xs sm:text-sm font-semibold">{item.chipLabel}</Chip>
-                <ChevronRight className="size-4 text-neutral-500 group-hover:text-foreground" />
-              </div>
-            </div>
+                <div className="flex items-center gap-2 shrink-0">
+                  <Chip tone={item.chipTone} className="text-xs sm:text-sm font-semibold">{item.chipLabel}</Chip>
+                  <ChevronRight className="size-4 text-neutral-500 group-hover:text-foreground" />
+                </div>
+              </CardBody>
+            </Card>
           );
         })}
       </div>
