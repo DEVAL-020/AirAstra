@@ -375,11 +375,11 @@ export const Purifier3DModal: React.FC<Purifier3DModalProps> = ({ isOpen, onClos
           <div ref={mountRef} className="w-full h-full cursor-grab active:cursor-grabbing" />
 
           {/* Left HUD: CAD Metrics */}
-          <div className="absolute top-4 left-4 space-y-2 pointer-events-none">
-            <div className="rounded-lg border border-border/40 bg-black/70 backdrop-blur-sm p-3.5 text-xs text-neutral-200 space-y-2 max-w-[210px] shadow-lg">
-              <div className="flex items-center justify-between text-white font-bold">
+          <div className="absolute top-3 left-3 sm:top-4 sm:left-4 space-y-2 pointer-events-none">
+            <div className="rounded-lg border border-border/40 bg-black/75 backdrop-blur-sm p-2.5 sm:p-3.5 text-xs text-neutral-200 space-y-1.5 sm:space-y-2 max-w-[160px] sm:max-w-[210px] shadow-lg">
+              <div className="flex items-center justify-between text-white font-bold text-[11px] sm:text-xs">
                 <span>Clean air delivery</span>
-                <span className="font-mono text-sm">{estimatedCadr} CFM</span>
+                <span className="font-mono text-xs sm:text-sm">{estimatedCadr} CFM</span>
               </div>
               <div className="h-1.5 w-full bg-neutral-800 rounded-full overflow-hidden">
                 <div
@@ -387,16 +387,16 @@ export const Purifier3DModal: React.FC<Purifier3DModalProps> = ({ isOpen, onClos
                   style={{ width: `${(estimatedCadr / 550) * 100}%` }}
                 />
               </div>
-              <div className="text-[11px] text-neutral-300 space-y-1 pt-1 border-t border-border/40">
-                <div className="flex justify-between"><span>Filtration grade:</span> <span className="text-white font-mono font-bold">MERV-13</span></div>
-                <div className="flex justify-between"><span>PM2.5 capture:</span> <span className="text-emerald-400 font-mono font-bold">92.4%</span></div>
-                <div className="flex justify-between"><span>Build cost:</span> <span className="text-white font-mono font-bold">~$28 total</span></div>
+              <div className="text-[10px] sm:text-[11px] text-neutral-300 space-y-1 pt-1 border-t border-border/40">
+                <div className="flex justify-between"><span>Filtration:</span> <span className="text-white font-mono font-bold">MERV-13</span></div>
+                <div className="flex justify-between"><span>PM2.5 catch:</span> <span className="text-emerald-400 font-mono font-bold">92.4%</span></div>
+                <div className="flex justify-between"><span>Build cost:</span> <span className="text-white font-mono font-bold">~$28</span></div>
               </div>
             </div>
           </div>
 
           {/* Right Floating Quick Explainer */}
-          <div className="absolute top-4 right-4 max-w-xs rounded-lg border border-border/40 bg-black/70 backdrop-blur-sm p-3.5 text-xs text-neutral-200 space-y-1.5 shadow-lg">
+          <div className="hidden md:block absolute top-4 right-4 max-w-xs rounded-lg border border-border/40 bg-black/75 backdrop-blur-sm p-3.5 text-xs text-neutral-200 space-y-1.5 shadow-lg">
             <div className="flex items-center gap-1.5 text-brand font-bold">
               <ShieldCheck className="size-3.5" />
               <span>Fluid dynamics logic</span>

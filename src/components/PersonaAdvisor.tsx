@@ -133,7 +133,7 @@ export function PersonaAdvisor({ airData }: PersonaAdvisorProps) {
                 )}>
                   <Icon className="size-4 sm:size-5" />
                 </div>
-                <span className="text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded-full bg-neutral-200 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-300">
+                <span className="text-[8.5px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded-full bg-neutral-200 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-300 truncate max-w-[75px] xs:max-w-none">
                   {persona.badge}
                 </span>
               </div>
@@ -181,7 +181,7 @@ export function PersonaAdvisor({ airData }: PersonaAdvisorProps) {
                 </p>
               </div>
 
-              <div className="bg-white dark:bg-neutral-900/90 border border-border rounded-xl p-4 text-center min-w-[200px] shadow-xs">
+              <div className="bg-white dark:bg-neutral-900/90 border border-border rounded-xl p-3 sm:p-4 text-center w-full md:w-auto md:min-w-[200px] shadow-xs">
                 <span className="text-xs font-bold text-neutral-600 dark:text-neutral-400 block">Safest Outdoor Window</span>
                 <span className="text-lg font-mono font-bold text-emerald-600 dark:text-emerald-400 mt-0.5 block">
                   {airData.ventilationSafeWindow}

@@ -179,7 +179,7 @@ export function AirSnapVision({ currentAQI }: AirSnapVisionProps) {
               animate={{ opacity: 1, y: 0 }}
               className="space-y-4"
             >
-              <div className="flex items-center justify-between p-3.5 rounded-lg border border-border/60 bg-white dark:bg-black/30 shadow-xs">
+              <div className="flex flex-col xs:flex-row items-start xs:items-center justify-between p-3.5 rounded-lg border border-border/60 bg-white dark:bg-black/30 shadow-xs gap-2">
                 <div>
                   <span className="text-[10px] font-bold text-neutral-600 dark:text-neutral-400 block">Defense rating</span>
                   <span className="font-montserrat text-xl font-bold text-foreground flex items-center gap-2">
@@ -190,7 +190,7 @@ export function AirSnapVision({ currentAQI }: AirSnapVisionProps) {
                   </span>
                 </div>
 
-                <div className="text-right">
+                <div className="text-left xs:text-right">
                   <span className="text-[10px] font-bold text-neutral-600 dark:text-neutral-400 block">Purifier placement</span>
                   <span className="font-mono text-xs font-bold text-foreground">{result.purifierPlacementRating}</span>
                 </div>

@@ -65,7 +65,7 @@ export default function AirAstraHome() {
   ];
 
   return (
-    <div className="relative isolate min-h-screen overflow-x-clip bg-background font-sans text-foreground antialiased selection:bg-brand selection:text-white">
+    <div className="relative isolate min-h-screen overflow-x-hidden w-full max-w-full bg-background font-sans text-foreground antialiased selection:bg-brand selection:text-white">
       {/* Atmospheric Page Background SVG with hexagon glow */}
       <Backdrop />
 

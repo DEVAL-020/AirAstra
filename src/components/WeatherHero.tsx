@@ -60,10 +60,10 @@ export function WeatherHero({
             <span className="font-mono font-bold text-foreground">{airData.timestamp}</span>
           </div>
 
-          <div className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-border/80 bg-neutral-100/90 dark:bg-neutral-900/80 px-3 py-1 sm:px-3.5 sm:py-1.5 backdrop-blur-md shadow-xs max-w-full">
+          <div className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-border/80 bg-neutral-100/90 dark:bg-neutral-900/80 px-2.5 py-1 sm:px-3.5 sm:py-1.5 backdrop-blur-md shadow-xs max-w-full">
             <Radio className="size-3.5 text-blue-600 dark:text-blue-400 shrink-0" />
             <span className="text-neutral-600 dark:text-neutral-400 font-medium shrink-0">Verified Source:</span>
-            <span className="font-bold text-foreground truncate max-w-[190px] sm:max-w-none">
+            <span className="font-bold text-foreground truncate max-w-[130px] xs:max-w-[200px] sm:max-w-none">
               {airData.dataSource || 'Open-Meteo & CPCB Global Atmospheric Network'}
             </span>
           </div>
@@ -96,13 +96,13 @@ export function WeatherHero({
 
       {/* Hourly Forecast Strip */}
       <div className="card-chai p-4 sm:p-6 space-y-4">
-        <div className="flex items-center justify-between border-b border-border/60 pb-3">
+        <div className="flex flex-col xs:flex-row items-start xs:items-center justify-between border-b border-border/60 pb-3 gap-2">
           <div className="flex items-center gap-2 text-sm text-neutral-800 dark:text-neutral-200 font-semibold">
             <Clock className="size-4 text-neutral-600 dark:text-neutral-400" />
             <span className="font-semibold text-foreground">24-hour inversion forecast</span>
           </div>
-          <div className="flex items-center gap-2.5">
-            <span className="text-sm text-neutral-600 dark:text-neutral-400 font-medium">Safe flush window:</span>
+          <div className="flex items-center gap-2">
+            <span className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 font-medium">Safe flush window:</span>
             <Chip tone="success" className="text-xs sm:text-sm font-semibold">{airData.ventilationSafeWindow}</Chip>
           </div>
         </div>
