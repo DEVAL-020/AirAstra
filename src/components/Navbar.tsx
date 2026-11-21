@@ -11,6 +11,7 @@ import {
   Search
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 interface NavbarProps {
   currentCity: CityPreset;
@@ -121,7 +122,7 @@ export function Navbar({
         </div>
 
         {/* Right actions */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2.5">
           <button
             type="button"
             onClick={toggleSound}
@@ -131,11 +132,13 @@ export function Navbar({
               'inline-flex size-9 items-center justify-center rounded-md border text-sm transition-colors cursor-pointer',
               isAmbientOn
                 ? 'border-brand text-brand'
-                : 'border-border text-neutral-400 hover:text-foreground hover:bg-neutral-800/40'
+                : 'border-border text-neutral-400 hover:text-foreground hover:bg-neutral-200/50 dark:hover:bg-neutral-800/40'
             )}
           >
             {isAmbientOn ? <Volume2 className="size-4" /> : <VolumeX className="size-4" />}
           </button>
+
+          <ThemeToggle />
         </div>
       </div>
     </header>

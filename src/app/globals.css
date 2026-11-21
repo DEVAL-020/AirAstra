@@ -34,7 +34,7 @@
   --color-ring: var(--ring);
   --color-brand: var(--brand);
 
-  /* ChaiUI extras */
+  /* Highlight & Card tokens */
   --color-highlight: var(--highlight);
   --color-card-edge: var(--card-edge);
   --color-card-edge-hover: var(--card-edge-hover);
@@ -43,36 +43,36 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  /* Warm paper-cream light background */
+  --background: #faf8f5;
+  --foreground: #18181b;
+  --card: #ffffff;
+  --card-foreground: #18181b;
+  --popover: #ffffff;
+  --popover-foreground: #18181b;
+  --primary: #18181b;
+  --primary-foreground: #ffffff;
+  --secondary: #f4f0eb;
+  --secondary-foreground: #18181b;
+  --muted: #f4f0eb;
+  --muted-foreground: #71717a;
+  --accent: #f4f0eb;
+  --accent-foreground: #18181b;
+  --destructive: #dc2626;
+  --border: rgba(0, 0, 0, 0.08);
+  --input: rgba(0, 0, 0, 0.12);
+  --ring: rgba(0, 0, 0, 0.2);
 
-  /* ChaiUI brand orange: strictly for brand/logo and active segments */
   --brand: #ff7d0c;
-  --highlight: #fef08a;
+  --highlight: #b45309;
 
   --card-edge: rgba(0, 0, 0, 0.08);
   --card-edge-hover: rgba(0, 0, 0, 0.16);
-  --card-fill: #ffffff;
+  --card-fill: rgba(255, 255, 255, 0.92);
 }
 
 .dark {
-  /* Warm near-black chaicode background */
+  /* Warm near-black background */
   --background: #09090b;
   --foreground: #f4f4f5;
 
@@ -102,7 +102,7 @@
   --brand: #ff7d0c;
   --highlight: #fef3c7;
 
-  /* ChaiUI hairline cards with warm edge */
+  /* Hairline cards with warm edge */
   --card-edge: rgba(255, 255, 255, 0.07);
   --card-edge-hover: rgba(255, 255, 255, 0.14);
   --card-fill: rgba(18, 18, 20, 0.65);
@@ -120,7 +120,7 @@ body {
   letter-spacing: -0.012em;
 }
 
-/* ChaiUI Highlight utility (cream Montserrat phrase) */
+/* Highlight utility */
 @utility highlight {
   font-family: var(--font-display);
   font-weight: 500;
@@ -129,7 +129,7 @@ body {
   display: inline;
 }
 
-/* ChaiUI Card: warm hairline border, no shadow, transparent dark blur */
+/* Card: warm hairline border, no shadow, transparent blur */
 @utility card-chai {
   background-color: var(--card-fill);
   border: 1px solid var(--card-edge);
@@ -137,7 +137,7 @@ body {
   -webkit-backdrop-filter: blur(12px);
   border-radius: 1rem;
   box-shadow: none !important;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
 @utility card-chai-hover {
@@ -146,7 +146,7 @@ body {
   }
 }
 
-/* Asymmetric buttons from ChaiUI specification */
+/* Asymmetric buttons */
 @utility btn-asym {
   border-radius: 0.375rem 0.75rem 0.375rem 0.75rem;
 }
@@ -175,6 +175,11 @@ body {
   background-position: top center;
   background-repeat: no-repeat;
   background-size: cover;
-  opacity: 0.85;
+  opacity: 0.2;
   z-index: 0;
+  transition: opacity 0.3s ease;
+}
+
+.dark .chai-backdrop {
+  opacity: 0.85;
 }

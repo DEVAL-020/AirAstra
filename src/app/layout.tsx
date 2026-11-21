@@ -54,12 +54,27 @@ export default function RootLayout({
   children: React.ReactNode;
   }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="dark" suppressHydrationWarning>
       <head>
         <link rel="icon" type="image/svg+xml" href="/icon.svg" />
         <link rel="alternate icon" href="/favicon.svg" />
         <link rel="apple-touch-icon" href="/icon.svg" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                var t = localStorage.getItem('airastra-theme') || 'dark';
+                var isDark = t === 'dark' || (t === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                if (isDark) {
+                  document.documentElement.classList.add('dark');
+                } else {
+                  document.documentElement.classList.remove('dark');
+                }
+              } catch (e) {}
+            `,
+          }}
+        />
       </head>
       <body className={`${plusJakartaSans.variable} ${montserrat.variable} ${onest.variable} font-sans min-h-screen bg-background text-foreground text-[17px] leading-relaxed antialiased selection:bg-brand selection:text-white`}>
         {children}
