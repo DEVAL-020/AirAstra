@@ -97,7 +97,7 @@ export function FamilyPlanExport({ airData }: FamilyPlanExportProps) {
 
         <div className="pt-2 border-t border-border/30 flex flex-col sm:flex-row sm:items-center justify-between text-[11px] text-neutral-400 gap-2">
           <span>Emergency respiratory helpline: 112 or local pediatric triage</span>
-          <span className="font-mono text-neutral-400">Powered by AirAstra chaicode edition</span>
+          <span className="font-mono text-neutral-400">Powered by AirAstra Urban Smog OS</span>
         </div>
       </div>
     </div>

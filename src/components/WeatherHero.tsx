@@ -32,7 +32,7 @@ export function WeatherHero({
 
   return (
     <section className="space-y-8 pt-4 pb-2">
-      {/* Hero Lead Section in ChaiUI style */}
+      {/* Hero Lead Section */}
       <div className="flex flex-col items-center text-center space-y-4">
         <AnimatedBadge>
           <span className="text-xs sm:text-sm font-medium">Urban Smog & Inversion Monitor</span>
@@ -46,7 +46,7 @@ export function WeatherHero({
           Cold winter surface air traps toxic particulates. Protect your household with <Highlight>proven low-emission routines</Highlight> and clean air hacks.
         </p>
 
-        {/* ChaiUI Solid + Outline Asymmetric Buttons */}
+        {/* Action Buttons */}
         <div className="flex items-center justify-center gap-4 pt-3">
           <button
             type="button"
@@ -69,7 +69,7 @@ export function WeatherHero({
         </div>
       </div>
 
-      {/* Hourly Strip in ChaiUI Card style */}
+      {/* Hourly Forecast Strip */}
       <div className="card-chai p-6 space-y-4">
         <div className="flex items-center justify-between border-b border-border/40 pb-3">
           <div className="flex items-center gap-2 text-sm text-neutral-300">

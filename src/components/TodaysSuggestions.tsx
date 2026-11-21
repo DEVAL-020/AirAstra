@@ -82,7 +82,7 @@ export function TodaysSuggestions({
         </span>
       </div>
 
-      {/* Prominent severity card matching Image 2 in ChaiUI style */}
+      {/* Prominent severity card */}
       <div
         onClick={onOpenEmergency}
         role="button"
@@ -107,7 +107,7 @@ export function TodaysSuggestions({
         </div>
       </div>
 
-      {/* Suggestion cards in ChaiUI card grid */}
+      {/* Suggestion cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {suggestions.map((item) => {
           const Icon = item.icon;

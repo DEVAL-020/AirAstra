@@ -97,7 +97,7 @@ export function Navbar({
         )}
       >
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 sm:px-12">
-          {/* Logo in ChaiCode style */}
+          {/* Brand Logo & Title */}
           <div className="flex items-center gap-3">
             <div className="flex size-9 items-center justify-center rounded-lg border border-border bg-black/20 text-white">
               <span className="font-brand text-lg font-bold text-brand">A</span>
@@ -107,7 +107,7 @@ export function Navbar({
                 AirAstra
               </span>
               <span className="ml-2 text-xs text-neutral-400 font-medium">
-                chaicode edition
+                smog defense
               </span>
             </div>
           </div>

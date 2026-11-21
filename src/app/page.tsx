@@ -50,7 +50,7 @@ export default function AirAstraHome() {
 
   return (
     <div className="relative isolate min-h-screen overflow-x-clip bg-background font-sans text-foreground antialiased selection:bg-brand selection:text-white">
-      {/* ChaiUI Page Background SVG with hexagon glow */}
+      {/* Atmospheric Page Background SVG with hexagon glow */}
       <Backdrop />
 
       {/* Sticky Navbar */}
@@ -62,7 +62,7 @@ export default function AirAstraHome() {
 
       {/* Main Container: max-w-6xl with p-6 sm:p-12 */}
       <main className="mx-auto w-full max-w-6xl p-6 sm:p-12 space-y-8">
-        {/* ChaiUI Segmented Toolbar Control */}
+        {/* Segmented Toolbar Control */}
         <div className="flex justify-center">
           <Segmented
             label="AirAstra views"
@@ -116,13 +116,13 @@ export default function AirAstraHome() {
         aqi={airData.aqi}
       />
 
-      {/* ChaiUI Footer with 10% hairline */}
+      {/* Atmospheric Footer with orange hairline */}
       <footer className="relative mt-20 border-t border-border/40 py-10 text-center text-xs text-neutral-400 before:absolute before:top-0 before:left-1/2 before:h-px before:w-1/2 before:-translate-x-1/2 before:bg-linear-to-r before:from-transparent before:via-orange-500/30 before:to-transparent">
         <div className="mx-auto max-w-6xl px-6 sm:px-12 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <span className="font-brand font-bold text-foreground">AirAstra</span>
             <span className="text-neutral-500">•</span>
-            <span>Built in the ChaiCode design system</span>
+            <span>Urban Smog Defense & Community Clean Air OS</span>
           </div>
           <div className="flex items-center gap-4 text-[11px] text-neutral-500">
             <span>Open-Meteo telemetry</span>
