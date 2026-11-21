@@ -241,31 +241,31 @@ export function AstraVoiceChat({ currentAQI, city }: AstraVoiceChatProps) {
             e.preventDefault();
             handleSend();
           }}
-          className="flex items-center gap-2"
+          className="flex items-center gap-2.5"
         >
           <input
             type="text"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             placeholder={isListening ? "Listening... Speak naturally..." : "Ask Astra about morning coughs, mask seals, or room filtration..."}
-            className="flex-1 h-9 rounded-md border border-border bg-black/30 px-3 text-xs text-foreground placeholder-neutral-500 focus:outline-none focus:border-brand"
+            className="flex-1 h-11 rounded-lg border-2 border-neutral-700 bg-neutral-900 px-3.5 text-sm font-medium text-white placeholder-neutral-400 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand"
           />
 
           <button
             type="button"
             onClick={toggleListening}
-            className="flex size-9 items-center justify-center rounded-md border border-border bg-black/20 text-neutral-400 hover:text-foreground transition-colors cursor-pointer"
+            className="flex size-11 items-center justify-center rounded-lg border-2 border-neutral-700 bg-neutral-800 text-neutral-200 hover:text-white transition-colors cursor-pointer"
             title="Speech input"
           >
-            {isListening ? <MicOff className="size-4 text-red-400" /> : <Mic className="size-4" />}
+            {isListening ? <MicOff className="size-5 text-red-400" /> : <Mic className="size-5" />}
           </button>
 
           <button
             type="submit"
             disabled={!inputValue.trim() || isLoading}
-            className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-3 text-xs font-semibold text-primary-foreground hover:bg-primary/90 transition-colors disabled:opacity-40 cursor-pointer"
+            className="inline-flex h-11 px-4 items-center justify-center rounded-lg bg-white text-black hover:bg-neutral-200 transition-colors disabled:opacity-40 cursor-pointer font-semibold"
           >
-            <Send className="size-3.5" />
+            <Send className="size-4" />
           </button>
         </form>
       </div>

@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { VisionDiagnosticResult } from '@/types';
 import { analyzeIndoorSmogPhoto } from '@/lib/gemini';
 import { soundFX } from '@/lib/sound';
+import { cn } from '@/lib/utils';
 import { 
   Camera, 
   Upload, 
@@ -23,11 +24,6 @@ interface AirSnapVisionProps {
 }
 
 export function AirSnapVision({ currentAQI }: AirSnapVisionProps) {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [roomContext, setRoomContext] = useState<string>('Living room window and balcony door');
-  const [loading, setLoading] = useState<boolean>(false);
-  const [result, setResult] = useState<VisionDiagnosticResult | null>(null);
-
   const presets = [
     {
       label: 'Single-pane sliding window sill',
@@ -45,6 +41,18 @@ export function AirSnapVision({ currentAQI }: AirSnapVisionProps) {
       preview: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200"><rect width="300" height="200" fill="%23111111"/><circle cx="95" cy="115" r="28" fill="%231c1c1c" stroke="%23f59e0b" stroke-width="2"/><circle cx="195" cy="115" r="28" fill="%231c1c1c" stroke="%23ef4444" stroke-width="2"/><text x="85" y="60" fill="%23fbbf24" font-size="12" font-family="sans-serif">Internal Combustion</text></svg>'
     }
   ];
+
+  const [selectedImage, setSelectedImage] = useState<string | null>(presets[0].preview);
+  const [roomContext, setRoomContext] = useState<string>(presets[0].context);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [result, setResult] = useState<VisionDiagnosticResult | null>(null);
+
+  // Pre-load initial diagnostic result so interface is immediately populated
+  useEffect(() => {
+    analyzeIndoorSmogPhoto(presets[0].preview, presets[0].context, currentAQI)
+      .then((res) => setResult(res))
+      .catch((err) => console.error(err));
+  }, []);
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -103,11 +111,12 @@ export function AirSnapVision({ currentAQI }: AirSnapVisionProps) {
                     setSelectedImage(p.preview);
                     setRoomContext(p.context);
                   }}
-                  className={`rounded border px-2.5 py-1 text-xs transition-colors cursor-pointer text-left ${
+                  className={cn(
+                    "rounded-lg border px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer text-left",
                     selectedImage === p.preview
-                      ? 'border-brand text-brand bg-brand/5'
-                      : 'border-border/40 text-neutral-400 hover:text-foreground hover:bg-black/30'
-                  }`}
+                      ? "border-amber-400 bg-amber-500/20 text-amber-300 font-bold"
+                      : "border-neutral-700 bg-neutral-800 text-neutral-200 hover:border-neutral-500 hover:text-white"
+                  )}
                 >
                   {p.label}
                 </button>
@@ -146,11 +155,11 @@ export function AirSnapVision({ currentAQI }: AirSnapVisionProps) {
             type="button"
             onClick={runDiagnostic}
             disabled={!selectedImage || loading}
-            className="w-full inline-flex h-9 items-center justify-center rounded-md bg-primary text-xs font-semibold text-primary-foreground hover:bg-primary/90 transition-colors disabled:opacity-40 cursor-pointer"
+            className="btn-asym w-full inline-flex h-11 items-center justify-center bg-white text-sm font-bold text-black hover:bg-neutral-200 transition-colors disabled:opacity-40 cursor-pointer"
           >
             {loading ? (
               <>
-                <Loader2 className="size-3.5 animate-spin mr-1.5" />
+                <Loader2 className="size-4 animate-spin mr-2" />
                 <span>Inspecting infiltration points...</span>
               </>
             ) : (
