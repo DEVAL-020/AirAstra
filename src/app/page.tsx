@@ -15,6 +15,7 @@ import { CommunityHub } from '@/components/CommunityHub';
 import { FamilyPlanExport } from '@/components/FamilyPlanExport';
 import { Purifier3DModal } from '@/components/Purifier3DModal';
 import { EmergencySmogModal } from '@/components/EmergencySmogModal';
+import { Footer } from '@/components/Footer';
 import { Backdrop } from '@/components/ui/backdrop';
 import { Segmented } from '@/components/ui/segmented';
 
@@ -116,21 +117,14 @@ export default function AirAstraHome() {
         aqi={airData.aqi}
       />
 
-      {/* Atmospheric Footer with orange hairline */}
-      <footer className="relative mt-20 border-t border-border/40 py-10 text-center text-xs text-neutral-400 before:absolute before:top-0 before:left-1/2 before:h-px before:w-1/2 before:-translate-x-1/2 before:bg-linear-to-r before:from-transparent before:via-orange-500/30 before:to-transparent">
-        <div className="mx-auto max-w-6xl px-6 sm:px-12 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <span className="font-brand font-bold text-foreground">AirAstra</span>
-            <span className="text-neutral-500">•</span>
-            <span>Urban Smog Defense & Community Clean Air OS</span>
-          </div>
-          <div className="flex items-center gap-4 text-[11px] text-neutral-500">
-            <span>Open-Meteo telemetry</span>
-            <span>EPA breakpoints</span>
-            <span>Harvard ACH standards</span>
-          </div>
-        </div>
-      </footer>
+      {/* Rich Interactive Footer */}
+      <Footer
+        onSelectTab={(tab) => setActiveTab(tab)}
+        onOpenEmergency={() => setIsEmergencyOpen(true)}
+        onOpenPurifier3D={() => setIsPurifier3DOpen(true)}
+        currentCity={airData.city}
+        currentAQI={airData.aqi}
+      />
     </div>
   );
 }
