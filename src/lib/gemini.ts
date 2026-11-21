@@ -31,7 +31,13 @@ export async function generateAIAirRoutine(
   if (apiKey) {
     try {
       const genAI = new GoogleGenerativeAI(apiKey);
-      const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+      const model = genAI.getGenerativeModel({
+        model: 'gemini-1.5-flash',
+        generationConfig: {
+          responseMimeType: 'application/json',
+          temperature: 0.2
+        }
+      });
 
       const prompt = `You are AirAstra's Senior Atmospheric Health & Urban Systems Architect.
 Create a personalized 24-hour winter smog survival & low-emission daily routine for this family:
@@ -48,8 +54,8 @@ Respond ONLY with valid JSON array of routine items matching this structure:
     "id": "1",
     "timeSlot": "06:30 - 08:00",
     "title": "Morning Inversion Defense & School/Office Prep",
-    "category": "commute" | "exercise" | "school" | "indoor" | "errand" | "sleep",
-    "riskLevel": "danger" | "caution" | "safe",
+    "category": "commute",
+    "riskLevel": "danger",
     "standardHabit": "Standard habit with emissions or smog exposure",
     "lowEmissionAlternative": "Recommended eco-smart, health-preserving alternative",
     "scienceRationale": "Why this works based on atmospheric boundary layers or emission avoidance",
@@ -57,18 +63,16 @@ Respond ONLY with valid JSON array of routine items matching this structure:
       "co2SavedGrams": 450,
       "pmInhaledAvoidedUg": 220
     },
-    "purifierRecommendation": "turbo_hepa" | "medium" | "low" | "off",
+    "purifierRecommendation": "turbo_hepa",
     "maskRequired": true
   }
 ]
-Generate 5 or 6 realistic, high-impact timeline entries throughout the day.`;
+Generate 5 or 6 realistic, high-impact timeline entries throughout the day. Do not use em dashes.`;
 
       const response = await model.generateContent(prompt);
       const text = response.response.text();
-      const jsonStart = text.indexOf('[');
-      const jsonEnd = text.lastIndexOf(']');
-      if (jsonStart !== -1 && jsonEnd !== -1) {
-        const parsed = JSON.parse(text.slice(jsonStart, jsonEnd + 1));
+      const parsed = JSON.parse(text);
+      if (Array.isArray(parsed) && parsed.length > 0) {
         return parsed;
       }
     } catch (err) {
@@ -91,7 +95,13 @@ export async function analyzeIndoorSmogPhoto(
   if (apiKey) {
     try {
       const genAI = new GoogleGenerativeAI(apiKey);
-      const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+      const model = genAI.getGenerativeModel({
+        model: 'gemini-1.5-flash',
+        generationConfig: {
+          responseMimeType: 'application/json',
+          temperature: 0.2
+        }
+      });
 
       // Clean base64 string
       const pureBase64 = base64Data.replace(/^data:image\/\w+;base64,/, '');
@@ -103,13 +113,13 @@ Detect:
 2. Internal particulate/combustion risks (gas burners, candles, unsealed vents, upholstery dust).
 3. Air purifier positioning (is it in a corner or blocked?).
 4. Indoor plant positioning.
-Calculate a 0-100 Smog Defense Score.
+Calculate a 0-100 Smog Defense Score based on building envelope sealing and filtration airflow.
 
 Return ONLY a JSON object:
 {
   "roomType": "${roomContext}",
   "smogDefenseScore": 68,
-  "leakageRisk": "High" | "Moderate" | "Well Sealed",
+  "leakageRisk": "High",
   "identifiedHazards": [
     {
       "item": "Window Bottom Sash Gap",
@@ -120,8 +130,8 @@ Return ONLY a JSON object:
   ],
   "purifierPlacementRating": "Sub-optimal",
   "actionChecklist": [
-    "Step 1...",
-    "Step 2..."
+    "Seal the 4mm bottom window frame gap with removable caulking cord or weather tape",
+    "Move your filtration unit into the natural convection draft between doorway and window"
   ],
   "botanicalPlacementTip": "Place an Areca Palm 2 meters from the radiator to humidify dry smoggy air."
 }`;
@@ -137,11 +147,7 @@ Return ONLY a JSON object:
       ]);
 
       const text = result.response.text();
-      const jsonStart = text.indexOf('{');
-      const jsonEnd = text.lastIndexOf('}');
-      if (jsonStart !== -1 && jsonEnd !== -1) {
-        return JSON.parse(text.slice(jsonStart, jsonEnd + 1));
-      }
+      return JSON.parse(text);
     } catch (err) {
       console.warn('Vision API fallback invoked:', err);
     }
@@ -196,13 +202,33 @@ export async function sendAstraMessage(
       const genAI = new GoogleGenerativeAI(apiKey);
       const model = genAI.getGenerativeModel({
         model: 'gemini-1.5-flash',
-        systemInstruction: `You are Astra, an empathetic, scientifically rigorous urban air quality and winter smog AI companion for families.
-Current city: ${city}, Outdoor AQI: ${currentAQI}.
-Guidelines:
-- Explain direct cause-and-effect (e.g. why temperature inversions trap diesel soot, why N95 masks work vs cloth masks).
-- Provide immediate, actionable hacks (Corsi-Rosenthal boxes, wet towel particulate traps, off-peak commuting).
-- Keep answers concise, warm, practical, and structured with bullet points.
-- Never give dangerous medical prescriptions, but give safe respiratory first-aid advice (saline nasal wash, hydration, steam inhalation).`
+        generationConfig: {
+          temperature: 0.2
+        },
+        systemInstruction: `You are Astra, Senior Atmospheric Health & Respiratory Safety AI for AirAstra.
+Operating City: ${city}. Current Local AQI: ${currentAQI}.
+
+Scientific Grounding & Standards:
+1. Air Quality Standards:
+   - WHO 2021 Global Guidelines: Annual PM2.5 < 5 µg/m³, 24-hr mean < 15 µg/m³.
+   - US EPA AQI Categories: 0-50 Good, 51-100 Moderate, 101-150 Unhealthy for Sensitive Groups, 151-200 Unhealthy, 201-300 Very Unhealthy, 301-500 Hazardous.
+2. Atmospheric Dynamics:
+   - Explain radiation temperature inversions: overnight ground cooling creates a stable cold air layer trapped beneath warmer air aloft (boundary ceiling usually at 50-200m).
+   - Inversion traps primary vehicle exhaust, biomass smoke, and industrial sulfates.
+   - Thermal updrafts begin during mid-afternoon solar heating (typically 12:30 to 15:30), diluting ground concentrations.
+3. Filtration Science:
+   - N95 / FFP2: Electrostatic melt-blown polypropylene captures >=95% of particles down to 0.3 micron MPPS. Cloth/surgical masks capture only 15-25% due to gap leakage.
+   - Corsi-Rosenthal Box: 20-inch box fan + 4 MERV-13 filters delivers 450-550 CFM CADR (clean air delivery rate) for ~$30, outperforming $400 commercial HEPA units.
+   - CADR Rule: CADR (CFM) >= Room Volume (cu ft) * ACH / 60 (aim for 4 to 6 ACH during hazardous smog).
+4. Indoor Air Quality:
+   - Seal window sash gaps with weather tape or damp micro-fiber towels.
+   - Maintain 40-50% indoor relative humidity to settle suspended aerosols.
+   - Avoid unvented gas heaters, incense, and open high-flame frying.
+5. Respiratory Safety:
+   - Safe first-aid: Warm steam hydration, isotonic saline nasal irrigation, high-efficiency filtration in smallest sealed bedroom.
+   - Medical Escalation: If there is stridor, chest retractions, cyanosis, or wheezing unresponsive to bronchodilators, advise immediate pediatric emergency care.
+
+Tone: Calm, empathetic, scientifically rigorous, practical. Format with clear markdown bullet points. Never use em dashes.`
       });
 
       const chat = model.startChat({ history: history.slice(0, -1) });
@@ -214,38 +240,157 @@ Guidelines:
     }
   }
 
-  // Intelligent local conversational responses
+  // Authoritative calibrated knowledge engine for offline / keyless operation
   const userText = history[history.length - 1].parts[0].text.toLowerCase();
-  if (userText.includes('cough') || userText.includes('child') || userText.includes('baby') || userText.includes('asthma')) {
-    return `### 🚨 Urgent Respiratory Care for Smog Exposure:
-1. **Move to Cleanest Room**: Gather the family in the smallest sealed bedroom. Turn the air purifier / DIY Corsi-Rosenthal box to **High Speed**.
-2. **Warm Steam Hydration**: Let the child sit in a warm steamy bathroom for 8-10 minutes. This liquefies airway mucus irritated by acidic sulfur and nitrogen oxides.
-3. **Saline Nasal Irrigation**: Gently rinse nasal passages with sterile isotonic saline to flush trapped PM2.5 particulates off cilia.
-4. **Airway Alert**: If there is stridor (high-pitched whistling on inhale), chest retractions, or blue-tinted lips, seek immediate emergency pediatric care.
-*Current outdoor AQI in ${city} is ${currentAQI} (Inversion Trapping Active).*`;
+
+  // 1. Pediatric & Urgent Respiratory Safety
+  if (
+    userText.includes('cough') ||
+    userText.includes('child') ||
+    userText.includes('baby') ||
+    userText.includes('asthma') ||
+    userText.includes('breath') ||
+    userText.includes('throat') ||
+    userText.includes('wheez')
+  ) {
+    return `### Pediatric Respiratory First Aid for Smog Irritation:
+1. **Move to Clean Air Sanctuary**: Move the child into the smallest sealed room immediately. Turn your air purifier or Corsi-Rosenthal box to **High Speed**.
+2. **Warm Airway Steam**: Let the child sit in a closed, steamy bathroom for 8 to 10 minutes. Warm moisture liquefies airway mucus irritated by sulfur dioxide and diesel soot.
+3. **Isotonic Saline Irrigation**: Gently spray sterile saline nasal mist to flush trapped PM2.5 particulates off nasal cilia.
+4. **Hydration**: Warm fluids (water, clear broth) thin bronchial secretions.
+5. **Emergency Red Flags**: Seek immediate emergency hospital care if you observe:
+   - Stridor (high-pitched crowing sound when inhaling)
+   - Subcostal retractions (chest pulling in tightly beneath ribs)
+   - Bluish discoloration around lips or fingernails
+*Current outdoor AQI in ${city} is ${currentAQI}.*`;
   }
 
-  if (userText.includes('mask') || userText.includes('n95') || userText.includes('cloth')) {
-    return `### 🛡️ Mask Science for Winter Smog:
-- **Cloth/Surgical Masks**: Only capture 15-25% of fine PM2.5. The gaps on the cheeks let microscopic soot enter unchecked.
-- **Certified N95 / FFP2 / KF94**: Electrostatic melt-blown fibers capture over **95% of particles down to 0.3 microns**.
-- **Fit Check**: Press the metal nose clip tightly. Cup your hands over the mask and exhale sharply: if air leaks around your eyes or jaw, readjust the straps. A poor fit destroys 50% of the mask's protective rating!`;
+  // 2. Mask Science & Filtration
+  if (
+    userText.includes('mask') ||
+    userText.includes('n95') ||
+    userText.includes('ffp2') ||
+    userText.includes('kf94') ||
+    userText.includes('cloth') ||
+    userText.includes('surgical')
+  ) {
+    return `### Certified Mask Science for Winter Smog:
+- **Cloth & Surgical Masks**: Capture only 15% to 25% of fine PM2.5. Face-seal gaps allow microscopic diesel soot to bypass filtration entirely.
+- **Certified N95 / FFP2 / KF94**: Electrostatic melt-blown microfiber captures **95%+ of particles down to 0.3 microns** (the most penetrating particle size).
+- **Proper Seal Verification**:
+  1. Mold the metal nose bridge tightly against your nasal bone.
+  2. Cup both hands over the front of the respirator and exhale sharply.
+  3. If air leaks around your cheeks or eyes, readjust the tension straps. A loose seal destroys up to 50% of the mask's protective rating!`;
   }
 
-  if (userText.includes('plant') || userText.includes('purifier') || userText.includes('diy') || userText.includes('filter')) {
-    return `### 🌿 DIY Filtration & Botanical Hacks:
-- **The $25 Corsi-Rosenthal Miracle**: 1 standard 20-inch box fan + 4 MERV-13 furnace filters taped into a cube. Outperforms a $400 commercial HEPA purifier by delivering 450+ CFM of clean air!
-- **Top 3 Smog Plants**:
-  1. *Sansevieria (Snake Plant)*: Produces oxygen at night, perfect for sealed bedrooms.
-  2. *Areca Palm*: Transpires 1 liter of pure moisture per day, keeping smog aerosols grounded.
-  3. *Chlorophytum (Spider Plant)*: Absorbs carbon monoxide and benzene from stove fumes.`;
+  // 3. DIY Filtration, Corsi-Rosenthal & Plants
+  if (
+    userText.includes('plant') ||
+    userText.includes('purifier') ||
+    userText.includes('diy') ||
+    userText.includes('filter') ||
+    userText.includes('corsi') ||
+    userText.includes('cadr') ||
+    userText.includes('box fan') ||
+    userText.includes('merv')
+  ) {
+    return `### Air Cleaning Science: DIY Corsi-Rosenthal Box vs Commercial Units:
+- **The Corsi-Rosenthal Advantage**:
+  - Construction: 1 standard 20-inch box fan + 4 MERV-13 furnace filters + 1 cardboard shroud.
+  - Performance: Delivers **450 to 550 CFM of clean air delivery rate (CADR)**.
+  - Economics: Outcleans a $400 commercial HEPA unit for less than $35 in materials.
+- **Room CADR Sizing Formula**:
+  - Required CADR (CFM) = (Room Volume in cu ft * Desired Air Changes per Hour) / 60.
+  - During hazardous winter smog, target **5 Air Changes per Hour (ACH)**.
+- **Botanical Realities**:
+  - Top smog plants: *Sansevieria* (releases oxygen at night in bedrooms) and *Areca Palm* (adds moisture to ground aerosols).
+  - Note: While indoor plants absorb trace VOCs, they cannot replace mechanical filtration for particulate PM2.5 during severe inversions.`;
   }
 
-  return `### 🌬️ AirAstra Guidance for ${city} (AQI: ${currentAQI}):
-- **Ground Inversion Active**: Cold air is trapping vehicular and domestic smoke below 200 meters altitude.
-- **Today's Strategic Move**: Avoid outdoor running or cycling before 11:30 AM. Shift any errands to the 13:00 - 15:30 solar thermal lift window.
-- **Direct Choice Impact**: Switching today's private car commute to an electric metro or shared carpool prevents ~4.2kg of $CO_2$ and 18g of direct tailpipe soot in your neighborhood.
-Feel free to ask about room sealing, mask fit tests, or DIY filter specs!`;
+  // 4. Inversion Physics & Weather Dynamics
+  if (
+    userText.includes('inversion') ||
+    userText.includes('weather') ||
+    userText.includes('fog') ||
+    userText.includes('smog') ||
+    userText.includes('temperature') ||
+    userText.includes('ceiling')
+  ) {
+    return `### Atmospheric Inversion Dynamics in ${city}:
+- **The Physics Mechanism**:
+  - Clear winter nights cause rapid ground heat radiation into space.
+  - The surface earth chills quickly, creating a dense layer of cold air (0-180m altitude) capped by warmer air aloft.
+  - Because cold air is denser than warm air, vertical convection ceases completely: this creates an atmospheric lid trapping vehicle exhaust and brick kiln soot.
+- **Diurnal Timeline**:
+  - **06:00 - 09:30**: Maximum smog concentration. Surface inversions are thickest. Avoid outdoor exposure.
+  - **12:30 - 15:30**: Solar heating warms the ground, breaking the inversion lid (thermal lift). This is your safest window for brief ventilation.
+  - **18:00 onward**: Surface cools again, locking the inversion lid back in place until sunrise.`;
+  }
+
+  // 5. Exercise & Outdoor Workouts
+  if (
+    userText.includes('run') ||
+    userText.includes('jog') ||
+    userText.includes('exercise') ||
+    userText.includes('workout') ||
+    userText.includes('walk') ||
+    userText.includes('cycl') ||
+    userText.includes('gym')
+  ) {
+    return `### Pulmonary Exercise Warning (Current AQI: ${currentAQI}):
+- **Minute Ventilation Impact**:
+  - Resting breathing: ~6 liters of air per minute.
+  - Vigorous jogging/cycling: **60 to 90 liters of air per minute** (a 10x to 15x increase!).
+  - Deep mouth breathing bypasses natural nasal cilia filters, delivering toxic ultrafine heavy metals directly into alveolar capillary walls.
+- **Today's Strategic Alternative**:
+  - Do not run outdoors when AQI exceeds 150.
+  - Shift workouts indoors: resistance training, yoga, or indoor cycling in a room with an active HEPA filter and 50% relative humidity.`;
+  }
+
+  // 6. Window Sealing & Strategic Flush Ventilation
+  if (
+    userText.includes('window') ||
+    userText.includes('ventilat') ||
+    userText.includes('draft') ||
+    userText.includes('seal') ||
+    userText.includes('door')
+  ) {
+    return `### Window Sealing & Strategic Flush Protocol:
+- **The CO2 vs PM2.5 Balance**:
+  - Sealing rooms hermetically traps human CO2, which can exceed 1500 ppm after 6 hours, causing fatigue and headaches.
+  - However, opening windows during morning inversion floods rooms with toxic PM2.5.
+- **The 15-Minute Flush Technique**:
+  1. Keep windows tightly sealed with weather tape throughout morning inversion hours.
+  2. Between **13:00 and 15:00** (during peak solar thermal lift), open windows on opposite sides of the room for exactly 15 minutes to purge stale CO2.
+  3. Close all windows tightly, then run your HEPA filter or Corsi-Rosenthal unit on Maximum for 10 minutes to scrub any entered particles.`;
+  }
+
+  // 7. Commute & Emission Reduction
+  if (
+    userText.includes('commute') ||
+    userText.includes('car') ||
+    userText.includes('traffic') ||
+    userText.includes('metro') ||
+    userText.includes('bus') ||
+    userText.includes('emission')
+  ) {
+    return `### Commute Defense & Community Emission Reductions:
+- **Vehicle Cabin Defense**:
+  - If driving is essential, keep vehicle air conditioning strictly set to **Internal Recirculation Mode** to prevent sucking external diesel exhaust through cowl intakes.
+  - Replace cabin air filters annually with activated carbon or HEPA-rated elements.
+- **Collective Impact of Transit Swaps**:
+  - Replacing a single 15km solo gasoline car commute with electric metro or bus prevents ~3.2kg of CO2 and 12g of direct PM2.5 tailpipe soot in your neighborhood.
+  - Carpooling reduces local peak congestion, directly diminishing cold-engine idling at traffic signals.`;
+  }
+
+  // Default Comprehensive Guidance
+  return `### AirAstra Guidance for ${city} (AQI: ${currentAQI}):
+- **Atmospheric Status**: Ground-level cold lake trapping particulate matter below 200m altitude.
+- **Top 3 Action Priorities**:
+  1. **Wear Certified N95**: Mandatory for any outdoor commute longer than 5 minutes.
+  2. **Run Continuous Indoor Filtration**: Keep your Corsi-Rosenthal unit or HEPA purifier running on medium-low in the main living quarters.
+  3. **Plan Around the Flush Window**: Schedule any brief room ventilation between 13:00 and 15:00 when solar heating temporarily breaks the inversion boundary.
+Ask me about DIY Corsi-Rosenthal box blueprints, room draft sealing, pediatric cough relief, or mask fit tests!`;
 }
 
 // 4. Curated Urban Routine fallback
@@ -280,7 +425,7 @@ function getCuratedUrbanRoutine(
       riskLevel: 'caution',
       standardHabit: 'Leaving windows cracked open for "fresh air" while running high-heat gas heaters.',
       lowEmissionAlternative: 'Keep perimeter sealed; activate DIY Corsi-Rosenthal filter on Medium; use induction or electric convection heating.',
-      scienceRationale: 'Unvented gas/kerosene heaters emit toxic NO2 and CO into unventilated rooms. Ambient winter "fresh" air is currently toxic (PM2.5 > 150 µg/m³).',
+      scienceRationale: 'Unvented gas heaters emit toxic NO2 and CO into unventilated rooms. Ambient winter "fresh" air is currently toxic (PM2.5 > 150 µg/m³).',
       personalImpact: {
         co2SavedGrams: 820,
         pmInhaledAvoidedUg: 310
