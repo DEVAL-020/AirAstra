@@ -86,10 +86,10 @@ export function RoutineArchitect({ airData }: RoutineArchitectProps) {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-border/40 pb-4">
         <div>
-          <h2 className="font-montserrat text-xl font-semibold text-foreground">
+          <h2 className="text-2xl sm:text-3xl font-bold text-foreground">
             Low-emission daily routine
           </h2>
-          <p className="text-xs text-neutral-400 mt-1 max-w-xl leading-relaxed">
+          <p className="text-sm sm:text-base text-neutral-300 mt-1 max-w-xl leading-relaxed">
             Plan your day around {airData.city}&apos;s winter inversion curve with <Highlight>practical emission alternatives</Highlight> that reduce lung exposure.
           </p>
         </div>
@@ -97,8 +97,8 @@ export function RoutineArchitect({ airData }: RoutineArchitectProps) {
         {routines.length > 0 && (
           <div className="flex items-center gap-3 rounded-lg border border-border/40 bg-black/20 px-3.5 py-2">
             <div className="text-right">
-              <span className="text-[10px] text-neutral-400 block">Personal daily impact</span>
-              <span className="text-xs font-mono font-semibold text-foreground">
+              <span className="text-xs text-neutral-400 block font-medium">Personal daily impact</span>
+              <span className="text-sm font-mono font-bold text-foreground">
                 -{(totalCo2Saved / 1000).toFixed(1)}kg CO₂ / -{totalPmAvoided}µg PM2.5
               </span>
             </div>

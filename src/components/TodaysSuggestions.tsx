@@ -70,14 +70,14 @@ export function TodaysSuggestions({
       {/* Title */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-border/40 pb-4">
         <div>
-          <h2 className="font-montserrat text-lg font-semibold text-foreground">
+          <h2 className="text-2xl sm:text-3xl font-bold text-foreground">
             Today&apos;s recommendations
           </h2>
-          <p className="text-xs text-neutral-400 mt-0.5">
+          <p className="text-sm sm:text-base text-neutral-300 mt-1">
             Targeted defense against <Highlight>severe winter inversion</Highlight> in {airData.city}.
           </p>
         </div>
-        <span className="text-xs text-neutral-400 font-mono">
+        <span className="text-sm text-neutral-400 font-mono">
           Updated {airData.timestamp}
         </span>
       </div>
@@ -87,28 +87,28 @@ export function TodaysSuggestions({
         onClick={onOpenEmergency}
         role="button"
         tabIndex={0}
-        className="group flex cursor-pointer items-center justify-between gap-4 rounded-xl border border-red-500/30 bg-black/30 p-4 transition-colors hover:border-red-500/50"
+        className="group flex cursor-pointer items-center justify-between gap-4 rounded-xl border border-red-500/30 bg-black/30 p-5 transition-colors hover:border-red-500/50"
       >
-        <div className="space-y-1">
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-red-400 font-medium">Air quality status</span>
-            <Chip tone="danger">Level 4 lockdown ready</Chip>
+        <div className="space-y-1.5">
+          <div className="flex items-center gap-2.5">
+            <span className="text-sm text-red-400 font-semibold">Air quality status</span>
+            <Chip tone="danger" className="text-xs sm:text-sm font-semibold">Level 4 lockdown ready</Chip>
           </div>
-          <div className="font-montserrat text-lg font-semibold text-white">
+          <div className="text-xl sm:text-2xl font-bold text-white">
             {airData.category} (AQI {airData.aqi})
           </div>
-          <p className="text-xs text-neutral-400">
+          <p className="text-sm sm:text-base text-neutral-300">
             Ground inversion is active. Tap to view the emergency checklist for sensitive family members.
           </p>
         </div>
 
-        <div className="flex size-8 shrink-0 items-center justify-center rounded-md border border-border bg-black/40 text-neutral-300 group-hover:text-white">
-          <ChevronRight className="size-4" />
+        <div className="flex size-9 shrink-0 items-center justify-center rounded-lg border border-border bg-black/40 text-neutral-300 group-hover:text-white">
+          <ChevronRight className="size-5" />
         </div>
       </div>
 
       {/* Suggestion cards in ChaiUI card grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {suggestions.map((item) => {
           const Icon = item.icon;
 
@@ -118,26 +118,26 @@ export function TodaysSuggestions({
               onClick={item.action}
               role="button"
               tabIndex={0}
-              className="group flex cursor-pointer items-center justify-between gap-3 rounded-lg border border-border/40 bg-black/20 p-3.5 transition-colors hover:border-border hover:bg-black/30"
+              className="group flex cursor-pointer items-center justify-between gap-3.5 rounded-xl border border-border/40 bg-black/20 p-4 transition-colors hover:border-border hover:bg-black/30"
             >
-              <div className="flex items-center gap-3 min-w-0">
-                <div className="flex size-9 shrink-0 items-center justify-center rounded-md border border-border bg-black/30 text-brand">
-                  <Icon className="size-4" />
+              <div className="flex items-center gap-3.5 min-w-0">
+                <div className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-border bg-black/30 text-brand">
+                  <Icon className="size-5" />
                 </div>
                 <div className="min-w-0">
                   <div className="flex items-center gap-2">
-                    <span className="truncate font-montserrat text-sm font-semibold text-foreground group-hover:text-brand transition-colors">
+                    <span className="truncate text-base sm:text-lg font-semibold text-foreground group-hover:text-brand transition-colors">
                       {item.title}
                     </span>
                   </div>
-                  <p className="truncate text-xs text-neutral-400 mt-0.5">
+                  <p className="truncate text-sm text-neutral-300 mt-0.5">
                     {item.caption}
                   </p>
                 </div>
               </div>
 
               <div className="flex items-center gap-2 shrink-0">
-                <Chip tone={item.chipTone}>{item.chipLabel}</Chip>
+                <Chip tone={item.chipTone} className="text-xs sm:text-sm font-semibold">{item.chipLabel}</Chip>
                 <ChevronRight className="size-4 text-neutral-500 group-hover:text-foreground" />
               </div>
             </div>

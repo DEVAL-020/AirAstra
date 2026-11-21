@@ -101,15 +101,15 @@ export function CommunityHub() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-border/40 pb-4">
         <div>
-          <h2 className="font-montserrat text-xl font-semibold text-foreground">
+          <h2 className="text-2xl sm:text-3xl font-bold text-foreground">
             BreatheTogether community hub
           </h2>
-          <p className="text-xs text-neutral-400 mt-1 max-w-xl leading-relaxed">
+          <p className="text-sm sm:text-base text-neutral-300 mt-1 max-w-xl leading-relaxed">
             Coordinated neighborhood action across housing pods to maintain <Highlight>collective smog defense</Highlight> during cold inversions.
           </p>
         </div>
 
-        <Chip tone="default">3 active local pods</Chip>
+        <Chip tone="default" className="text-xs sm:text-sm font-semibold">3 active local pods</Chip>
       </div>
 
       {/* Impact Stats */}

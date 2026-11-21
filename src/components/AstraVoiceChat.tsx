@@ -147,11 +147,11 @@ export function AstraVoiceChat({ currentAQI, city }: AstraVoiceChatProps) {
             <Stethoscope className="size-4" />
           </div>
           <div>
-            <div className="flex items-center gap-2">
-              <h3 className="font-montserrat text-base font-semibold text-foreground">Astra</h3>
-              <Chip tone="default">Respiratory advisor</Chip>
+            <div className="flex items-center gap-2.5">
+              <h3 className="text-xl sm:text-2xl font-bold text-foreground">Astra</h3>
+              <Chip tone="default" className="text-xs sm:text-sm font-semibold">Respiratory advisor</Chip>
             </div>
-            <p className="text-xs text-neutral-400">
+            <p className="text-sm sm:text-base text-neutral-300 mt-0.5">
               Personalized guidance for {city} (AQI {currentAQI}) based on <Highlight>pediatric respiratory safety</Highlight>.
             </p>
           </div>

@@ -1,5 +1,27 @@
 import type { Metadata } from 'next';
+import { Plus_Jakarta_Sans, Montserrat, Onest } from 'next/font/google';
 import './globals.css';
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700', '800'],
+  variable: '--font-sans',
+  display: 'swap',
+});
+
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-display',
+  display: 'swap',
+});
+
+const onest = Onest({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-brand',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'AirAstra | Winter Smog & Community Clean Air OS',
@@ -30,7 +52,7 @@ export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
-}) {
+  }) {
   return (
     <html lang="en" className="dark">
       <head>
@@ -39,7 +61,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/icon.svg" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
-      <body className="min-h-screen bg-background text-foreground font-sans antialiased selection:bg-brand selection:text-white">
+      <body className={`${plusJakartaSans.variable} ${montserrat.variable} ${onest.variable} font-sans min-h-screen bg-background text-foreground text-[17px] leading-relaxed antialiased selection:bg-brand selection:text-white`}>
         {children}
       </body>
     </html>

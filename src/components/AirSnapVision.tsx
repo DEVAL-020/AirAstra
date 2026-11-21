@@ -76,15 +76,15 @@ export function AirSnapVision({ currentAQI }: AirSnapVisionProps) {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-border/40 pb-4">
         <div>
-          <h2 className="font-montserrat text-xl font-semibold text-foreground">
+          <h2 className="text-2xl sm:text-3xl font-bold text-foreground">
             AirSnap room scanner
           </h2>
-          <p className="text-xs text-neutral-400 mt-1 max-w-xl leading-relaxed">
+          <p className="text-sm sm:text-base text-neutral-300 mt-1 max-w-xl leading-relaxed">
             Take or upload a photo of your window frame, radiator, or room corner to identify <Highlight>indoor particulate infiltration points</Highlight> and drafts.
           </p>
         </div>
 
-        <Chip tone="default">Building envelope scan</Chip>
+        <Chip tone="default" className="text-xs sm:text-sm font-semibold">Building envelope scan</Chip>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">

@@ -44,7 +44,7 @@ function Segmented<T extends string>({
           aria-label={o['aria-label']}
           onClick={() => onChange(o.value)}
           className={cn(
-            "inline-flex h-9 min-w-9 shrink-0 cursor-pointer items-center justify-center gap-2 px-3.5 text-[13px] whitespace-nowrap transition-colors duration-150 outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset [&_svg:not([class*='size-'])]:size-4",
+            "inline-flex h-10 min-w-10 shrink-0 cursor-pointer items-center justify-center gap-2 px-4 text-sm sm:text-base font-semibold whitespace-nowrap transition-colors duration-150 outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset [&_svg:not([class*='size-'])]:size-4",
             value === o.value
               ? 'bg-orange-100 text-orange-900 dark:bg-orange-900/40 dark:text-orange-100'
               : 'text-gray-600 hover:bg-orange-50 hover:text-orange-900 dark:text-gray-400 dark:hover:bg-orange-900/20 dark:hover:text-orange-100',
