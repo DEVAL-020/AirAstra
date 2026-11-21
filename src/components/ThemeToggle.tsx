@@ -71,7 +71,7 @@ export function ThemeToggle() {
 
   if (!mounted) {
     return (
-      <div className="inline-flex size-9 items-center justify-center rounded-md border border-border text-neutral-400">
+      <div className="inline-flex size-9 items-center justify-center rounded-md border border-neutral-300 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300">
         <Moon className="size-4" />
       </div>
     );
@@ -86,31 +86,31 @@ export function ThemeToggle() {
         aria-label="Toggle color theme (Light, Dark, System)"
         aria-expanded={isOpen}
         className={cn(
-          'inline-flex size-9 items-center justify-center rounded-md border text-sm transition-colors cursor-pointer',
+          'inline-flex size-9 items-center justify-center rounded-md border text-sm transition-colors cursor-pointer shadow-xs',
           isOpen
-            ? 'border-brand text-brand bg-neutral-800/40 dark:bg-neutral-800/50'
-            : 'border-border text-neutral-400 hover:text-foreground hover:bg-neutral-200/50 dark:hover:bg-neutral-800/40'
+            ? 'border-brand text-brand bg-amber-50 dark:bg-neutral-800/50'
+            : 'border-neutral-300 dark:border-neutral-700 text-neutral-800 dark:text-neutral-200 hover:text-foreground hover:bg-neutral-100 dark:hover:bg-neutral-800/40'
         )}
       >
         {theme === 'dark' && <Moon className="size-4 text-neutral-200" />}
-        {theme === 'light' && <Sun className="size-4 text-amber-500" />}
-        {theme === 'system' && <Laptop className="size-4 text-neutral-300" />}
+        {theme === 'light' && <Sun className="size-4 text-amber-600 dark:text-amber-500" />}
+        {theme === 'system' && <Laptop className="size-4 text-neutral-800 dark:text-neutral-200" />}
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-36 rounded-xl border border-border/60 bg-card p-1.5 backdrop-blur-xl z-50 animate-in fade-in zoom-in-95 duration-150">
+        <div className="absolute right-0 mt-2 w-36 rounded-xl border-2 border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-1.5 backdrop-blur-xl z-50 shadow-lg animate-in fade-in zoom-in-95 duration-150">
           <button
             type="button"
             onClick={() => selectTheme('light')}
             className={cn(
-              'w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors cursor-pointer',
+              'w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs transition-colors cursor-pointer',
               theme === 'light'
-                ? 'bg-brand/10 text-brand font-semibold'
-                : 'text-neutral-400 hover:text-foreground hover:bg-neutral-100 dark:hover:bg-neutral-800/60'
+                ? 'bg-amber-100/80 text-amber-900 dark:bg-brand/20 dark:text-brand font-bold'
+                : 'text-neutral-800 dark:text-neutral-300 font-semibold hover:text-foreground hover:bg-neutral-100 dark:hover:bg-neutral-800/60'
             )}
           >
             <div className="flex items-center gap-2">
-              <Sun className="size-3.5 text-amber-500" />
+              <Sun className="size-3.5 text-amber-600 dark:text-amber-500" />
               <span>Light</span>
             </div>
             {theme === 'light' && <Check className="size-3.5" />}
@@ -120,14 +120,14 @@ export function ThemeToggle() {
             type="button"
             onClick={() => selectTheme('dark')}
             className={cn(
-              'w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors cursor-pointer',
+              'w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs transition-colors cursor-pointer',
               theme === 'dark'
-                ? 'bg-brand/10 text-brand font-semibold'
-                : 'text-neutral-400 hover:text-foreground hover:bg-neutral-100 dark:hover:bg-neutral-800/60'
+                ? 'bg-amber-100/80 text-amber-900 dark:bg-brand/20 dark:text-brand font-bold'
+                : 'text-neutral-800 dark:text-neutral-300 font-semibold hover:text-foreground hover:bg-neutral-100 dark:hover:bg-neutral-800/60'
             )}
           >
             <div className="flex items-center gap-2">
-              <Moon className="size-3.5 text-neutral-200" />
+              <Moon className="size-3.5 text-neutral-800 dark:text-neutral-200" />
               <span>Dark</span>
             </div>
             {theme === 'dark' && <Check className="size-3.5" />}
@@ -137,14 +137,14 @@ export function ThemeToggle() {
             type="button"
             onClick={() => selectTheme('system')}
             className={cn(
-              'w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors cursor-pointer',
+              'w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs transition-colors cursor-pointer',
               theme === 'system'
-                ? 'bg-brand/10 text-brand font-semibold'
-                : 'text-neutral-400 hover:text-foreground hover:bg-neutral-100 dark:hover:bg-neutral-800/60'
+                ? 'bg-amber-100/80 text-amber-900 dark:bg-brand/20 dark:text-brand font-bold'
+                : 'text-neutral-800 dark:text-neutral-300 font-semibold hover:text-foreground hover:bg-neutral-100 dark:hover:bg-neutral-800/60'
             )}
           >
             <div className="flex items-center gap-2">
-              <Laptop className="size-3.5 text-neutral-300" />
+              <Laptop className="size-3.5 text-neutral-800 dark:text-neutral-200" />
               <span>System</span>
             </div>
             {theme === 'system' && <Check className="size-3.5" />}

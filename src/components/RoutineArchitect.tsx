@@ -255,10 +255,10 @@ export function RoutineArchitect({ airData }: RoutineArchitectProps) {
 
       {/* Routine Timeline */}
       {routines.length === 0 && !loading && (
-        <div className="text-center py-10 border border-dashed border-border/40 rounded-xl p-6 space-y-3 bg-black/20">
-          <Calendar className="size-9 text-neutral-400 mx-auto" />
-          <h3 className="text-base font-semibold text-foreground">Calculating initial schedule...</h3>
-          <p className="text-sm text-neutral-400 max-w-sm mx-auto">
+        <div className="text-center py-10 border-2 border-dashed border-neutral-300 dark:border-neutral-700 rounded-xl p-6 space-y-3 bg-neutral-100/80 dark:bg-neutral-900/40">
+          <Calendar className="size-9 text-neutral-700 dark:text-neutral-400 mx-auto" />
+          <h3 className="text-base font-bold text-foreground">Calculating initial schedule...</h3>
+          <p className="text-sm font-semibold text-neutral-700 dark:text-neutral-300 max-w-sm mx-auto">
             Formulating hour-by-hour swaps tailored to current air conditions.
           </p>
         </div>

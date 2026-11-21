@@ -141,7 +141,7 @@ export function IndoorHacksLab({ onOpenPurifier3D, currentAQI = 210 }: IndoorHac
           <h2 className="text-2xl sm:text-3xl font-bold text-foreground">
             Indoor hacks and DIY filter lab
           </h2>
-          <p className="text-sm sm:text-base text-neutral-300 mt-1 max-w-xl leading-relaxed">
+          <p className="text-sm sm:text-base font-semibold text-neutral-800 dark:text-neutral-200 mt-1 max-w-xl leading-relaxed">
             Low-cost modifications and blueprints to build a <Highlight>pressurized clean-air sanctuary</Highlight> for under $35.
           </p>
         </div>

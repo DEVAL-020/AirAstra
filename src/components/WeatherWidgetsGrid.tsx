@@ -30,8 +30,8 @@ export function WeatherWidgetsGrid({
       {/* Widget 1: Air Quality Breakdown */}
       <div className="card-chai p-6 flex flex-col justify-between space-y-5 lg:col-span-1">
         <div className="space-y-4">
-          <div className="flex items-center justify-between text-sm text-neutral-300">
-            <span className="font-semibold text-foreground">Air quality index</span>
+          <div className="flex items-center justify-between text-sm">
+            <span className="font-bold text-foreground">Air quality index</span>
             <Chip tone={airData.aqi > 200 ? 'danger' : 'default'} className="text-xs sm:text-sm font-semibold">{airData.category}</Chip>
           </div>
 
@@ -39,14 +39,14 @@ export function WeatherWidgetsGrid({
             <span className="font-mono text-4xl sm:text-5xl font-bold text-foreground">
               {airData.aqi}
             </span>
-            <span className="ml-2 font-mono text-sm text-neutral-400">
+            <span className="ml-2 font-mono text-sm font-semibold text-neutral-600 dark:text-neutral-400">
               EPA US standard
             </span>
           </div>
 
           {/* Scale bar */}
           <div className="space-y-2">
-            <div className="relative h-2 w-full rounded-full bg-neutral-800 overflow-hidden">
+            <div className="relative h-2 w-full rounded-full bg-neutral-200 dark:bg-neutral-800 overflow-hidden">
               <div 
                 className="absolute inset-0 h-full w-full rounded-full"
                 style={{
@@ -56,7 +56,7 @@ export function WeatherWidgetsGrid({
             </div>
             <div className="relative w-full h-2">
               <div 
-                className="absolute top-0 -ml-1.5 size-3 bg-white rounded-full border border-black/40 transition-all duration-300"
+                className="absolute top-0 -ml-2 size-3.5 bg-neutral-900 dark:bg-white rounded-full border-2 border-white dark:border-neutral-900 shadow-md transition-all duration-300"
                 style={{ left: `${scalePercent}%` }}
               />
             </div>
