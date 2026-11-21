@@ -55,15 +55,21 @@ export function Segmented<T extends string>({
     };
   }, [checkScroll]);
 
-  // Smoothly scroll active tab into view when changed
+  // Smoothly scroll active tab into view strictly within the container
   React.useEffect(() => {
-    if (activeTabRef.current) {
-      activeTabRef.current.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
-        inline: 'center',
-      });
-    }
+    const container = containerRef.current;
+    const activeTab = activeTabRef.current;
+    if (!container || !activeTab) return;
+
+    const containerWidth = container.clientWidth;
+    const tabOffsetLeft = activeTab.offsetLeft;
+    const tabWidth = activeTab.clientWidth;
+    const targetScrollLeft = tabOffsetLeft - containerWidth / 2 + tabWidth / 2;
+
+    container.scrollTo({
+      left: Math.max(0, targetScrollLeft),
+      behavior: 'smooth',
+    });
   }, [value]);
 
   const scroll = (direction: 'left' | 'right') => {

@@ -105,7 +105,7 @@ export function TripCombiner({ airData }: TripCombinerProps) {
         </div>
 
         {selectedErrands.length > 0 && (
-          <div className="flex items-center gap-3 rounded-xl border-2 border-emerald-300 bg-emerald-50 dark:border-emerald-500/40 dark:bg-neutral-900/90 px-3.5 py-2.5 sm:px-5 sm:py-3 shadow-sm">
+          <div className="flex items-center justify-between sm:justify-end gap-3 rounded-xl border-2 border-emerald-300 bg-emerald-50 dark:border-emerald-500/40 dark:bg-neutral-900/90 px-3.5 py-2.5 sm:px-5 sm:py-3 shadow-sm w-full sm:w-auto">
             <div className="text-left sm:text-right">
               <span className="text-xs font-bold text-neutral-700 dark:text-neutral-400 block">Chained Route Savings</span>
               <span className="text-xs sm:text-sm font-mono font-extrabold text-emerald-800 dark:text-emerald-400">

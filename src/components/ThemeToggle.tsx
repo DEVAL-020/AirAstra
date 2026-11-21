@@ -72,8 +72,8 @@ export function ThemeToggle() {
 
   if (!mounted) {
     return (
-      <div className="inline-flex size-9 items-center justify-center rounded-md border border-neutral-300 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300">
-        <Moon className="size-4" />
+      <div className="inline-flex size-7.5 sm:size-9 items-center justify-center rounded-md border border-neutral-300 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300">
+        <Moon className="size-3.5 sm:size-4" />
       </div>
     );
   }
@@ -87,15 +87,15 @@ export function ThemeToggle() {
         aria-label="Toggle color theme (Light, Dark, System)"
         aria-expanded={isOpen}
         className={cn(
-          'inline-flex size-9 items-center justify-center rounded-md border text-sm transition-colors cursor-pointer shadow-xs',
+          'inline-flex size-7.5 sm:size-9 items-center justify-center rounded-md border text-xs sm:text-sm transition-colors cursor-pointer shadow-xs',
           isOpen
             ? 'border-brand text-brand bg-amber-50 dark:bg-neutral-800/50'
             : 'border-neutral-300 dark:border-neutral-700 text-neutral-800 dark:text-neutral-200 hover:text-foreground hover:bg-neutral-100 dark:hover:bg-neutral-800/40'
         )}
       >
-        {theme === 'dark' && <Moon className="size-4 text-neutral-200" />}
-        {theme === 'light' && <Sun className="size-4 text-amber-600 dark:text-amber-500" />}
-        {theme === 'system' && <Laptop className="size-4 text-neutral-800 dark:text-neutral-200" />}
+        {theme === 'dark' && <Moon className="size-3.5 sm:size-4 text-neutral-200" />}
+        {theme === 'light' && <Sun className="size-3.5 sm:size-4 text-amber-600 dark:text-amber-500" />}
+        {theme === 'system' && <Laptop className="size-3.5 sm:size-4 text-neutral-800 dark:text-neutral-200" />}
       </button>
 
       {isOpen && (
