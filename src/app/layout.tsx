@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     'Corsi-Rosenthal Box',
     'GenAI Assistant',
     'Thermal Inversion',
-    'Three.js GLSL'
+    'Atmospheric Simulation'
   ]
 };
 

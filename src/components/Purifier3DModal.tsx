@@ -353,9 +353,9 @@ export const Purifier3DModal: React.FC<Purifier3DModalProps> = ({ isOpen, onClos
               <Wind className="size-4" />
             </div>
             <div>
-              <h3 className="font-montserrat text-base font-semibold text-foreground flex items-center gap-2">
+              <h3 className="text-lg font-bold text-foreground flex items-center gap-2">
                 3D Corsi-Rosenthal filter simulator
-                <span className="text-[11px] font-mono text-neutral-400 border border-border/40 px-2 py-0.5 rounded">Three.js + GLSL</span>
+                <span className="text-xs font-medium text-neutral-300 border border-border/40 px-2.5 py-0.5 rounded-full">Interactive CAD View</span>
               </h3>
               <p className="text-xs text-neutral-400">Drag to rotate the box and inspect fluid mechanics</p>
             </div>

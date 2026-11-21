@@ -178,7 +178,7 @@ export function Footer({
               </li>
               <li className="flex items-center gap-1.5">
                 <CheckCircle2 className="size-3.5 text-emerald-400 shrink-0" />
-                <span className="text-neutral-300">GLSL Three.js shaders</span>
+                <span className="text-neutral-300">Aerosol dispersal physics</span>
               </li>
             </ul>
           </div>

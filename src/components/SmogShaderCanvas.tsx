@@ -235,11 +235,11 @@ export const SmogShaderCanvas: React.FC<SmogShaderCanvasProps> = ({ aqi, inversi
       {/* 3D Simulation Overlay HUD */}
       <div className="absolute top-3 left-3 pointer-events-none flex items-center space-x-2 text-xs bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-emerald-500/20 text-emerald-300">
         <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping inline-block" />
-        <span className="font-mono uppercase font-semibold tracking-wider">GLSL Inversion Shader (WebGL)</span>
+        <span className="font-medium tracking-wide">Live Atmospheric Boundary Model</span>
       </div>
 
-      <div className="absolute bottom-3 right-3 pointer-events-none text-[11px] bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10 text-slate-300">
-        <span>Interactive: Move cursor to perturb aerosol boundary</span>
+      <div className="absolute bottom-3 right-3 pointer-events-none text-xs bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10 text-neutral-300">
+        <span>Interactive: Drag to inspect aerosol dispersal</span>
       </div>
     </div>
   );
