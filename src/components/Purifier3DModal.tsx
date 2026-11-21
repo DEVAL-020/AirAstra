@@ -344,26 +344,26 @@ export const Purifier3DModal: React.FC<Purifier3DModalProps> = ({ isOpen, onClos
   const estimatedCadr = Math.round(280 + fanSpeed * 55);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-      <div className="card-chai relative w-full max-w-4xl overflow-hidden flex flex-col max-h-[90vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/60 backdrop-blur-sm">
+      <div className="card-chai relative w-full max-w-4xl overflow-hidden flex flex-col max-h-[92vh]">
         {/* Header */}
-        <div className="px-6 py-4 border-b border-border/60 flex items-center justify-between bg-neutral-100 dark:bg-black/30">
-          <div className="flex items-center gap-3">
-            <div className="flex size-9 items-center justify-center rounded-lg border border-border bg-white dark:bg-black/40 text-brand shadow-xs">
+        <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-border/60 flex items-center justify-between bg-neutral-100 dark:bg-black/30">
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            <div className="flex size-8 sm:size-9 items-center justify-center rounded-lg border border-border bg-white dark:bg-black/40 text-brand shadow-xs shrink-0">
               <Wind className="size-4" />
             </div>
             <div>
-              <h3 className="text-lg font-bold text-foreground flex items-center gap-2">
-                3D Corsi-Rosenthal filter simulator
-                <span className="text-xs font-bold text-neutral-700 dark:text-neutral-300 border border-neutral-300 dark:border-border/40 px-2.5 py-0.5 rounded-full bg-white dark:bg-transparent shadow-xs">Interactive CAD View</span>
+              <h3 className="text-sm sm:text-lg font-bold text-foreground flex flex-wrap items-center gap-1.5 sm:gap-2">
+                <span>3D filter simulator</span>
+                <span className="text-[10px] sm:text-xs font-bold text-neutral-700 dark:text-neutral-300 border border-neutral-300 dark:border-border/40 px-2 py-0.5 rounded-full bg-white dark:bg-transparent shadow-xs">CAD View</span>
               </h3>
-              <p className="text-xs font-medium text-neutral-600 dark:text-neutral-400">Drag to rotate the box and inspect fluid mechanics</p>
+              <p className="text-[11px] sm:text-xs font-medium text-neutral-600 dark:text-neutral-400">Drag to rotate the box and inspect fluid mechanics</p>
             </div>
           </div>
           <button
             type="button"
             onClick={onClose}
-            className="text-neutral-500 hover:text-foreground p-1 cursor-pointer"
+            className="text-neutral-500 hover:text-foreground p-1.5 cursor-pointer"
             aria-label="Close"
           >
             <X className="size-4" />
@@ -371,7 +371,7 @@ export const Purifier3DModal: React.FC<Purifier3DModalProps> = ({ isOpen, onClos
         </div>
 
         {/* 3D Viewport & HUD */}
-        <div className="relative flex-1 min-h-[380px] bg-black/50">
+        <div className="relative flex-1 min-h-[260px] sm:min-h-[380px] bg-black/50">
           <div ref={mountRef} className="w-full h-full cursor-grab active:cursor-grabbing" />
 
           {/* Left HUD: CAD Metrics */}

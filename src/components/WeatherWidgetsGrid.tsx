@@ -28,7 +28,7 @@ export function WeatherWidgetsGrid({
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {/* Widget 1: Air Quality Breakdown */}
-      <div className="card-chai p-6 flex flex-col justify-between space-y-5 lg:col-span-1">
+      <div className="card-chai p-4 sm:p-6 flex flex-col justify-between space-y-5 lg:col-span-1">
         <div className="space-y-4">
           <div className="flex items-center justify-between text-sm">
             <span className="font-bold text-foreground">Air quality index</span>
@@ -85,7 +85,7 @@ export function WeatherWidgetsGrid({
       </div>
 
       {/* Widget 2: 3D Inversion Shader Canvas */}
-      <div className="card-chai p-6 flex flex-col justify-between space-y-4 lg:col-span-2">
+      <div className="card-chai p-4 sm:p-6 flex flex-col justify-between space-y-4 lg:col-span-2">
         <div className="flex items-center justify-between text-sm">
           <div className="flex items-center gap-2 font-bold text-foreground">
             <Layers className="size-4 text-brand" />
@@ -106,59 +106,59 @@ export function WeatherWidgetsGrid({
       </div>
 
       {/* Widget 3: Wind */}
-      <div className="card-chai p-6 flex flex-col justify-between space-y-4">
+      <div className="card-chai p-4 sm:p-6 flex flex-col justify-between space-y-4">
         <div className="flex items-center gap-2 text-sm font-bold text-foreground">
           <Wind className="size-4 text-brand" />
           <span>Surface wind</span>
         </div>
 
         <div>
-          <span className="font-mono text-4xl sm:text-5xl font-bold text-foreground">
+          <span className="font-mono text-3xl sm:text-5xl font-bold text-foreground">
             {airData.windSpeed}
           </span>
-          <span className="ml-2 font-mono text-sm font-semibold text-neutral-600 dark:text-neutral-400">
+          <span className="ml-2 font-mono text-xs sm:text-sm font-semibold text-neutral-600 dark:text-neutral-400">
             km/h • NW
           </span>
         </div>
 
-        <p className="pt-3 border-t border-border/60 text-sm font-medium text-neutral-700 dark:text-neutral-300 leading-relaxed">
+        <p className="pt-3 border-t border-border/60 text-xs sm:text-sm font-medium text-neutral-700 dark:text-neutral-300 leading-relaxed">
           Calm surface wind allows vehicular exhaust and solid fuels to stagnate.
         </p>
       </div>
 
       {/* Widget 4: Humidity */}
-      <div className="card-chai p-6 flex flex-col justify-between space-y-4">
+      <div className="card-chai p-4 sm:p-6 flex flex-col justify-between space-y-4">
         <div className="flex items-center gap-2 text-sm font-bold text-foreground">
           <Droplets className="size-4 text-brand" />
           <span>Relative humidity</span>
         </div>
 
         <div>
-          <span className="font-mono text-4xl sm:text-5xl font-bold text-foreground">
+          <span className="font-mono text-3xl sm:text-5xl font-bold text-foreground">
             {airData.humidity}%
           </span>
-          <span className="ml-2 font-mono text-sm font-semibold text-neutral-600 dark:text-neutral-400">
+          <span className="ml-2 font-mono text-xs sm:text-sm font-semibold text-neutral-600 dark:text-neutral-400">
             Moisture saturation
           </span>
         </div>
 
-        <p className="pt-3 border-t border-border/60 text-sm font-medium text-neutral-700 dark:text-neutral-300 leading-relaxed">
+        <p className="pt-3 border-t border-border/60 text-xs sm:text-sm font-medium text-neutral-700 dark:text-neutral-300 leading-relaxed">
           High humidity bonds with ambient sulfates, creating visible smog aerosol droplets.
         </p>
       </div>
 
       {/* Widget 5: Visibility */}
-      <div className="card-chai p-6 flex flex-col justify-between space-y-4">
+      <div className="card-chai p-4 sm:p-6 flex flex-col justify-between space-y-4">
         <div className="flex items-center gap-2 text-sm font-bold text-foreground">
           <Eye className="size-4 text-brand" />
           <span>Visibility</span>
         </div>
 
         <div>
-          <span className="font-mono text-4xl sm:text-5xl font-bold text-foreground">
+          <span className="font-mono text-3xl sm:text-5xl font-bold text-foreground">
             1.1
           </span>
-          <span className="ml-2 font-mono text-sm font-semibold text-neutral-600 dark:text-neutral-400">
+          <span className="ml-2 font-mono text-xs sm:text-sm font-semibold text-neutral-600 dark:text-neutral-400">
             km (Reduced by haze)
           </span>
         </div>

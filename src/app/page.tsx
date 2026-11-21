@@ -76,8 +76,8 @@ export default function AirAstraHome() {
         airData={airData}
       />
 
-      {/* Main Container: max-w-6xl with p-6 sm:p-12 */}
-      <main className="mx-auto w-full max-w-6xl p-6 sm:p-12 space-y-8">
+      {/* Main Container: responsive max-w-6xl */}
+      <main className="mx-auto w-full max-w-6xl px-3 sm:px-6 md:px-12 py-5 sm:py-8 space-y-6 sm:space-y-8">
         {/* Segmented Toolbar Control */}
         <div className="flex justify-center">
           <Segmented

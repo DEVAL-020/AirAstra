@@ -105,7 +105,7 @@ export function RoutineArchitect({ airData }: RoutineArchitectProps) {
   const totalPmAvoided = routines.reduce((sum, r) => sum + r.personalImpact.pmInhaledAvoidedUg, 0);
 
   return (
-    <div className="card-chai p-6 sm:p-8 space-y-7">
+    <div className="card-chai p-4 sm:p-6 md:p-8 space-y-5 sm:space-y-7">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-border/60 pb-5">
         <div>
@@ -118,14 +118,14 @@ export function RoutineArchitect({ airData }: RoutineArchitectProps) {
         </div>
 
         {routines.length > 0 && (
-          <div className="flex items-center gap-3.5 rounded-xl border border-border/80 bg-neutral-100 dark:bg-neutral-900/60 px-4 py-2.5 shadow-xs">
+          <div className="flex items-center gap-3 rounded-xl border border-border/80 bg-neutral-100 dark:bg-neutral-900/60 px-3.5 py-2 shadow-xs">
             <div className="text-right">
-              <span className="text-xs font-bold text-neutral-600 dark:text-neutral-400 block">Personal daily impact</span>
-              <span className="text-sm font-mono font-bold text-foreground">
+              <span className="text-[11px] sm:text-xs font-bold text-neutral-600 dark:text-neutral-400 block">Personal daily impact</span>
+              <span className="text-xs sm:text-sm font-mono font-bold text-foreground">
                 -{(totalCo2Saved / 1000).toFixed(1)}kg CO₂ / -{totalPmAvoided}µg PM2.5
               </span>
             </div>
-            <div className="flex size-9 items-center justify-center rounded-lg border border-border bg-emerald-100 dark:bg-black/40 text-emerald-700 dark:text-brand">
+            <div className="flex size-8 sm:size-9 items-center justify-center rounded-lg border border-border bg-emerald-100 dark:bg-black/40 text-emerald-700 dark:text-brand shrink-0">
               <Leaf className="size-4" />
             </div>
           </div>
@@ -133,7 +133,7 @@ export function RoutineArchitect({ airData }: RoutineArchitectProps) {
       </div>
 
       {/* Household configurator with High Visibility Inputs */}
-      <div className="rounded-xl border border-border/70 bg-neutral-100/60 dark:bg-neutral-900/50 p-5 sm:p-6 space-y-5 shadow-xs">
+      <div className="rounded-xl border border-border/70 bg-neutral-100/60 dark:bg-neutral-900/50 p-4 sm:p-5 md:p-6 space-y-4 sm:space-y-5 shadow-xs">
         <div className="flex items-center justify-between border-b border-border/50 pb-3">
           <span className="text-sm sm:text-base font-bold text-foreground flex items-center gap-2">
             <ShieldCheck className="size-4 text-brand" />
@@ -239,7 +239,7 @@ export function RoutineArchitect({ airData }: RoutineArchitectProps) {
             onClick={handleGenerate}
             disabled={loading}
             iconRight={null}
-            className="text-sm font-bold shadow-xs"
+            className="w-full sm:w-auto text-sm font-bold shadow-xs justify-center"
           >
             {loading ? (
               <>

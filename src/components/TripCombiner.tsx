@@ -88,7 +88,7 @@ export function TripCombiner({ airData }: TripCombinerProps) {
   const exposureReductionPercent = Math.round(((morningExposureScore - thermalLiftExposureScore) / morningExposureScore) * 100);
 
   return (
-    <div className="card-chai p-6 sm:p-8 space-y-7">
+    <div className="card-chai p-4 sm:p-6 md:p-8 space-y-5 sm:space-y-7">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-border/80 pb-6">
         <div>
@@ -105,22 +105,22 @@ export function TripCombiner({ airData }: TripCombinerProps) {
         </div>
 
         {selectedErrands.length > 0 && (
-          <div className="flex items-center gap-3.5 rounded-xl border-2 border-emerald-300 bg-emerald-50 dark:border-emerald-500/40 dark:bg-neutral-900/90 px-5 py-3 shadow-sm">
-            <div className="text-right">
+          <div className="flex items-center gap-3 rounded-xl border-2 border-emerald-300 bg-emerald-50 dark:border-emerald-500/40 dark:bg-neutral-900/90 px-3.5 py-2.5 sm:px-5 sm:py-3 shadow-sm">
+            <div className="text-left sm:text-right">
               <span className="text-xs font-bold text-neutral-700 dark:text-neutral-400 block">Chained Route Savings</span>
-              <span className="text-sm font-mono font-extrabold text-emerald-800 dark:text-emerald-400">
+              <span className="text-xs sm:text-sm font-mono font-extrabold text-emerald-800 dark:text-emerald-400">
                 -{co2SavedKg} kg CO₂ • -{exposureReductionPercent}% Inhalation Risk
               </span>
             </div>
-            <div className="flex size-10 items-center justify-center rounded-lg border border-emerald-300 bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-400">
-              <Leaf className="size-5" />
+            <div className="flex size-9 sm:size-10 items-center justify-center rounded-lg border border-emerald-300 bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-400 shrink-0">
+              <Leaf className="size-4 sm:size-5" />
             </div>
           </div>
         )}
       </div>
 
       {/* Errand Selection & Vehicle Setup */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6">
         {/* Left: Errand Checkbox List */}
         <div className="lg:col-span-2 space-y-4">
           <div className="flex items-center justify-between">
@@ -128,7 +128,7 @@ export function TripCombiner({ airData }: TripCombinerProps) {
             <span className="text-xs font-bold text-neutral-700 dark:text-neutral-400">{selectedErrands.length} destinations selected</span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-3.5">
             {AVAILABLE_ERRANDS.map((errand) => {
               const isSelected = selectedIds.includes(errand.id);
               return (
@@ -137,7 +137,7 @@ export function TripCombiner({ airData }: TripCombinerProps) {
                   type="button"
                   onClick={() => toggleErrand(errand.id)}
                   className={cn(
-                    "flex items-start justify-between p-4 rounded-xl border-2 transition-all text-left cursor-pointer shadow-xs",
+                    "flex items-start justify-between p-3.5 sm:p-4 rounded-xl border-2 transition-all text-left cursor-pointer shadow-xs",
                     isSelected
                       ? "border-brand bg-amber-50/80 dark:bg-white/5 text-foreground ring-1 ring-brand"
                       : "border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/60 text-foreground hover:border-neutral-400 dark:hover:border-neutral-700"
@@ -208,36 +208,36 @@ export function TripCombiner({ airData }: TripCombinerProps) {
       </div>
 
       {/* Comparison: Unchained vs Chained Trip Performance */}
-      <div className="rounded-xl border-2 border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/50 p-6 sm:p-7 space-y-5 shadow-xs">
-        <h3 className="text-lg font-extrabold text-foreground flex items-center gap-2">
+      <div className="rounded-xl border-2 border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/50 p-4 sm:p-6 md:p-7 space-y-4 sm:space-y-5 shadow-xs">
+        <h3 className="text-base sm:text-lg font-extrabold text-foreground flex items-center gap-2">
           <ShieldCheck className="size-5 text-brand" />
           Trip Chaining Impact Analysis
         </h3>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
           {/* Unchained Profile */}
-          <div className="border-2 border-red-300 dark:border-red-500/40 rounded-xl bg-red-50/80 dark:bg-red-950/20 p-5 space-y-4 shadow-xs">
+          <div className="border-2 border-red-300 dark:border-red-500/40 rounded-xl bg-red-50/80 dark:bg-red-950/20 p-3.5 sm:p-5 space-y-3 sm:space-y-4 shadow-xs">
             <div className="flex items-center justify-between border-b border-red-200 dark:border-red-500/30 pb-2.5">
               <span className="text-xs font-extrabold text-red-800 dark:text-red-400 uppercase tracking-wider">Unchained Errands (Fragmented)</span>
               <span className="text-xs font-bold text-neutral-700 dark:text-neutral-400">{tripCount} isolated trips</span>
             </div>
 
-            <div className="grid grid-cols-2 gap-3 text-center">
-              <div className="p-3 rounded-lg bg-white dark:bg-neutral-900 border border-red-200 dark:border-red-900/50 shadow-xs">
-                <span className="text-xs font-bold text-neutral-600 dark:text-neutral-400 block mb-1">Total Travel</span>
-                <span className="text-lg font-extrabold font-mono text-neutral-900 dark:text-white">{rawSumKm} km</span>
+            <div className="grid grid-cols-2 gap-2 sm:gap-3 text-center">
+              <div className="p-2 sm:p-3 rounded-lg bg-white dark:bg-neutral-900 border border-red-200 dark:border-red-900/50 shadow-xs">
+                <span className="text-[10px] sm:text-xs font-bold text-neutral-600 dark:text-neutral-400 block mb-0.5 sm:mb-1">Total Travel</span>
+                <span className="text-sm sm:text-lg font-extrabold font-mono text-neutral-900 dark:text-white">{rawSumKm} km</span>
               </div>
-              <div className="p-3 rounded-lg bg-white dark:bg-neutral-900 border border-red-200 dark:border-red-900/50 shadow-xs">
-                <span className="text-xs font-bold text-neutral-600 dark:text-neutral-400 block mb-1">Cold Engine Starts</span>
-                <span className="text-lg font-extrabold font-mono text-red-700 dark:text-red-400">{tripCount} cold starts</span>
+              <div className="p-2 sm:p-3 rounded-lg bg-white dark:bg-neutral-900 border border-red-200 dark:border-red-900/50 shadow-xs">
+                <span className="text-[10px] sm:text-xs font-bold text-neutral-600 dark:text-neutral-400 block mb-0.5 sm:mb-1">Cold Starts</span>
+                <span className="text-sm sm:text-lg font-extrabold font-mono text-red-700 dark:text-red-400">{tripCount} starts</span>
               </div>
-              <div className="p-3 rounded-lg bg-white dark:bg-neutral-900 border border-red-200 dark:border-red-900/50 shadow-xs">
-                <span className="text-xs font-bold text-neutral-600 dark:text-neutral-400 block mb-1">CO₂ Generated</span>
-                <span className="text-lg font-extrabold font-mono text-neutral-900 dark:text-white">{unchainedCo2Grams} g</span>
+              <div className="p-2 sm:p-3 rounded-lg bg-white dark:bg-neutral-900 border border-red-200 dark:border-red-900/50 shadow-xs">
+                <span className="text-[10px] sm:text-xs font-bold text-neutral-600 dark:text-neutral-400 block mb-0.5 sm:mb-1">CO₂ Generated</span>
+                <span className="text-sm sm:text-lg font-extrabold font-mono text-neutral-900 dark:text-white">{unchainedCo2Grams} g</span>
               </div>
-              <div className="p-3 rounded-lg bg-white dark:bg-neutral-900 border border-red-200 dark:border-red-900/50 shadow-xs">
-                <span className="text-xs font-bold text-neutral-600 dark:text-neutral-400 block mb-1">Commuter Exposure</span>
-                <span className="text-sm font-extrabold font-mono text-red-700 dark:text-red-400">High Risk (Inversion)</span>
+              <div className="p-2 sm:p-3 rounded-lg bg-white dark:bg-neutral-900 border border-red-200 dark:border-red-900/50 shadow-xs">
+                <span className="text-[10px] sm:text-xs font-bold text-neutral-600 dark:text-neutral-400 block mb-0.5 sm:mb-1">Commuter Exposure</span>
+                <span className="text-xs sm:text-sm font-extrabold font-mono text-red-700 dark:text-red-400">High (Inversion)</span>
               </div>
             </div>
 
@@ -247,28 +247,28 @@ export function TripCombiner({ airData }: TripCombinerProps) {
           </div>
 
           {/* Chained Profile */}
-          <div className="border-2 border-emerald-300 dark:border-emerald-500/40 rounded-xl bg-emerald-50/80 dark:bg-emerald-950/20 p-5 space-y-4 shadow-xs">
+          <div className="border-2 border-emerald-300 dark:border-emerald-500/40 rounded-xl bg-emerald-50/80 dark:bg-emerald-950/20 p-3.5 sm:p-5 space-y-3 sm:space-y-4 shadow-xs">
             <div className="flex items-center justify-between border-b border-emerald-200 dark:border-emerald-500/30 pb-2.5">
               <span className="text-xs font-extrabold text-emerald-800 dark:text-emerald-400 uppercase tracking-wider">Chained Loop (Optimized Window)</span>
-              <span className="text-xs font-extrabold text-emerald-900 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-900/50 px-2.5 py-0.5 rounded-full">{co2SavingsPercent}% CO₂ Reduction</span>
+              <span className="text-xs font-extrabold text-emerald-900 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-900/50 px-2 py-0.5 rounded-full">{co2SavingsPercent}% CO₂ Cut</span>
             </div>
 
-            <div className="grid grid-cols-2 gap-3 text-center">
-              <div className="p-3 rounded-lg bg-white dark:bg-neutral-900 border border-emerald-200 dark:border-emerald-900/50 shadow-xs">
-                <span className="text-xs font-bold text-neutral-600 dark:text-neutral-400 block mb-1">Total Travel</span>
-                <span className="text-lg font-extrabold font-mono text-emerald-800 dark:text-emerald-400">{chainedKm} km</span>
+            <div className="grid grid-cols-2 gap-2 sm:gap-3 text-center">
+              <div className="p-2 sm:p-3 rounded-lg bg-white dark:bg-neutral-900 border border-emerald-200 dark:border-emerald-900/50 shadow-xs">
+                <span className="text-[10px] sm:text-xs font-bold text-neutral-600 dark:text-neutral-400 block mb-0.5 sm:mb-1">Total Travel</span>
+                <span className="text-sm sm:text-lg font-extrabold font-mono text-emerald-800 dark:text-emerald-400">{chainedKm} km</span>
               </div>
-              <div className="p-3 rounded-lg bg-white dark:bg-neutral-900 border border-emerald-200 dark:border-emerald-900/50 shadow-xs">
-                <span className="text-xs font-bold text-neutral-600 dark:text-neutral-400 block mb-1">Cold Engine Starts</span>
-                <span className="text-lg font-extrabold font-mono text-emerald-800 dark:text-emerald-400">1 cold start only</span>
+              <div className="p-2 sm:p-3 rounded-lg bg-white dark:bg-neutral-900 border border-emerald-200 dark:border-emerald-900/50 shadow-xs">
+                <span className="text-[10px] sm:text-xs font-bold text-neutral-600 dark:text-neutral-400 block mb-0.5 sm:mb-1">Cold Starts</span>
+                <span className="text-sm sm:text-lg font-extrabold font-mono text-emerald-800 dark:text-emerald-400">1 start only</span>
               </div>
-              <div className="p-3 rounded-lg bg-white dark:bg-neutral-900 border border-emerald-200 dark:border-emerald-900/50 shadow-xs">
-                <span className="text-xs font-bold text-neutral-600 dark:text-neutral-400 block mb-1">CO₂ Generated</span>
-                <span className="text-lg font-extrabold font-mono text-emerald-800 dark:text-emerald-400">{chainedCo2Grams} g</span>
+              <div className="p-2 sm:p-3 rounded-lg bg-white dark:bg-neutral-900 border border-emerald-200 dark:border-emerald-900/50 shadow-xs">
+                <span className="text-[10px] sm:text-xs font-bold text-neutral-600 dark:text-neutral-400 block mb-0.5 sm:mb-1">CO₂ Generated</span>
+                <span className="text-sm sm:text-lg font-extrabold font-mono text-emerald-800 dark:text-emerald-400">{chainedCo2Grams} g</span>
               </div>
-              <div className="p-3 rounded-lg bg-white dark:bg-neutral-900 border border-emerald-200 dark:border-emerald-900/50 shadow-xs">
-                <span className="text-xs font-bold text-neutral-600 dark:text-neutral-400 block mb-1">Inhalation Reduction</span>
-                <span className="text-sm font-extrabold font-mono text-emerald-800 dark:text-emerald-400">-{exposureReductionPercent}% Inhaled PM</span>
+              <div className="p-2 sm:p-3 rounded-lg bg-white dark:bg-neutral-900 border border-emerald-200 dark:border-emerald-900/50 shadow-xs">
+                <span className="text-[10px] sm:text-xs font-bold text-neutral-600 dark:text-neutral-400 block mb-0.5 sm:mb-1">Inhalation Cut</span>
+                <span className="text-xs sm:text-sm font-extrabold font-mono text-emerald-800 dark:text-emerald-400">-{exposureReductionPercent}% Inhaled</span>
               </div>
             </div>
 

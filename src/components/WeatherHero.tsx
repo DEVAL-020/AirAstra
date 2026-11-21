@@ -41,18 +41,18 @@ export function WeatherHero({
           <span className="text-xs sm:text-sm font-medium">Urban Smog & Inversion Monitor</span>
         </AnimatedBadge>
 
-        <h1 className="text-5xl font-bold tracking-tight max-md:leading-tight md:text-7xl lg:text-8xl text-foreground">
-          {airData.city} <span className="font-mono text-3xl md:text-5xl font-light text-neutral-600 dark:text-neutral-400">({airData.aqi} AQI)</span>
+        <h1 className="text-3xl sm:text-5xl font-bold tracking-tight max-md:leading-tight md:text-7xl lg:text-8xl text-foreground">
+          {airData.city} <span className="font-mono text-2xl sm:text-3xl md:text-5xl font-light text-neutral-600 dark:text-neutral-400">({airData.aqi} AQI)</span>
         </h1>
 
-        <p className="max-w-3xl text-lg text-neutral-700 dark:text-neutral-300 font-medium md:text-2xl leading-relaxed">
+        <p className="max-w-3xl text-base sm:text-lg text-neutral-700 dark:text-neutral-300 font-medium md:text-2xl leading-relaxed">
           Cold winter surface air traps toxic particulates. Protect your household with <Highlight>proven low-emission routines</Highlight> and clean air hacks.
         </p>
 
         {/* Live Data Source and Timestamp Verification Badge */}
-        <div className="flex flex-wrap items-center justify-center gap-2.5 pt-1 text-xs sm:text-sm">
-          <div className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-neutral-100/90 dark:bg-neutral-900/80 px-3.5 py-1.5 backdrop-blur-md shadow-xs">
-            <span className="relative flex size-2">
+        <div className="flex flex-wrap items-center justify-center gap-2 pt-1 text-xs sm:text-sm max-w-full">
+          <div className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-neutral-100/90 dark:bg-neutral-900/80 px-3 py-1 sm:px-3.5 sm:py-1.5 backdrop-blur-md shadow-xs">
+            <span className="relative flex size-2 shrink-0">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75"></span>
               <span className="relative inline-flex size-2 rounded-full bg-emerald-600 dark:bg-emerald-500"></span>
             </span>
@@ -60,22 +60,22 @@ export function WeatherHero({
             <span className="font-mono font-bold text-foreground">{airData.timestamp}</span>
           </div>
 
-          <div className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-neutral-100/90 dark:bg-neutral-900/80 px-3.5 py-1.5 backdrop-blur-md shadow-xs">
-            <Radio className="size-3.5 text-blue-600 dark:text-blue-400" />
-            <span className="text-neutral-600 dark:text-neutral-400 font-medium">Verified Source:</span>
-            <span className="font-bold text-foreground">
+          <div className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-border/80 bg-neutral-100/90 dark:bg-neutral-900/80 px-3 py-1 sm:px-3.5 sm:py-1.5 backdrop-blur-md shadow-xs max-w-full">
+            <Radio className="size-3.5 text-blue-600 dark:text-blue-400 shrink-0" />
+            <span className="text-neutral-600 dark:text-neutral-400 font-medium shrink-0">Verified Source:</span>
+            <span className="font-bold text-foreground truncate max-w-[190px] sm:max-w-none">
               {airData.dataSource || 'Open-Meteo & CPCB Global Atmospheric Network'}
             </span>
           </div>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex items-center justify-center gap-4 pt-2">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 w-full sm:w-auto pt-2">
           <Button
             variant="solid"
             size="lg"
             onClick={onOpenPurifier3D}
-            className="text-base font-semibold shadow-xs"
+            className="w-full sm:w-auto justify-center text-sm sm:text-base font-semibold shadow-xs"
           >
             Open 3D filter simulator
           </Button>
@@ -85,7 +85,7 @@ export function WeatherHero({
               variant="outline"
               size="lg"
               onClick={onOpenEmergency}
-              className="text-base font-semibold"
+              className="w-full sm:w-auto justify-center text-sm sm:text-base font-semibold"
             >
               <ShieldAlert className="size-5 text-red-600 dark:text-red-400" />
               Smog protocol
@@ -95,7 +95,7 @@ export function WeatherHero({
       </div>
 
       {/* Hourly Forecast Strip */}
-      <div className="card-chai p-6 space-y-4">
+      <div className="card-chai p-4 sm:p-6 space-y-4">
         <div className="flex items-center justify-between border-b border-border/60 pb-3">
           <div className="flex items-center gap-2 text-sm text-neutral-800 dark:text-neutral-200 font-semibold">
             <Clock className="size-4 text-neutral-600 dark:text-neutral-400" />

@@ -134,9 +134,9 @@ export function IndoorHacksLab({ onOpenPurifier3D, currentAQI = 210 }: IndoorHac
     : hacks.filter((h) => h.category === activeCategory);
 
   return (
-    <div className="card-chai p-6 space-y-6">
+    <div className="card-chai p-4 sm:p-6 space-y-5 sm:space-y-6">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-border/40 pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border/40 pb-4">
         <div>
           <h2 className="text-2xl sm:text-3xl font-bold text-foreground">
             Indoor hacks and DIY filter lab
@@ -149,7 +149,7 @@ export function IndoorHacksLab({ onOpenPurifier3D, currentAQI = 210 }: IndoorHac
         <button
           type="button"
           onClick={onOpenPurifier3D}
-          className="inline-flex h-8 items-center rounded-md bg-primary px-3 text-xs font-semibold text-primary-foreground hover:bg-primary/90 transition-colors cursor-pointer"
+          className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-3.5 text-xs font-semibold text-primary-foreground hover:bg-primary/90 transition-colors cursor-pointer w-full sm:w-auto"
         >
           <Wind className="size-3.5 mr-1.5" />
           <span>Launch 3D filter simulator</span>
@@ -157,7 +157,7 @@ export function IndoorHacksLab({ onOpenPurifier3D, currentAQI = 210 }: IndoorHac
       </div>
 
       {/* CAD Calculator */}
-      <div className="rounded-xl border border-border/70 bg-neutral-100/60 dark:bg-black/20 p-5 space-y-4 shadow-xs">
+      <div className="rounded-xl border border-border/70 bg-neutral-100/60 dark:bg-black/20 p-4 sm:p-5 space-y-4 shadow-xs">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div className="flex items-center gap-2">
             <Cpu className="size-4 text-brand" />

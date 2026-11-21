@@ -67,7 +67,7 @@ export function TodaysSuggestions({
   ];
 
   return (
-    <div className="card-chai p-6 space-y-6">
+    <div className="card-chai p-4 sm:p-6 space-y-5 sm:space-y-6">
       {/* Title */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-border/60 pb-4">
         <div>
@@ -88,7 +88,7 @@ export function TodaysSuggestions({
         onClick={onOpenEmergency}
         role="button"
         tabIndex={0}
-        className="group flex cursor-pointer items-center justify-between gap-4 rounded-xl border border-red-500/40 bg-red-100/60 dark:bg-black/30 p-5 transition-colors hover:border-red-500/60 shadow-xs"
+        className="group flex cursor-pointer items-center justify-between gap-3 sm:gap-4 rounded-xl border border-red-500/40 bg-red-100/60 dark:bg-black/30 p-4 sm:p-5 transition-colors hover:border-red-500/60 shadow-xs"
       >
         <div className="space-y-1.5">
           <div className="flex items-center gap-2.5">

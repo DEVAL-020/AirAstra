@@ -38,8 +38,8 @@ export function Footer({
   };
 
   return (
-    <footer className="relative mt-24 border-t border-border/60 pt-16 pb-12 before:absolute before:top-0 before:left-1/2 before:h-px before:w-full before:max-w-[1440px] before:-translate-x-1/2 before:bg-amber-600 before:opacity-10 before:[mask-image:linear-gradient(90deg,transparent_0%,black_40%,black_60%,transparent_100%)] dark:before:bg-orange-300">
-      <div className="mx-auto max-w-6xl px-6 sm:px-12 space-y-12">
+    <footer className="relative mt-20 sm:mt-24 border-t border-border/60 pt-12 sm:pt-16 pb-10 sm:pb-12 before:absolute before:top-0 before:left-1/2 before:h-px before:w-full before:max-w-[1440px] before:-translate-x-1/2 before:bg-amber-600 before:opacity-10 before:[mask-image:linear-gradient(90deg,transparent_0%,black_40%,black_60%,transparent_100%)] dark:before:bg-orange-300">
+      <div className="mx-auto max-w-6xl px-3 sm:px-6 lg:px-12 space-y-10 sm:space-y-12">
         {/* Main Grid Columns */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           {/* Column 1: Brand & Live Status (Spans 2 columns on lg) */}

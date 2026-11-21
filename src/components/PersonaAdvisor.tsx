@@ -89,7 +89,7 @@ export function PersonaAdvisor({ airData }: PersonaAdvisorProps) {
   ];
 
   return (
-    <div className="card-chai p-6 sm:p-8 space-y-7">
+    <div className="card-chai p-4 sm:p-6 md:p-8 space-y-5 sm:space-y-7">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-border/60 pb-5">
         <div>
@@ -107,7 +107,7 @@ export function PersonaAdvisor({ airData }: PersonaAdvisorProps) {
       </div>
 
       {/* Persona Selection Tabs */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3">
         {personas.map((persona) => {
           const isSelected = selectedPersona === persona.id;
           const Icon = persona.icon;
@@ -117,7 +117,7 @@ export function PersonaAdvisor({ airData }: PersonaAdvisorProps) {
               type="button"
               onClick={() => setSelectedPersona(persona.id)}
               className={cn(
-                "flex flex-col items-start text-left p-4 rounded-xl border transition-all cursor-pointer relative overflow-hidden",
+                "flex flex-col items-start text-left p-3 sm:p-4 rounded-xl border transition-all cursor-pointer relative overflow-hidden",
                 isSelected
                   ? "border-brand bg-brand/10 dark:bg-white/5 text-foreground ring-1 ring-brand/40 shadow-xs"
                   : "border-border/70 bg-neutral-100/70 dark:bg-neutral-900/40 text-neutral-800 dark:text-neutral-300 hover:border-neutral-400 dark:hover:border-neutral-700 hover:bg-neutral-200/50 dark:hover:bg-neutral-900/80"
@@ -128,24 +128,24 @@ export function PersonaAdvisor({ airData }: PersonaAdvisorProps) {
               )}
               <div className="flex items-center justify-between w-full mb-2">
                 <div className={cn(
-                  "p-2 rounded-lg border",
+                  "p-1.5 sm:p-2 rounded-lg border",
                   isSelected ? "bg-brand/20 border-brand/50 text-brand" : "bg-white dark:bg-neutral-800 border-border text-neutral-700 dark:text-neutral-400"
                 )}>
-                  <Icon className="size-5" />
+                  <Icon className="size-4 sm:size-5" />
                 </div>
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-neutral-200 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-300">
+                <span className="text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded-full bg-neutral-200 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-300">
                   {persona.badge}
                 </span>
               </div>
-              <h3 className="text-sm font-bold text-foreground leading-snug">{persona.title}</h3>
-              <p className="text-xs font-medium text-neutral-600 dark:text-neutral-400 mt-0.5">{persona.subtitle}</p>
+              <h3 className="text-xs sm:text-sm font-bold text-foreground leading-snug">{persona.title}</h3>
+              <p className="text-[11px] sm:text-xs font-medium text-neutral-600 dark:text-neutral-400 mt-0.5">{persona.subtitle}</p>
             </button>
           );
         })}
       </div>
 
       {/* Dynamic Persona Panel Content */}
-      <div className="rounded-xl border-2 border-neutral-200 dark:border-border/70 bg-white dark:bg-neutral-900/40 p-6 sm:p-7 space-y-6 shadow-xs">
+      <div className="rounded-xl border-2 border-neutral-200 dark:border-border/70 bg-white dark:bg-neutral-900/40 p-4 sm:p-6 md:p-7 space-y-5 sm:space-y-6 shadow-xs">
         {/* PARENTS & SCHOOL CHILDREN */}
         {selectedPersona === 'parents' && (
           <div className="space-y-6">

@@ -53,22 +53,22 @@ export function EmergencySmogModal({ isOpen, onClose, city, aqi }: EmergencySmog
   const allCompleted = protocols.every((p) => checkedItems[p.id]);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-      <div className="card-chai relative w-full max-w-2xl p-6 space-y-5 max-h-[90vh] flex flex-col">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/60 backdrop-blur-sm">
+      <div className="card-chai relative w-full max-w-2xl p-4 sm:p-6 space-y-4 sm:space-y-5 max-h-[92vh] flex flex-col">
         {/* Header */}
-        <div className="flex items-start justify-between border-b border-border/40 pb-4">
-          <div className="flex items-center gap-3">
-            <div className="flex size-9 items-center justify-center rounded-lg border border-red-500/30 bg-red-950/20 text-red-400">
-              <ShieldAlert className="size-5" />
+        <div className="flex items-start justify-between border-b border-border/40 pb-3 sm:pb-4">
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            <div className="flex size-8 sm:size-9 items-center justify-center rounded-lg border border-red-500/30 bg-red-950/20 text-red-400 shrink-0">
+              <ShieldAlert className="size-4 sm:size-5" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="font-montserrat text-base font-semibold text-foreground">
+                <h3 className="font-montserrat text-sm sm:text-base font-semibold text-foreground">
                   Severe smog lockdown protocol
                 </h3>
                 <Chip tone="danger">Level 4</Chip>
               </div>
-              <p className="text-xs font-semibold text-neutral-600 dark:text-neutral-400 mt-0.5">
+              <p className="text-[11px] sm:text-xs font-semibold text-neutral-600 dark:text-neutral-400 mt-0.5">
                 Active alert for {city} (AQI {aqi})
               </p>
             </div>
@@ -76,7 +76,7 @@ export function EmergencySmogModal({ isOpen, onClose, city, aqi }: EmergencySmog
           <button
             type="button"
             onClick={onClose}
-            className="text-neutral-500 hover:text-foreground p-1 cursor-pointer"
+            className="text-neutral-500 hover:text-foreground p-1.5 cursor-pointer"
             aria-label="Close"
           >
             <X className="size-4" />

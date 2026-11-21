@@ -139,19 +139,19 @@ export function AstraVoiceChat({ currentAQI, city }: AstraVoiceChatProps) {
   };
 
   return (
-    <div className="card-chai p-6 flex flex-col h-[600px]">
+    <div className="card-chai p-4 sm:p-6 flex flex-col h-[520px] sm:h-[600px]">
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-border/60 pb-4 mb-4">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-border/60 pb-3 sm:pb-4 mb-3 sm:mb-4">
         <div className="flex items-center gap-3">
-          <div className="flex size-9 items-center justify-center rounded-lg border border-border bg-neutral-100 dark:bg-black/30 text-brand shadow-xs">
+          <div className="flex size-9 items-center justify-center rounded-lg border border-border bg-neutral-100 dark:bg-black/30 text-brand shadow-xs shrink-0">
             <Stethoscope className="size-4" />
           </div>
           <div>
-            <div className="flex items-center gap-2.5">
-              <h3 className="text-xl sm:text-2xl font-bold text-foreground">Astra</h3>
-              <Chip tone="default" className="text-xs sm:text-sm font-semibold">Respiratory advisor</Chip>
+            <div className="flex items-center gap-2">
+              <h3 className="text-lg sm:text-2xl font-bold text-foreground">Astra</h3>
+              <Chip tone="default" className="text-xs font-semibold">Respiratory advisor</Chip>
             </div>
-            <p className="text-sm sm:text-base font-medium text-neutral-700 dark:text-neutral-300 mt-0.5">
+            <p className="text-xs sm:text-base font-medium text-neutral-700 dark:text-neutral-300 mt-0.5">
               Personalized guidance for {city} (AQI {currentAQI}) based on <Highlight>pediatric respiratory safety</Highlight>.
             </p>
           </div>
@@ -163,7 +163,7 @@ export function AstraVoiceChat({ currentAQI, city }: AstraVoiceChatProps) {
             if (ttsEnabled && typeof window !== 'undefined') window.speechSynthesis.cancel();
             setTtsEnabled(!ttsEnabled);
           }}
-          className="inline-flex h-8 items-center gap-1.5 rounded-md border border-neutral-300 dark:border-border/60 bg-neutral-100 dark:bg-black/20 px-2.5 text-xs font-semibold text-neutral-800 dark:text-neutral-400 hover:text-foreground transition-colors shadow-xs"
+          className="inline-flex h-8 items-center gap-1.5 rounded-md border border-neutral-300 dark:border-border/60 bg-neutral-100 dark:bg-black/20 px-2.5 text-xs font-semibold text-neutral-800 dark:text-neutral-400 hover:text-foreground transition-colors shadow-xs shrink-0 self-end sm:self-auto"
         >
           {ttsEnabled ? <Volume2 className="size-3.5 text-brand" /> : <VolumeX className="size-3.5" />}
           <span>{ttsEnabled ? 'Voice on' : 'Muted'}</span>

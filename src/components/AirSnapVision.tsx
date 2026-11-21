@@ -81,9 +81,9 @@ export function AirSnapVision({ currentAQI }: AirSnapVisionProps) {
   };
 
   return (
-    <div className="card-chai p-6 space-y-6">
+    <div className="card-chai p-4 sm:p-6 space-y-5 sm:space-y-6">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-border/60 pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border/60 pb-4">
         <div>
           <h2 className="text-2xl sm:text-3xl font-bold text-foreground">
             AirSnap room scanner
@@ -93,12 +93,12 @@ export function AirSnapVision({ currentAQI }: AirSnapVisionProps) {
           </p>
         </div>
 
-        <Chip tone="default" className="text-xs sm:text-sm font-semibold">Building envelope scan</Chip>
+        <Chip tone="default" className="text-xs sm:text-sm font-semibold w-fit">Building envelope scan</Chip>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
         {/* Left Column */}
-        <div className="lg:col-span-5 flex flex-col justify-between space-y-4 rounded-xl border border-border/70 bg-neutral-100/60 dark:bg-black/20 p-5 shadow-xs">
+        <div className="lg:col-span-5 flex flex-col justify-between space-y-4 rounded-xl border border-border/70 bg-neutral-100/60 dark:bg-black/20 p-4 sm:p-5 shadow-xs">
           <div className="space-y-2">
             <span className="text-xs font-bold text-foreground block">
               Choose a sample scenario or upload yours
@@ -172,7 +172,7 @@ export function AirSnapVision({ currentAQI }: AirSnapVisionProps) {
         </div>
 
         {/* Right Column */}
-        <div className="lg:col-span-7 rounded-xl border border-border/70 bg-neutral-100/60 dark:bg-black/20 p-5 flex flex-col justify-between shadow-xs">
+        <div className="lg:col-span-7 rounded-xl border border-border/70 bg-neutral-100/60 dark:bg-black/20 p-4 sm:p-5 flex flex-col justify-between shadow-xs">
           {result ? (
             <motion.div
               initial={{ opacity: 0, y: 10 }}
