@@ -113,6 +113,7 @@ export function Navbar({
           <Search className="size-3.5 sm:size-4 text-brand shrink-0" />
           <div className="relative flex-1 min-w-0 flex items-center">
             <select
+              aria-label="Select city for air quality data"
               value={currentCity.name}
               onChange={(e) => {
                 const found = POPULAR_CITIES.find((c) => c.name === e.target.value);

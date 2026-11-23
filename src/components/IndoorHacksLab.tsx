@@ -170,8 +170,10 @@ export function IndoorHacksLab({ onOpenPurifier3D, currentAQI = 210 }: IndoorHac
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
           <div>
-            <label className="text-neutral-700 dark:text-neutral-300 font-bold block mb-1">Room length (feet)</label>
+            <label htmlFor="room-length-input" className="text-neutral-700 dark:text-neutral-300 font-bold block mb-1">Room length (feet)</label>
             <input
+              id="room-length-input"
+              aria-label="Room length in feet"
               type="number"
               value={roomLength}
               onChange={(e) => setRoomLength(Math.max(6, Number(e.target.value)))}
@@ -179,8 +181,10 @@ export function IndoorHacksLab({ onOpenPurifier3D, currentAQI = 210 }: IndoorHac
             />
           </div>
           <div>
-            <label className="text-neutral-700 dark:text-neutral-300 font-bold block mb-1">Room width (feet)</label>
+            <label htmlFor="room-width-input" className="text-neutral-700 dark:text-neutral-300 font-bold block mb-1">Room width (feet)</label>
             <input
+              id="room-width-input"
+              aria-label="Room width in feet"
               type="number"
               value={roomWidth}
               onChange={(e) => setRoomWidth(Math.max(6, Number(e.target.value)))}
@@ -188,8 +192,10 @@ export function IndoorHacksLab({ onOpenPurifier3D, currentAQI = 210 }: IndoorHac
             />
           </div>
           <div>
-            <label className="text-neutral-700 dark:text-neutral-300 font-bold block mb-1">Ceiling height (feet)</label>
+            <label htmlFor="room-height-input" className="text-neutral-700 dark:text-neutral-300 font-bold block mb-1">Ceiling height (feet)</label>
             <input
+              id="room-height-input"
+              aria-label="Ceiling height in feet"
               type="number"
               value={roomHeight}
               onChange={(e) => setRoomHeight(Math.max(7, Number(e.target.value)))}

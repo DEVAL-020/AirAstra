@@ -270,6 +270,7 @@ export function AstraVoiceChat({ currentAQI, city }: AstraVoiceChatProps) {
         >
           <input
             type="text"
+            aria-label="Message Astra respiratory advisor"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             placeholder={isListening ? "Listening... Speak naturally..." : "Ask Astra about morning coughs, mask seals, or room filtration..."}
@@ -281,6 +282,7 @@ export function AstraVoiceChat({ currentAQI, city }: AstraVoiceChatProps) {
             onClick={toggleListening}
             className="flex size-11 items-center justify-center rounded-lg border-2 border-neutral-300 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 hover:text-foreground transition-colors cursor-pointer shadow-xs"
             title="Speech input"
+            aria-label="Toggle speech input dictation"
           >
             {isListening ? <MicOff className="size-5 text-red-600 dark:text-red-400" /> : <Mic className="size-5" />}
           </button>
@@ -288,6 +290,7 @@ export function AstraVoiceChat({ currentAQI, city }: AstraVoiceChatProps) {
           <button
             type="submit"
             disabled={!inputValue.trim() || isLoading}
+            aria-label="Send message"
             className="inline-flex h-11 px-4 items-center justify-center rounded-lg bg-neutral-900 text-white dark:bg-white dark:text-black hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors disabled:opacity-40 cursor-pointer font-bold shadow-xs"
           >
             <Send className="size-4" />

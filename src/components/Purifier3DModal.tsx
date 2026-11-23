@@ -444,6 +444,7 @@ export const Purifier3DModal: React.FC<Purifier3DModalProps> = ({ isOpen, onClos
                 <button
                   key={lvl}
                   type="button"
+                  aria-label={`Set purifier fan speed to level ${lvl}`}
                   onClick={() => setFanSpeed(lvl)}
                   className={`size-8 sm:size-9 rounded-lg text-xs sm:text-sm font-mono font-bold transition-colors cursor-pointer border shadow-xs ${
                     fanSpeed === lvl

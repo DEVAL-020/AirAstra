@@ -138,7 +138,7 @@ export function AirSnapVision({ currentAQI }: AirSnapVisionProps) {
                   <span className="text-[11px] font-bold text-neutral-600 dark:text-neutral-400">{roomContext}</span>
                   <label className="text-[11px] font-bold text-brand underline cursor-pointer">
                     Change photo
-                    <input type="file" accept="image/*" onChange={handleFileUpload} className="hidden" />
+                    <input type="file" accept="image/*" aria-label="Upload replacement photo of room or window" onChange={handleFileUpload} className="hidden" />
                   </label>
                 </div>
               </div>
@@ -147,7 +147,7 @@ export function AirSnapVision({ currentAQI }: AirSnapVisionProps) {
                 <Upload className="size-6 text-neutral-500 mb-2" />
                 <span className="text-xs font-bold text-foreground">Upload window or room photo</span>
                 <span className="text-[10px] font-medium text-neutral-500 mt-0.5">JPG or PNG from phone or camera</span>
-                <input type="file" accept="image/*" onChange={handleFileUpload} className="hidden" />
+                <input type="file" accept="image/*" aria-label="Upload photo of room or window for diagnostic" onChange={handleFileUpload} className="hidden" />
               </label>
             )}
           </div>

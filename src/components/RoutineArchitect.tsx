@@ -146,11 +146,13 @@ export function RoutineArchitect({ airData }: RoutineArchitectProps) {
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           <div>
-            <label className="text-xs sm:text-sm font-bold text-neutral-800 dark:text-neutral-200 block mb-2">
+            <label htmlFor="household-type-select" className="text-xs sm:text-sm font-bold text-neutral-800 dark:text-neutral-200 block mb-2">
               Household structure
             </label>
             <div className="relative">
               <select
+                id="household-type-select"
+                aria-label="Household structure"
                 value={householdType}
                 onChange={(e) => setHouseholdType(e.target.value)}
                 className="w-full h-11 rounded-lg border-2 border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 px-3.5 text-sm font-bold text-neutral-900 dark:text-white focus:outline-none focus:border-brand cursor-pointer shadow-xs appearance-none"
@@ -167,11 +169,13 @@ export function RoutineArchitect({ airData }: RoutineArchitectProps) {
           </div>
 
           <div>
-            <label className="text-xs sm:text-sm font-bold text-neutral-800 dark:text-neutral-200 block mb-2">
+            <label htmlFor="commute-mode-select" className="text-xs sm:text-sm font-bold text-neutral-800 dark:text-neutral-200 block mb-2">
               Primary daily transit
             </label>
             <div className="relative">
               <select
+                id="commute-mode-select"
+                aria-label="Primary daily transit mode"
                 value={commuteMode}
                 onChange={(e) => setCommuteMode(e.target.value)}
                 className="w-full h-11 rounded-lg border-2 border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 px-3.5 text-sm font-bold text-neutral-900 dark:text-white focus:outline-none focus:border-brand cursor-pointer shadow-xs appearance-none"
@@ -188,11 +192,13 @@ export function RoutineArchitect({ airData }: RoutineArchitectProps) {
           </div>
 
           <div>
-            <label className="text-xs sm:text-sm font-bold text-neutral-800 dark:text-neutral-200 block mb-2">
+            <label htmlFor="housing-type-select" className="text-xs sm:text-sm font-bold text-neutral-800 dark:text-neutral-200 block mb-2">
               Dwelling exposure
             </label>
             <div className="relative">
               <select
+                id="housing-type-select"
+                aria-label="Dwelling exposure type"
                 value={housingType}
                 onChange={(e) => setHousingType(e.target.value)}
                 className="w-full h-11 rounded-lg border-2 border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 px-3.5 text-sm font-bold text-neutral-900 dark:text-white focus:outline-none focus:border-brand cursor-pointer shadow-xs appearance-none"

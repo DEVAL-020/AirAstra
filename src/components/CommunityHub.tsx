@@ -202,8 +202,10 @@ export function CommunityHub() {
         ) : (
           <form onSubmit={handleReportSubmit} className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs">
             <div>
-              <label className="text-neutral-700 dark:text-neutral-300 font-bold block mb-1">Issue type</label>
+              <label htmlFor="report-issue-type" className="text-neutral-700 dark:text-neutral-300 font-bold block mb-1">Issue type</label>
               <select
+                id="report-issue-type"
+                aria-label="Neighborhood hazard issue type"
                 value={reportType}
                 onChange={(e) => setReportType(e.target.value)}
                 className="w-full h-9 rounded-md border border-neutral-300 dark:border-border bg-white dark:bg-black/30 px-3 text-xs font-semibold text-foreground focus:outline-none focus:border-brand cursor-pointer shadow-xs"
@@ -216,8 +218,10 @@ export function CommunityHub() {
             </div>
 
             <div>
-              <label className="text-neutral-700 dark:text-neutral-300 font-bold block mb-1">Location or landmark</label>
+              <label htmlFor="report-location-input" className="text-neutral-700 dark:text-neutral-300 font-bold block mb-1">Location or landmark</label>
               <input
+                id="report-location-input"
+                aria-label="Location or landmark of smog hazard"
                 type="text"
                 value={reportLocation}
                 onChange={(e) => setReportLocation(e.target.value)}

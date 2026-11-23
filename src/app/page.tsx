@@ -78,6 +78,11 @@ export default function AirAstraHome() {
 
       {/* Main Container: responsive max-w-6xl */}
       <main className="mx-auto w-full max-w-6xl px-3 sm:px-6 md:px-12 py-5 sm:py-8 space-y-6 sm:space-y-8">
+        {/* Unconditional single H1 for non-overview tabs */}
+        {activeTab !== 'overview' && (
+          <h1 className="sr-only">AirAstra - Winter Smog & Community Clean Air OS</h1>
+        )}
+
         {/* Segmented Toolbar Control */}
         <div className="flex justify-center">
           <Segmented

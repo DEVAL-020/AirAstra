@@ -35,8 +35,25 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://airastra.netlify.app'),
   title: 'AirAstra | Winter Smog & Community Clean Air OS',
   description: 'GenAI-powered urban air quality assistant helping families and communities navigate severe winter smog with low-emission routines, DIY filtration hacks, and interactive 3D simulations.',
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: 'AirAstra | Winter Smog & Community Clean Air OS',
+    description: 'GenAI-powered urban air quality assistant helping families and communities navigate severe winter smog with low-emission routines, DIY filtration hacks, and interactive 3D simulations.',
+    url: 'https://airastra.netlify.app',
+    siteName: 'AirAstra',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'AirAstra | Winter Smog & Community Clean Air OS',
+    description: 'GenAI-powered urban air quality assistant helping families and communities navigate severe winter smog with low-emission routines and DIY filtration hacks.',
+  },
   icons: {
     icon: [
       { url: '/icon.svg', type: 'image/svg+xml' },
@@ -59,6 +76,29 @@ export const metadata: Metadata = {
   ]
 };
 
+const jsonLdSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'AirAstra',
+  url: 'https://airastra.netlify.app',
+  applicationCategory: 'HealthApplication',
+  operatingSystem: 'All',
+  description: 'GenAI-powered urban air quality assistant helping families and communities navigate severe winter smog with low-emission routines, DIY filtration hacks, and interactive 3D simulations.',
+  featureList: [
+    'Real-time urban air quality index and pollutant telemetry',
+    'Cold surface thermal inversion forecasting',
+    '3D interactive Corsi-Rosenthal filter CAD simulation',
+    'Personalized demographic protection advisor',
+    'Low-emission errand trip combiner',
+    'Astra conversational voice air doctor'
+  ],
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD'
+  }
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -70,6 +110,10 @@ export default function RootLayout({
         <link rel="icon" type="image/svg+xml" href="/icon.svg" />
         <link rel="alternate icon" href="/favicon.svg" />
         <link rel="apple-touch-icon" href="/icon.svg" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSchema) }}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `
