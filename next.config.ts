@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  devIndicators: false,
   cacheComponents: true,
   partialPrefetching: true,
   turbopack: {
@@ -30,7 +31,7 @@ const nextConfig: NextConfig = {
           },
           {
             key: "Permissions-Policy",
-            value: "camera=(self), microphone=(self), geolocation=()",
+            value: "camera=(self), microphone=(self), geolocation=(self)",
           },
         ],
       },
