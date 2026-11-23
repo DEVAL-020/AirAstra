@@ -54,13 +54,13 @@ export function FamilyPlanExport({ airData }: FamilyPlanExportProps) {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 text-xs">
-          <div className="p-3.5 rounded-lg border border-border/60 bg-white dark:bg-black/30 space-y-2 shadow-xs">
-            <span className="font-bold text-foreground flex items-center gap-1.5">
-              <Heart className="size-3.5 text-brand" />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 text-xs sm:text-sm">
+          <div className="p-4 rounded-xl border border-border/60 bg-white dark:bg-black/30 space-y-2.5 shadow-xs">
+            <span className="font-bold text-foreground flex items-center gap-2 text-sm sm:text-base">
+              <Heart className="size-4 text-brand" />
               1. Children and school protocol
             </span>
-            <ul className="space-y-1 text-neutral-700 dark:text-neutral-300 text-[11px] font-medium">
+            <ul className="space-y-1.5 text-neutral-700 dark:text-neutral-300 text-xs sm:text-sm font-medium">
               <li>✓ Certified N95 mask packed in backpack side pouch</li>
               <li>✓ Eye wash drops and saline nasal spray for post-school rinse</li>
               <li>✓ Request indoor recess when AQI exceeds 200</li>
@@ -68,12 +68,12 @@ export function FamilyPlanExport({ airData }: FamilyPlanExportProps) {
             </ul>
           </div>
 
-          <div className="p-3.5 rounded-lg border border-border/60 bg-white dark:bg-black/30 space-y-2 shadow-xs">
-            <span className="font-bold text-foreground flex items-center gap-1.5">
-              <Wind className="size-3.5 text-brand" />
+          <div className="p-4 rounded-xl border border-border/60 bg-white dark:bg-black/30 space-y-2.5 shadow-xs">
+            <span className="font-bold text-foreground flex items-center gap-2 text-sm sm:text-base">
+              <Wind className="size-4 text-brand" />
               2. Home sanctuary rules
             </span>
-            <ul className="space-y-1 text-neutral-700 dark:text-neutral-300 text-[11px] font-medium">
+            <ul className="space-y-1.5 text-neutral-700 dark:text-neutral-300 text-xs sm:text-sm font-medium">
               <li>✓ Bedroom Corsi-Rosenthal filter runs 24/7 on Speed 1</li>
               <li>✓ Aerate home only during {airData.ventilationSafeWindow}</li>
               <li>✓ Towel draft-stopper placed under main entry door</li>
@@ -81,12 +81,12 @@ export function FamilyPlanExport({ airData }: FamilyPlanExportProps) {
             </ul>
           </div>
 
-          <div className="p-3.5 rounded-lg border border-border/60 bg-white dark:bg-black/30 space-y-2 shadow-xs">
-            <span className="font-bold text-foreground flex items-center gap-1.5">
-              <CheckSquare className="size-3.5 text-brand" />
+          <div className="p-4 rounded-xl border border-border/60 bg-white dark:bg-black/30 space-y-2.5 shadow-xs">
+            <span className="font-bold text-foreground flex items-center gap-2 text-sm sm:text-base">
+              <CheckSquare className="size-4 text-brand" />
               3. Low-emission daily swaps
             </span>
-            <ul className="space-y-1 text-neutral-700 dark:text-neutral-300 text-[11px] font-medium">
+            <ul className="space-y-1.5 text-neutral-700 dark:text-neutral-300 text-xs sm:text-sm font-medium">
               <li>✓ Shift morning cardio indoors to protect alveolar walls</li>
               <li>✓ Eliminate vehicle idle-warming; use shared transit</li>
               <li>✓ Electric kettle and induction boiling over open flame</li>
@@ -95,7 +95,7 @@ export function FamilyPlanExport({ airData }: FamilyPlanExportProps) {
           </div>
         </div>
 
-        <div className="pt-2 border-t border-border/50 flex flex-col sm:flex-row sm:items-center justify-between text-[11px] text-neutral-700 dark:text-neutral-400 font-medium gap-2">
+        <div className="pt-2.5 border-t border-border/50 flex flex-col sm:flex-row sm:items-center justify-between text-xs sm:text-sm text-neutral-700 dark:text-neutral-400 font-medium gap-2">
           <span>Emergency respiratory helpline: 112 or local pediatric triage</span>
           <span className="font-mono text-neutral-700 dark:text-neutral-400 font-bold">Powered by AirAstra Urban Smog OS</span>
         </div>

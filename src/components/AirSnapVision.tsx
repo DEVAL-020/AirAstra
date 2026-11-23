@@ -179,10 +179,10 @@ export function AirSnapVision({ currentAQI }: AirSnapVisionProps) {
               animate={{ opacity: 1, y: 0 }}
               className="space-y-4"
             >
-              <div className="flex flex-col xs:flex-row items-start xs:items-center justify-between p-3.5 rounded-lg border border-border/60 bg-white dark:bg-black/30 shadow-xs gap-2">
+              <div className="flex flex-col xs:flex-row items-start xs:items-center justify-between p-3.5 sm:p-4 rounded-xl border border-border/60 bg-white dark:bg-black/30 shadow-xs gap-2">
                 <div>
-                  <span className="text-[10px] font-bold text-neutral-600 dark:text-neutral-400 block">Defense rating</span>
-                  <span className="font-montserrat text-xl font-bold text-foreground flex items-center gap-2">
+                  <span className="text-xs sm:text-sm font-bold text-neutral-600 dark:text-neutral-400 block">Defense rating</span>
+                  <span className="font-montserrat text-xl sm:text-2xl font-bold text-foreground flex items-center gap-2">
                     {result.smogDefenseScore} / 100
                     <Chip tone={result.smogDefenseScore >= 75 ? 'success' : 'danger'}>
                       {result.leakageRisk} leakage
@@ -191,39 +191,39 @@ export function AirSnapVision({ currentAQI }: AirSnapVisionProps) {
                 </div>
 
                 <div className="text-left xs:text-right">
-                  <span className="text-[10px] font-bold text-neutral-600 dark:text-neutral-400 block">Purifier placement</span>
-                  <span className="font-mono text-xs font-bold text-foreground">{result.purifierPlacementRating}</span>
+                  <span className="text-xs sm:text-sm font-bold text-neutral-600 dark:text-neutral-400 block">Purifier placement</span>
+                  <span className="font-mono text-sm sm:text-base font-bold text-foreground">{result.purifierPlacementRating}</span>
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <span className="text-xs font-bold text-foreground block">Detected vulnerabilities:</span>
+              <div className="space-y-2.5">
+                <span className="text-sm font-bold text-foreground block">Detected vulnerabilities:</span>
                 {result.identifiedHazards.map((hz, idx) => (
-                  <div key={idx} className="p-3 rounded-lg border border-border/60 bg-white dark:bg-black/20 space-y-1 text-xs shadow-xs">
+                  <div key={idx} className="p-3.5 rounded-xl border border-border/60 bg-white dark:bg-black/20 space-y-1.5 text-xs sm:text-sm shadow-xs">
                     <div className="flex items-center justify-between">
-                      <span className="font-bold text-foreground flex items-center gap-1.5">
-                        <AlertCircle className="size-3.5 text-neutral-500" />
+                      <span className="font-bold text-foreground flex items-center gap-2">
+                        <AlertCircle className="size-4 text-neutral-500" />
                         {hz.item}
                       </span>
                       <Chip tone={hz.severity === 'High' ? 'danger' : 'default'}>{hz.severity} priority</Chip>
                     </div>
-                    <p className="text-neutral-700 dark:text-neutral-300 text-[11px] font-medium leading-relaxed">{hz.description}</p>
-                    <div className="pt-0.5 text-[11px] font-bold text-brand">
+                    <p className="text-neutral-700 dark:text-neutral-300 text-xs sm:text-sm font-medium leading-relaxed">{hz.description}</p>
+                    <div className="pt-0.5 text-xs sm:text-sm font-bold text-brand">
                       Recommended fix: {hz.fix}
                     </div>
                   </div>
                 ))}
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 text-xs">
-                <div className="p-3 rounded-lg border border-border/60 bg-white dark:bg-black/20 shadow-xs">
-                  <span className="font-bold text-foreground block mb-1.5 flex items-center gap-1.5">
-                    <CheckCircle className="size-3.5 text-green-600 dark:text-green-400" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-1 text-xs sm:text-sm">
+                <div className="p-3.5 rounded-xl border border-border/60 bg-white dark:bg-black/20 shadow-xs">
+                  <span className="font-bold text-foreground block mb-2 flex items-center gap-2 text-sm">
+                    <CheckCircle className="size-4 text-green-600 dark:text-green-400" />
                     Action checklist
                   </span>
-                  <ul className="space-y-1 text-neutral-700 dark:text-neutral-300 text-[11px] font-medium">
+                  <ul className="space-y-1.5 text-neutral-700 dark:text-neutral-300 text-xs sm:text-sm font-medium">
                     {result.actionChecklist.slice(0, 3).map((act, i) => (
-                      <li key={i} className="flex items-start gap-1.5">
+                      <li key={i} className="flex items-start gap-2">
                         <span className="text-neutral-400">•</span>
                         <span>{act}</span>
                       </li>
@@ -231,12 +231,12 @@ export function AirSnapVision({ currentAQI }: AirSnapVisionProps) {
                   </ul>
                 </div>
 
-                <div className="p-3 rounded-lg border border-border/60 bg-white dark:bg-black/20 shadow-xs">
-                  <span className="font-bold text-foreground block mb-1.5 flex items-center gap-1.5">
-                    <Flower2 className="size-3.5 text-brand" />
+                <div className="p-3.5 rounded-xl border border-border/60 bg-white dark:bg-black/20 shadow-xs">
+                  <span className="font-bold text-foreground block mb-2 flex items-center gap-2 text-sm">
+                    <Flower2 className="size-4 text-brand" />
                     Botanical advice
                   </span>
-                  <p className="text-neutral-700 dark:text-neutral-300 text-[11px] font-medium leading-relaxed">
+                  <p className="text-neutral-700 dark:text-neutral-300 text-xs sm:text-sm font-medium leading-relaxed">
                     {result.botanicalPlacementTip}
                   </p>
                 </div>

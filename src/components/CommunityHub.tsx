@@ -118,9 +118,9 @@ export function CommunityHub() {
           <div>
             <span className="text-xs font-bold text-neutral-600 dark:text-neutral-400">Community CO₂ prevented</span>
             <div className="font-mono text-2xl font-bold text-foreground mt-1 flex items-baseline">
-              <span ref={co2Ref}>14,680</span> <span className="text-xs ml-1 font-semibold text-neutral-600 dark:text-neutral-400">kg</span>
+              <span ref={co2Ref}>14,680</span> <span className="text-xs sm:text-sm ml-1 font-semibold text-neutral-600 dark:text-neutral-400">kg</span>
             </div>
-            <span className="text-[11px] font-medium text-neutral-600 dark:text-neutral-400 mt-0.5 block">Equivalent to 680 mature urban trees</span>
+            <span className="text-xs sm:text-sm font-medium text-neutral-600 dark:text-neutral-400 mt-0.5 block">Equivalent to 680 mature urban trees</span>
           </div>
           <div className="flex size-9 items-center justify-center rounded-lg border border-border bg-white dark:bg-black/30 text-brand shadow-xs">
             <Leaf className="size-4" />
@@ -129,11 +129,11 @@ export function CommunityHub() {
 
         <div className="rounded-xl border border-border/70 bg-neutral-100/60 dark:bg-black/20 p-4 flex items-center justify-between shadow-xs">
           <div>
-            <span className="text-xs font-bold text-neutral-600 dark:text-neutral-400">Ground PM2.5 avoided</span>
+            <span className="text-xs sm:text-sm font-bold text-neutral-600 dark:text-neutral-400">Ground PM2.5 avoided</span>
             <div className="font-mono text-2xl font-bold text-foreground mt-1 flex items-baseline">
-              <span ref={pmRef}>68,400</span> <span className="text-xs ml-1 font-semibold text-neutral-600 dark:text-neutral-400">grams</span>
+              <span ref={pmRef}>68,400</span> <span className="text-xs sm:text-sm ml-1 font-semibold text-neutral-600 dark:text-neutral-400">grams</span>
             </div>
-            <span className="text-[11px] font-medium text-neutral-600 dark:text-neutral-400 mt-0.5 block">Spared from neighborhood children lungs</span>
+            <span className="text-xs sm:text-sm font-medium text-neutral-600 dark:text-neutral-400 mt-0.5 block">Spared from neighborhood children lungs</span>
           </div>
           <div className="flex size-9 items-center justify-center rounded-lg border border-border bg-white dark:bg-black/30 text-brand shadow-xs">
             <TrendingDown className="size-4" />

@@ -120,8 +120,8 @@ export function RoutineArchitect({ airData }: RoutineArchitectProps) {
         {routines.length > 0 && (
           <div className="flex items-center gap-3 rounded-xl border border-border/80 bg-neutral-100 dark:bg-neutral-900/60 px-3.5 py-2 shadow-xs">
             <div className="text-right">
-              <span className="text-[11px] sm:text-xs font-bold text-neutral-600 dark:text-neutral-400 block">Personal daily impact</span>
-              <span className="text-xs sm:text-sm font-mono font-bold text-foreground">
+              <span className="text-xs sm:text-sm font-bold text-neutral-600 dark:text-neutral-400 block">Personal daily impact</span>
+              <span className="text-sm sm:text-base font-mono font-bold text-foreground">
                 -{(totalCo2Saved / 1000).toFixed(1)}kg CO₂ / -{totalPmAvoided}µg PM2.5
               </span>
             </div>

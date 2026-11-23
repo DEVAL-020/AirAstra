@@ -202,7 +202,7 @@ export function AstraVoiceChat({ currentAQI, city }: AstraVoiceChatProps) {
                         key={idx}
                         type="button"
                         onClick={() => handleSend(chip)}
-                        className="rounded border border-neutral-300 dark:border-border/50 bg-white dark:bg-black/20 px-2.5 py-1 text-[11px] font-semibold text-neutral-800 dark:text-neutral-300 hover:border-brand hover:text-brand transition-colors cursor-pointer shadow-xs"
+                        className="rounded-lg border border-neutral-300 dark:border-border/50 bg-white dark:bg-black/20 px-3 py-1.5 text-xs sm:text-sm font-semibold text-neutral-800 dark:text-neutral-200 hover:border-brand hover:text-brand transition-colors cursor-pointer shadow-xs"
                       >
                         {chip}
                       </button>
@@ -210,7 +210,7 @@ export function AstraVoiceChat({ currentAQI, city }: AstraVoiceChatProps) {
                   </div>
                 )}
 
-                <div className="text-[10px] font-medium text-neutral-500 text-right">
+                <div className="text-xs font-medium text-neutral-500 text-right">
                   {m.timestamp}
                 </div>
               </div>

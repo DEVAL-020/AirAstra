@@ -63,12 +63,12 @@ export function EmergencySmogModal({ isOpen, onClose, city, aqi }: EmergencySmog
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="font-montserrat text-sm sm:text-base font-semibold text-foreground">
+                <h3 className="font-montserrat text-base sm:text-lg font-bold text-foreground">
                   Severe smog lockdown protocol
                 </h3>
                 <Chip tone="danger">Level 4</Chip>
               </div>
-              <p className="text-[11px] sm:text-xs font-semibold text-neutral-600 dark:text-neutral-400 mt-0.5">
+              <p className="text-xs sm:text-sm font-semibold text-neutral-600 dark:text-neutral-400 mt-0.5">
                 Active alert for {city} (AQI {aqi})
               </p>
             </div>
@@ -84,16 +84,16 @@ export function EmergencySmogModal({ isOpen, onClose, city, aqi }: EmergencySmog
         </div>
 
         {/* Warning callout */}
-        <div className="p-3.5 rounded-lg border border-red-500/40 bg-red-100/80 dark:bg-red-950/20 text-xs text-red-900 dark:text-red-300 flex items-start gap-2.5 font-medium shadow-xs">
-          <AlertTriangle className="size-4 text-red-600 dark:text-red-400 shrink-0 mt-0.5" />
+        <div className="p-3.5 sm:p-4 rounded-xl border border-red-500/40 bg-red-100/80 dark:bg-red-950/20 text-xs sm:text-sm text-red-900 dark:text-red-300 flex items-start gap-3 font-medium shadow-xs">
+          <AlertTriangle className="size-4.5 sm:size-5 text-red-600 dark:text-red-400 shrink-0 mt-0.5" />
           <p className="leading-relaxed">
             Cold thermal inversion has collapsed the ground boundary layer. Cease outdoor physical exertion and maintain continuous HEPA or Corsi-Rosenthal filtration.
           </p>
         </div>
 
         {/* Checklist */}
-        <div className="flex-1 overflow-y-auto space-y-2.5 pr-1 [scrollbar-width:none]">
-          <span className="text-xs font-bold text-foreground block">
+        <div className="flex-1 overflow-y-auto space-y-3 pr-1 [scrollbar-width:none]">
+          <span className="text-xs sm:text-sm font-bold text-foreground block">
             Tactical defense checklist
           </span>
           {protocols.map((p) => {
@@ -105,7 +105,7 @@ export function EmergencySmogModal({ isOpen, onClose, city, aqi }: EmergencySmog
                 onClick={() => toggleCheck(p.id)}
                 role="button"
                 tabIndex={0}
-                className={`p-3.5 rounded-lg border transition-colors cursor-pointer flex items-start gap-3 shadow-xs ${
+                className={`p-3.5 sm:p-4 rounded-xl border transition-colors cursor-pointer flex items-start gap-3.5 shadow-xs ${
                   isDone
                     ? 'border-border/30 bg-neutral-100/40 dark:bg-black/10 opacity-70'
                     : 'border-border/70 bg-white dark:bg-black/20 hover:border-border'
@@ -113,16 +113,16 @@ export function EmergencySmogModal({ isOpen, onClose, city, aqi }: EmergencySmog
               >
                 <div className="mt-0.5 text-neutral-500">
                   {isDone ? (
-                    <CheckCircle2 className="size-4 text-emerald-600 dark:text-green-400" />
+                    <CheckCircle2 className="size-5 text-emerald-600 dark:text-green-400" />
                   ) : (
-                    <Circle className="size-4 text-neutral-400" />
+                    <Circle className="size-5 text-neutral-400" />
                   )}
                 </div>
                 <div>
-                  <h4 className={`text-xs font-bold text-foreground ${isDone ? 'line-through text-neutral-500' : ''}`}>
+                  <h4 className={`text-sm sm:text-base font-bold text-foreground ${isDone ? 'line-through text-neutral-500' : ''}`}>
                     {p.title}
                   </h4>
-                  <p className="text-xs font-medium text-neutral-700 dark:text-neutral-300 mt-0.5 leading-relaxed">{p.desc}</p>
+                  <p className="text-xs sm:text-sm font-medium text-neutral-700 dark:text-neutral-300 mt-1 leading-relaxed">{p.desc}</p>
                 </div>
               </div>
             );

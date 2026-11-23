@@ -64,7 +64,7 @@ export function WeatherWidgetsGrid({
         </div>
 
         {/* Pollutants list */}
-        <div className="pt-4 border-t border-border/60 space-y-2.5 text-sm font-medium">
+        <div className="pt-4 border-t border-border/60 space-y-3 text-sm sm:text-base font-medium">
           <div className="flex justify-between text-neutral-700 dark:text-neutral-300">
             <span>PM2.5 (Fine soot)</span>
             <span className="font-mono font-bold text-foreground">{airData.pm25} µg/m³</span>

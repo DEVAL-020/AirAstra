@@ -347,80 +347,80 @@ export const Purifier3DModal: React.FC<Purifier3DModalProps> = ({ isOpen, onClos
     <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/60 backdrop-blur-sm">
       <div className="card-chai relative w-full max-w-4xl overflow-hidden flex flex-col max-h-[92vh]">
         {/* Header */}
-        <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-border/60 flex items-center justify-between bg-neutral-100 dark:bg-black/30">
-          <div className="flex items-center gap-2.5 sm:gap-3">
-            <div className="flex size-8 sm:size-9 items-center justify-center rounded-lg border border-border bg-white dark:bg-black/40 text-brand shadow-xs shrink-0">
-              <Wind className="size-4" />
+        <div className="px-5 sm:px-7 py-3.5 sm:py-4.5 border-b border-border/60 flex items-center justify-between bg-neutral-100 dark:bg-black/30">
+          <div className="flex items-center gap-3">
+            <div className="flex size-9 sm:size-10 items-center justify-center rounded-lg border border-border bg-white dark:bg-black/40 text-brand shadow-xs shrink-0">
+              <Wind className="size-4.5 sm:size-5" />
             </div>
             <div>
-              <h3 className="text-sm sm:text-lg font-bold text-foreground flex flex-wrap items-center gap-1.5 sm:gap-2">
+              <h3 className="text-base sm:text-xl font-bold text-foreground flex flex-wrap items-center gap-2">
                 <span>3D filter simulator</span>
-                <span className="text-[10px] sm:text-xs font-bold text-neutral-700 dark:text-neutral-300 border border-neutral-300 dark:border-border/40 px-2 py-0.5 rounded-full bg-white dark:bg-transparent shadow-xs">CAD View</span>
+                <span className="text-xs font-bold text-neutral-800 dark:text-neutral-200 border border-neutral-300 dark:border-border/60 px-2.5 py-0.5 rounded-full bg-white dark:bg-transparent shadow-xs">CAD View</span>
               </h3>
-              <p className="text-[11px] sm:text-xs font-medium text-neutral-600 dark:text-neutral-400">Drag to rotate the box and inspect fluid mechanics</p>
+              <p className="text-xs sm:text-sm font-medium text-neutral-600 dark:text-neutral-300 mt-0.5">Drag to rotate the box and inspect fluid mechanics</p>
             </div>
           </div>
           <button
             type="button"
             onClick={onClose}
-            className="text-neutral-500 hover:text-foreground p-1.5 cursor-pointer"
+            className="text-neutral-500 hover:text-foreground p-2 cursor-pointer rounded-lg hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors"
             aria-label="Close"
           >
-            <X className="size-4" />
+            <X className="size-5" />
           </button>
         </div>
 
         {/* 3D Viewport & HUD */}
-        <div className="relative flex-1 min-h-[260px] sm:min-h-[380px] bg-black/50">
+        <div className="relative flex-1 min-h-[280px] sm:min-h-[400px] bg-black/50">
           <div ref={mountRef} className="w-full h-full cursor-grab active:cursor-grabbing" />
 
           {/* Left HUD: CAD Metrics */}
           <div className="absolute top-3 left-3 sm:top-4 sm:left-4 space-y-2 pointer-events-none">
-            <div className="rounded-lg border border-border/40 bg-black/75 backdrop-blur-sm p-2.5 sm:p-3.5 text-xs text-neutral-200 space-y-1.5 sm:space-y-2 max-w-[160px] sm:max-w-[210px] shadow-lg">
-              <div className="flex items-center justify-between text-white font-bold text-[11px] sm:text-xs">
+            <div className="rounded-xl border border-border/60 bg-black/80 backdrop-blur-md p-3.5 sm:p-4 text-xs sm:text-sm text-neutral-200 space-y-2.5 min-w-[210px] sm:min-w-[240px] max-w-[270px] shadow-xl">
+              <div className="flex items-center justify-between text-white font-bold gap-3 text-xs sm:text-sm">
                 <span>Clean air delivery</span>
-                <span className="font-mono text-xs sm:text-sm">{estimatedCadr} CFM</span>
+                <span className="font-mono text-sm sm:text-base font-extrabold text-brand shrink-0">{estimatedCadr} CFM</span>
               </div>
-              <div className="h-1.5 w-full bg-neutral-800 rounded-full overflow-hidden">
+              <div className="h-2 w-full bg-neutral-800 rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-white transition-all duration-300"
+                  className="h-full bg-gradient-to-r from-amber-500 to-emerald-400 transition-all duration-300"
                   style={{ width: `${(estimatedCadr / 550) * 100}%` }}
                 />
               </div>
-              <div className="text-[10px] sm:text-[11px] text-neutral-300 space-y-1 pt-1 border-t border-border/40">
-                <div className="flex justify-between"><span>Filtration:</span> <span className="text-white font-mono font-bold">MERV-13</span></div>
-                <div className="flex justify-between"><span>PM2.5 catch:</span> <span className="text-emerald-400 font-mono font-bold">92.4%</span></div>
-                <div className="flex justify-between"><span>Build cost:</span> <span className="text-white font-mono font-bold">~$28</span></div>
+              <div className="text-xs sm:text-[13px] text-neutral-200 space-y-1.5 pt-1.5 border-t border-border/50">
+                <div className="flex justify-between items-center"><span className="text-neutral-400">Filtration grade:</span> <span className="text-white font-mono font-bold">MERV-13</span></div>
+                <div className="flex justify-between items-center"><span className="text-neutral-400">PM2.5 capture:</span> <span className="text-emerald-400 font-mono font-bold">92.4%</span></div>
+                <div className="flex justify-between items-center"><span className="text-neutral-400">Estimated cost:</span> <span className="text-white font-mono font-bold">~$28</span></div>
               </div>
             </div>
           </div>
 
           {/* Right Floating Quick Explainer */}
-          <div className="hidden md:block absolute top-4 right-4 max-w-xs rounded-lg border border-border/40 bg-black/75 backdrop-blur-sm p-3.5 text-xs text-neutral-200 space-y-1.5 shadow-lg">
-            <div className="flex items-center gap-1.5 text-brand font-bold">
-              <ShieldCheck className="size-3.5" />
+          <div className="hidden md:block absolute top-4 right-4 max-w-sm rounded-xl border border-border/60 bg-black/80 backdrop-blur-md p-4 text-xs sm:text-sm text-neutral-200 space-y-2 shadow-xl">
+            <div className="flex items-center gap-2 text-brand font-bold text-sm sm:text-base">
+              <ShieldCheck className="size-4 text-brand" />
               <span>Fluid dynamics logic</span>
             </div>
-            <p className="text-[11px] leading-relaxed text-neutral-300 font-medium">
+            <p className="text-xs sm:text-sm leading-relaxed text-neutral-300 font-medium">
               Using 4 filters in a cube increases total surface area by 400 percent, reducing backpressure and allowing maximum clean air throughput.
             </p>
           </div>
         </div>
 
         {/* Interactive Controls Footer */}
-        <div className="px-6 py-3.5 bg-neutral-100 dark:bg-black/40 border-t border-border/60 flex flex-wrap items-center justify-between gap-4">
+        <div className="px-5 sm:px-7 py-3.5 sm:py-4 bg-neutral-100 dark:bg-black/40 border-t border-border/60 flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <span className="text-xs font-bold text-neutral-800 dark:text-neutral-300">Fan speed:</span>
-            <div className="flex items-center gap-1.5">
+            <span className="text-xs sm:text-sm font-bold text-neutral-800 dark:text-neutral-200">Fan speed:</span>
+            <div className="flex items-center gap-2">
               {[1, 2, 3, 4, 5].map((lvl) => (
                 <button
                   key={lvl}
                   type="button"
                   onClick={() => setFanSpeed(lvl)}
-                  className={`size-7 rounded text-xs font-mono font-bold transition-colors cursor-pointer border shadow-xs ${
+                  className={`size-8 sm:size-9 rounded-lg text-xs sm:text-sm font-mono font-bold transition-colors cursor-pointer border shadow-xs ${
                     fanSpeed === lvl
-                      ? 'border-brand text-brand bg-brand/10'
-                      : 'border-neutral-300 dark:border-border/40 bg-white dark:bg-transparent text-neutral-800 dark:text-neutral-400 hover:text-foreground'
+                      ? 'border-brand text-brand bg-brand/15 ring-1 ring-brand'
+                      : 'border-neutral-300 dark:border-border/60 bg-white dark:bg-transparent text-neutral-800 dark:text-neutral-300 hover:text-foreground'
                   }`}
                 >
                   {lvl}
@@ -429,22 +429,22 @@ export const Purifier3DModal: React.FC<Purifier3DModalProps> = ({ isOpen, onClos
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2.5">
             <button
               type="button"
               onClick={() => setIsExploded(!isExploded)}
-              className="inline-flex h-8 items-center gap-1.5 rounded-md border border-neutral-300 dark:border-border/50 bg-white dark:bg-black/20 px-3 text-xs font-bold text-neutral-800 dark:text-neutral-300 hover:text-foreground transition-colors cursor-pointer shadow-xs"
+              className="inline-flex h-9 sm:h-10 items-center gap-2 rounded-lg border border-neutral-300 dark:border-border/60 bg-white dark:bg-black/20 px-3.5 sm:px-4 text-xs sm:text-sm font-bold text-neutral-800 dark:text-neutral-200 hover:text-foreground transition-colors cursor-pointer shadow-xs"
             >
-              <Layers className="size-3.5" />
+              <Layers className="size-4" />
               <span>{isExploded ? 'Assemble unit' : 'Exploded CAD view'}</span>
             </button>
 
             <button
               type="button"
               onClick={() => setIsRotating(!isRotating)}
-              className="inline-flex h-8 items-center gap-1.5 rounded-md border border-neutral-300 dark:border-border/50 bg-white dark:bg-black/20 px-3 text-xs font-bold text-neutral-800 dark:text-neutral-300 hover:text-foreground transition-colors cursor-pointer shadow-xs"
+              className="inline-flex h-9 sm:h-10 items-center gap-2 rounded-lg border border-neutral-300 dark:border-border/60 bg-white dark:bg-black/20 px-3.5 sm:px-4 text-xs sm:text-sm font-bold text-neutral-800 dark:text-neutral-200 hover:text-foreground transition-colors cursor-pointer shadow-xs"
             >
-              {isRotating ? <Pause className="size-3.5" /> : <Play className="size-3.5" />}
+              {isRotating ? <Pause className="size-4" /> : <Play className="size-4" />}
               <span>{isRotating ? 'Pause orbit' : 'Auto orbit'}</span>
             </button>
           </div>

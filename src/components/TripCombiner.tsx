@@ -218,30 +218,30 @@ export function TripCombiner({ airData }: TripCombinerProps) {
           {/* Unchained Profile */}
           <div className="border-2 border-red-300 dark:border-red-500/40 rounded-xl bg-red-50/80 dark:bg-red-950/20 p-3.5 sm:p-5 space-y-3 sm:space-y-4 shadow-xs">
             <div className="flex items-center justify-between border-b border-red-200 dark:border-red-500/30 pb-2.5">
-              <span className="text-xs font-extrabold text-red-800 dark:text-red-400 uppercase tracking-wider">Unchained Errands (Fragmented)</span>
-              <span className="text-xs font-bold text-neutral-700 dark:text-neutral-400">{tripCount} isolated trips</span>
+              <span className="text-xs sm:text-sm font-extrabold text-red-800 dark:text-red-400 uppercase tracking-wider">Unchained Errands (Fragmented)</span>
+              <span className="text-xs sm:text-sm font-bold text-neutral-700 dark:text-neutral-300">{tripCount} isolated trips</span>
             </div>
 
-            <div className="grid grid-cols-2 gap-2 sm:gap-3 text-center">
-              <div className="p-2 sm:p-3 rounded-lg bg-white dark:bg-neutral-900 border border-red-200 dark:border-red-900/50 shadow-xs">
-                <span className="text-[10px] sm:text-xs font-bold text-neutral-600 dark:text-neutral-400 block mb-0.5 sm:mb-1">Total Travel</span>
-                <span className="text-sm sm:text-lg font-extrabold font-mono text-neutral-900 dark:text-white">{rawSumKm} km</span>
+            <div className="grid grid-cols-2 gap-2.5 sm:gap-3.5 text-center">
+              <div className="p-2.5 sm:p-3.5 rounded-xl bg-white dark:bg-neutral-900 border border-red-200 dark:border-red-900/50 shadow-xs">
+                <span className="text-xs sm:text-sm font-bold text-neutral-600 dark:text-neutral-400 block mb-1">Total Travel</span>
+                <span className="text-base sm:text-xl font-extrabold font-mono text-neutral-900 dark:text-white">{rawSumKm} km</span>
               </div>
-              <div className="p-2 sm:p-3 rounded-lg bg-white dark:bg-neutral-900 border border-red-200 dark:border-red-900/50 shadow-xs">
-                <span className="text-[10px] sm:text-xs font-bold text-neutral-600 dark:text-neutral-400 block mb-0.5 sm:mb-1">Cold Starts</span>
-                <span className="text-sm sm:text-lg font-extrabold font-mono text-red-700 dark:text-red-400">{tripCount} starts</span>
+              <div className="p-2.5 sm:p-3.5 rounded-xl bg-white dark:bg-neutral-900 border border-red-200 dark:border-red-900/50 shadow-xs">
+                <span className="text-xs sm:text-sm font-bold text-neutral-600 dark:text-neutral-400 block mb-1">Cold Starts</span>
+                <span className="text-base sm:text-xl font-extrabold font-mono text-red-700 dark:text-red-400">{tripCount} starts</span>
               </div>
-              <div className="p-2 sm:p-3 rounded-lg bg-white dark:bg-neutral-900 border border-red-200 dark:border-red-900/50 shadow-xs">
-                <span className="text-[10px] sm:text-xs font-bold text-neutral-600 dark:text-neutral-400 block mb-0.5 sm:mb-1">CO₂ Generated</span>
-                <span className="text-sm sm:text-lg font-extrabold font-mono text-neutral-900 dark:text-white">{unchainedCo2Grams} g</span>
+              <div className="p-2.5 sm:p-3.5 rounded-xl bg-white dark:bg-neutral-900 border border-red-200 dark:border-red-900/50 shadow-xs">
+                <span className="text-xs sm:text-sm font-bold text-neutral-600 dark:text-neutral-400 block mb-1">CO₂ Generated</span>
+                <span className="text-base sm:text-xl font-extrabold font-mono text-neutral-900 dark:text-white">{unchainedCo2Grams} g</span>
               </div>
-              <div className="p-2 sm:p-3 rounded-lg bg-white dark:bg-neutral-900 border border-red-200 dark:border-red-900/50 shadow-xs">
-                <span className="text-[10px] sm:text-xs font-bold text-neutral-600 dark:text-neutral-400 block mb-0.5 sm:mb-1">Commuter Exposure</span>
-                <span className="text-xs sm:text-sm font-extrabold font-mono text-red-700 dark:text-red-400">High (Inversion)</span>
+              <div className="p-2.5 sm:p-3.5 rounded-xl bg-white dark:bg-neutral-900 border border-red-200 dark:border-red-900/50 shadow-xs">
+                <span className="text-xs sm:text-sm font-bold text-neutral-600 dark:text-neutral-400 block mb-1">Commuter Exposure</span>
+                <span className="text-sm sm:text-base font-extrabold font-mono text-red-700 dark:text-red-400">High (Inversion)</span>
               </div>
             </div>
 
-            <p className="text-xs font-medium text-neutral-800 dark:text-neutral-200 leading-relaxed">
+            <p className="text-xs sm:text-sm font-medium text-neutral-800 dark:text-neutral-200 leading-relaxed">
               Multiple cold starts force the engine to run rich with unheated catalytic converters, spewing 400% higher hydrocarbons and fine particulates into morning cold air.
             </p>
           </div>
@@ -249,30 +249,30 @@ export function TripCombiner({ airData }: TripCombinerProps) {
           {/* Chained Profile */}
           <div className="border-2 border-emerald-300 dark:border-emerald-500/40 rounded-xl bg-emerald-50/80 dark:bg-emerald-950/20 p-3.5 sm:p-5 space-y-3 sm:space-y-4 shadow-xs">
             <div className="flex items-center justify-between border-b border-emerald-200 dark:border-emerald-500/30 pb-2.5">
-              <span className="text-xs font-extrabold text-emerald-800 dark:text-emerald-400 uppercase tracking-wider">Chained Loop (Optimized Window)</span>
-              <span className="text-xs font-extrabold text-emerald-900 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-900/50 px-2 py-0.5 rounded-full">{co2SavingsPercent}% CO₂ Cut</span>
+              <span className="text-xs sm:text-sm font-extrabold text-emerald-800 dark:text-emerald-400 uppercase tracking-wider">Chained Loop (Optimized Window)</span>
+              <span className="text-xs sm:text-sm font-extrabold text-emerald-900 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-900/50 px-2.5 py-0.5 rounded-full">{co2SavingsPercent}% CO₂ Cut</span>
             </div>
 
-            <div className="grid grid-cols-2 gap-2 sm:gap-3 text-center">
-              <div className="p-2 sm:p-3 rounded-lg bg-white dark:bg-neutral-900 border border-emerald-200 dark:border-emerald-900/50 shadow-xs">
-                <span className="text-[10px] sm:text-xs font-bold text-neutral-600 dark:text-neutral-400 block mb-0.5 sm:mb-1">Total Travel</span>
-                <span className="text-sm sm:text-lg font-extrabold font-mono text-emerald-800 dark:text-emerald-400">{chainedKm} km</span>
+            <div className="grid grid-cols-2 gap-2.5 sm:gap-3.5 text-center">
+              <div className="p-2.5 sm:p-3.5 rounded-xl bg-white dark:bg-neutral-900 border border-emerald-200 dark:border-emerald-900/50 shadow-xs">
+                <span className="text-xs sm:text-sm font-bold text-neutral-600 dark:text-neutral-400 block mb-1">Total Travel</span>
+                <span className="text-base sm:text-xl font-extrabold font-mono text-emerald-800 dark:text-emerald-400">{chainedKm} km</span>
               </div>
-              <div className="p-2 sm:p-3 rounded-lg bg-white dark:bg-neutral-900 border border-emerald-200 dark:border-emerald-900/50 shadow-xs">
-                <span className="text-[10px] sm:text-xs font-bold text-neutral-600 dark:text-neutral-400 block mb-0.5 sm:mb-1">Cold Starts</span>
-                <span className="text-sm sm:text-lg font-extrabold font-mono text-emerald-800 dark:text-emerald-400">1 start only</span>
+              <div className="p-2.5 sm:p-3.5 rounded-xl bg-white dark:bg-neutral-900 border border-emerald-200 dark:border-emerald-900/50 shadow-xs">
+                <span className="text-xs sm:text-sm font-bold text-neutral-600 dark:text-neutral-400 block mb-1">Cold Starts</span>
+                <span className="text-base sm:text-xl font-extrabold font-mono text-emerald-800 dark:text-emerald-400">1 start only</span>
               </div>
-              <div className="p-2 sm:p-3 rounded-lg bg-white dark:bg-neutral-900 border border-emerald-200 dark:border-emerald-900/50 shadow-xs">
-                <span className="text-[10px] sm:text-xs font-bold text-neutral-600 dark:text-neutral-400 block mb-0.5 sm:mb-1">CO₂ Generated</span>
-                <span className="text-sm sm:text-lg font-extrabold font-mono text-emerald-800 dark:text-emerald-400">{chainedCo2Grams} g</span>
+              <div className="p-2.5 sm:p-3.5 rounded-xl bg-white dark:bg-neutral-900 border border-emerald-200 dark:border-emerald-900/50 shadow-xs">
+                <span className="text-xs sm:text-sm font-bold text-neutral-600 dark:text-neutral-400 block mb-1">CO₂ Generated</span>
+                <span className="text-base sm:text-xl font-extrabold font-mono text-emerald-800 dark:text-emerald-400">{chainedCo2Grams} g</span>
               </div>
-              <div className="p-2 sm:p-3 rounded-lg bg-white dark:bg-neutral-900 border border-emerald-200 dark:border-emerald-900/50 shadow-xs">
-                <span className="text-[10px] sm:text-xs font-bold text-neutral-600 dark:text-neutral-400 block mb-0.5 sm:mb-1">Inhalation Cut</span>
-                <span className="text-xs sm:text-sm font-extrabold font-mono text-emerald-800 dark:text-emerald-400">-{exposureReductionPercent}% Inhaled</span>
+              <div className="p-2.5 sm:p-3.5 rounded-xl bg-white dark:bg-neutral-900 border border-emerald-200 dark:border-emerald-900/50 shadow-xs">
+                <span className="text-xs sm:text-sm font-bold text-neutral-600 dark:text-neutral-400 block mb-1">Inhalation Cut</span>
+                <span className="text-sm sm:text-base font-extrabold font-mono text-emerald-800 dark:text-emerald-400">-{exposureReductionPercent}% Inhaled</span>
               </div>
             </div>
 
-            <p className="text-xs font-medium text-neutral-800 dark:text-neutral-200 leading-relaxed">
+            <p className="text-xs sm:text-sm font-medium text-neutral-800 dark:text-neutral-200 leading-relaxed">
               One warm loop keeps the catalytic converter at optimal 450°C efficiency, while scheduling during thermal lift ensures commuter avoids morning soot stagnation.
             </p>
           </div>

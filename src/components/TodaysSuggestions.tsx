@@ -130,14 +130,14 @@ export function TodaysSuggestions({
                     <CardTitle className="text-sm sm:text-base md:text-lg font-bold text-foreground group-hover:text-brand transition-colors">
                       {item.title}
                     </CardTitle>
-                    <CardText className="text-xs sm:text-sm font-medium text-neutral-700 dark:text-neutral-300 mt-0.5 line-clamp-1">
+                    <CardText className="text-sm sm:text-base font-medium text-neutral-700 dark:text-neutral-300 mt-0.5 line-clamp-1">
                       {item.caption}
                     </CardText>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-2 shrink-0 self-end xs:self-center">
-                  <Chip tone={item.chipTone} className="text-[10px] sm:text-xs font-semibold">{item.chipLabel}</Chip>
+                  <Chip tone={item.chipTone} className="text-xs sm:text-sm font-semibold">{item.chipLabel}</Chip>
                   <ChevronRight className="size-4 text-neutral-500 group-hover:text-foreground" />
                 </div>
               </CardBody>

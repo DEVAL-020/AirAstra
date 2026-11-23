@@ -7,13 +7,13 @@ import { cn } from '@/lib/utils';
  * An outlined meta chip. Grey by default; special is purple.
  * Tones are text and a thin stroke, never a fill.
  */
-const chipVariants = cva('inline-flex items-center gap-1 rounded border px-2 py-0.5 text-[11px] leading-4 whitespace-nowrap', {
+const chipVariants = cva('inline-flex items-center gap-1.5 rounded-md border px-2.5 py-0.5 text-xs sm:text-[13px] font-semibold leading-relaxed whitespace-nowrap', {
   variants: {
     tone: {
-      default: 'border-gray-200 text-gray-500 dark:border-gray-700 dark:text-gray-400',
-      success: 'border-green-600/30 text-green-700 dark:border-green-400/30 dark:text-green-400',
-      danger: 'border-red-600/30 text-red-700 dark:border-red-400/30 dark:text-red-400',
-      special: 'border-purple-600/30 text-purple-700 dark:border-purple-400/30 dark:text-purple-400',
+      default: 'border-gray-300 text-gray-700 dark:border-gray-700 dark:text-gray-300',
+      success: 'border-green-600/40 text-green-800 dark:border-green-400/40 dark:text-green-300 font-bold',
+      danger: 'border-red-600/40 text-red-800 dark:border-red-400/40 dark:text-red-300 font-bold',
+      special: 'border-purple-600/40 text-purple-800 dark:border-purple-400/40 dark:text-purple-300 font-bold',
     },
   },
   defaultVariants: { tone: 'default' },

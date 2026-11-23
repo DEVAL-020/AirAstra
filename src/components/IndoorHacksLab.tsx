@@ -198,27 +198,27 @@ export function IndoorHacksLab({ onOpenPurifier3D, currentAQI = 210 }: IndoorHac
           </div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-3 border-t border-border/50 text-xs">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-3.5 border-t border-border/50 text-xs sm:text-sm">
           <div>
-            <span className="text-[10px] font-bold text-neutral-600 dark:text-neutral-400 block">Room volume</span>
-            <span className="font-mono text-sm font-bold text-foreground">{roomVolumeCuFt.toLocaleString()} cu ft</span>
+            <span className="text-xs sm:text-sm font-bold text-neutral-600 dark:text-neutral-400 block">Room volume</span>
+            <span className="font-mono text-sm sm:text-base font-bold text-foreground">{roomVolumeCuFt.toLocaleString()} cu ft</span>
           </div>
 
           <div>
-            <span className="text-[10px] font-bold text-neutral-600 dark:text-neutral-400 block">Required baseline CADR</span>
-            <span className="font-mono text-sm font-bold text-brand">{requiredCadr} CFM</span>
+            <span className="text-xs sm:text-sm font-bold text-neutral-600 dark:text-neutral-400 block">Required baseline CADR</span>
+            <span className="font-mono text-sm sm:text-base font-bold text-brand">{requiredCadr} CFM</span>
           </div>
 
           <div>
-            <span className="text-[10px] font-bold text-neutral-600 dark:text-neutral-400 block">Recommended build</span>
-            <span className="text-xs font-bold text-foreground block">
+            <span className="text-xs sm:text-sm font-bold text-neutral-600 dark:text-neutral-400 block">Recommended build</span>
+            <span className="text-xs sm:text-sm font-bold text-foreground block">
               {requiredCadr > 350 ? '4-Filter Corsi-Rosenthal cube' : '2-Filter wedge'}
             </span>
           </div>
 
           <div>
-            <span className="text-[10px] font-bold text-neutral-600 dark:text-neutral-400 block">Estimated build cost</span>
-            <span className="font-mono text-sm font-bold text-foreground">~$28 total</span>
+            <span className="text-xs sm:text-sm font-bold text-neutral-600 dark:text-neutral-400 block">Estimated build cost</span>
+            <span className="font-mono text-sm sm:text-base font-bold text-foreground">~$28 total</span>
           </div>
         </div>
 
@@ -297,11 +297,11 @@ export function IndoorHacksLab({ onOpenPurifier3D, currentAQI = 210 }: IndoorHac
                     {hack.category === 'cooking' && <Flame className="size-4" />}
                   </div>
                   <div>
-                    <h4 className="font-montserrat text-sm font-bold text-foreground">{hack.title}</h4>
+                    <h4 className="font-montserrat text-sm sm:text-base font-bold text-foreground">{hack.title}</h4>
                     <div className="flex items-center gap-2 mt-1">
                       <Chip tone="default">{hack.cost}</Chip>
-                      <span className="text-[11px] font-semibold text-neutral-600 dark:text-neutral-400">{hack.difficulty}</span>
-                      <span className="text-[11px] font-bold text-neutral-600 dark:text-neutral-400 font-mono">{hack.cadr}</span>
+                      <span className="text-xs sm:text-sm font-semibold text-neutral-600 dark:text-neutral-400">{hack.difficulty}</span>
+                      <span className="text-xs sm:text-sm font-bold text-neutral-600 dark:text-neutral-400 font-mono">{hack.cadr}</span>
                     </div>
                   </div>
                 </div>

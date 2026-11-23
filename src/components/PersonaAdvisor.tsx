@@ -133,12 +133,12 @@ export function PersonaAdvisor({ airData }: PersonaAdvisorProps) {
                 )}>
                   <Icon className="size-4 sm:size-5" />
                 </div>
-                <span className="text-[8.5px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded-full bg-neutral-200 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-300 truncate max-w-[75px] xs:max-w-none">
+                <span className="text-[10px] sm:text-xs font-bold px-2 py-0.5 rounded-full bg-neutral-200 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-300 truncate max-w-[85px] xs:max-w-none">
                   {persona.badge}
                 </span>
               </div>
               <h3 className="text-xs sm:text-sm font-bold text-foreground leading-snug">{persona.title}</h3>
-              <p className="text-[11px] sm:text-xs font-medium text-neutral-600 dark:text-neutral-400 mt-0.5">{persona.subtitle}</p>
+              <p className="text-xs sm:text-sm font-medium text-neutral-600 dark:text-neutral-400 mt-0.5">{persona.subtitle}</p>
             </button>
           );
         })}
@@ -409,28 +409,28 @@ export function PersonaAdvisor({ airData }: PersonaAdvisorProps) {
 
               {/* Calculator Output */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-1">
-                <div className="p-4 rounded-lg border border-border/60 bg-neutral-50 dark:bg-neutral-900/60 text-center">
-                  <span className="text-xs font-bold text-neutral-600 dark:text-neutral-400 block">Pulmonary Intake</span>
+                <div className="p-4 rounded-xl border border-border/60 bg-neutral-50 dark:bg-neutral-900/60 text-center">
+                  <span className="text-xs sm:text-sm font-bold text-neutral-600 dark:text-neutral-400 block">Pulmonary Intake</span>
                   <span className="text-2xl font-mono font-bold text-foreground mt-1 block">
                     {totalLitersInhaled.toLocaleString()} Liters
                   </span>
-                  <span className="text-[11px] font-medium text-neutral-500 dark:text-neutral-400 mt-1 block">Inhaled in {athleteMinutes} minutes</span>
+                  <span className="text-xs sm:text-sm font-medium text-neutral-500 dark:text-neutral-400 mt-1 block">Inhaled in {athleteMinutes} minutes</span>
                 </div>
 
-                <div className="p-4 rounded-lg border border-border/60 bg-neutral-50 dark:bg-neutral-900/60 text-center">
-                  <span className="text-xs font-bold text-neutral-600 dark:text-neutral-400 block">Particulate Deposition</span>
+                <div className="p-4 rounded-xl border border-border/60 bg-neutral-50 dark:bg-neutral-900/60 text-center">
+                  <span className="text-xs sm:text-sm font-bold text-neutral-600 dark:text-neutral-400 block">Particulate Deposition</span>
                   <span className="text-2xl font-mono font-bold text-amber-600 dark:text-amber-400 mt-1 block">
                     {pmInhaledUg} µg PM2.5
                   </span>
-                  <span className="text-[11px] font-medium text-neutral-500 dark:text-neutral-400 mt-1 block">Deposited deep in pulmonary alveoli</span>
+                  <span className="text-xs sm:text-sm font-medium text-neutral-500 dark:text-neutral-400 mt-1 block">Deposited deep in pulmonary alveoli</span>
                 </div>
 
-                <div className="p-4 rounded-lg border border-border/60 bg-neutral-50 dark:bg-neutral-900/60 text-center">
-                  <span className="text-xs font-bold text-neutral-600 dark:text-neutral-400 block">Smog Health Penalty</span>
+                <div className="p-4 rounded-xl border border-border/60 bg-neutral-50 dark:bg-neutral-900/60 text-center">
+                  <span className="text-xs sm:text-sm font-bold text-neutral-600 dark:text-neutral-400 block">Smog Health Penalty</span>
                   <span className="text-2xl font-mono font-bold text-red-600 dark:text-red-400 mt-1 block">
                     ~{cigaretteEquivalents} cigarettes
                   </span>
-                  <span className="text-[11px] font-medium text-neutral-500 dark:text-neutral-400 mt-1 block">Toxic particulate equivalent</span>
+                  <span className="text-xs sm:text-sm font-medium text-neutral-500 dark:text-neutral-400 mt-1 block">Toxic particulate equivalent</span>
                 </div>
               </div>
 
