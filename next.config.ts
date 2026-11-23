@@ -22,8 +22,8 @@ const nextConfig: NextConfig = {
             value: "nosniff",
           },
           {
-            key: "X-Frame-Options",
-            value: "DENY",
+            key: "Content-Security-Policy",
+            value: "frame-ancestors 'self' https://app.netlify.com https://*.netlify.app",
           },
           {
             key: "Referrer-Policy",
