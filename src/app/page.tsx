@@ -7,16 +7,19 @@ import { Navbar } from '@/components/Navbar';
 import { WeatherHero } from '@/components/WeatherHero';
 import { WeatherWidgetsGrid } from '@/components/WeatherWidgetsGrid';
 import { TodaysSuggestions } from '@/components/TodaysSuggestions';
+import dynamic from 'next/dynamic';
 import { PersonaAdvisor } from '@/components/PersonaAdvisor';
-import { TripCombiner } from '@/components/TripCombiner';
-import { RoutineArchitect } from '@/components/RoutineArchitect';
-import { IndoorHacksLab } from '@/components/IndoorHacksLab';
-import { AirSnapVision } from '@/components/AirSnapVision';
-import { AstraVoiceChat } from '@/components/AstraVoiceChat';
-import { CommunityHub } from '@/components/CommunityHub';
-import { FamilyPlanExport } from '@/components/FamilyPlanExport';
-import { Purifier3DModal } from '@/components/Purifier3DModal';
-import { EmergencySmogModal } from '@/components/EmergencySmogModal';
+
+const TripCombiner = dynamic(() => import('@/components/TripCombiner').then((m) => m.TripCombiner), { ssr: false });
+const RoutineArchitect = dynamic(() => import('@/components/RoutineArchitect').then((m) => m.RoutineArchitect), { ssr: false });
+const IndoorHacksLab = dynamic(() => import('@/components/IndoorHacksLab').then((m) => m.IndoorHacksLab), { ssr: false });
+const AirSnapVision = dynamic(() => import('@/components/AirSnapVision').then((m) => m.AirSnapVision), { ssr: false });
+const AstraVoiceChat = dynamic(() => import('@/components/AstraVoiceChat').then((m) => m.AstraVoiceChat), { ssr: false });
+const CommunityHub = dynamic(() => import('@/components/CommunityHub').then((m) => m.CommunityHub), { ssr: false });
+const FamilyPlanExport = dynamic(() => import('@/components/FamilyPlanExport').then((m) => m.FamilyPlanExport), { ssr: false });
+const Purifier3DModal = dynamic(() => import('@/components/Purifier3DModal').then((m) => m.Purifier3DModal), { ssr: false });
+const EmergencySmogModal = dynamic(() => import('@/components/EmergencySmogModal').then((m) => m.EmergencySmogModal), { ssr: false });
+
 import { Footer } from '@/components/Footer';
 import { Backdrop } from '@/components/ui/backdrop';
 import { Segmented } from '@/components/ui/segmented';

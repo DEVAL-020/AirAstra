@@ -1,17 +1,13 @@
 @import 'tailwindcss';
-@import "@fontsource-variable/manrope";
-@import "@fontsource-variable/montserrat";
-@import "@fontsource-variable/onest";
-@import "@fontsource-variable/geist-mono";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --breakpoint-xs: 400px;
-  --font-sans: 'Manrope Variable', 'Manrope', ui-sans-serif, system-ui, sans-serif;
-  --font-display: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
-  --font-brand: 'Onest', ui-sans-serif, system-ui, sans-serif;
-  --font-mono: 'Geist Mono Variable', 'Geist Mono', ui-monospace, monospace;
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  --font-brand: var(--font-brand), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -43,9 +39,9 @@
   --color-card-edge: var(--card-edge);
   --color-card-edge-hover: var(--card-edge-hover);
   --color-card-fill: var(--card-fill);
-  --font-manrope: 'Manrope Variable', 'Manrope', ui-sans-serif, system-ui, sans-serif;
-  --font-montserrat: 'Montserrat Variable', 'Montserrat', ui-sans-serif, system-ui, sans-serif;
-  --font-onest: 'Onest Variable', 'Onest', ui-sans-serif, system-ui, sans-serif;
+  --font-manrope: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-montserrat: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  --font-onest: var(--font-brand), ui-sans-serif, system-ui, sans-serif;
   --animate-chai-spin: chai-spin 4s linear infinite;
   --animate-chai-pop: chai-pop 0.18s cubic-bezier(0.2, 0.8, 0.2, 1);
   --animate-chai-fade: chai-fade 0.15s ease;

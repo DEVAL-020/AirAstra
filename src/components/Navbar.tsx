@@ -112,7 +112,9 @@ export function Navbar({
         <div className="flex items-center gap-1.5 sm:gap-2 rounded-xl border border-neutral-300 dark:border-border/80 bg-white dark:bg-black/40 px-2 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm shadow-xs flex-1 min-w-0 max-w-[190px] sm:max-w-none">
           <Search className="size-3.5 sm:size-4 text-brand shrink-0" />
           <div className="relative flex-1 min-w-0 flex items-center">
+            <label htmlFor="nav-city-select" className="sr-only">Select city</label>
             <select
+              id="nav-city-select"
               aria-label="Select city for air quality data"
               value={currentCity.name}
               onChange={(e) => {

@@ -1,8 +1,18 @@
 'use client';
 
 import React from 'react';
+import dynamic from 'next/dynamic';
 import { AirQualityData } from '@/types';
-import { SmogShaderCanvas } from './SmogShaderCanvas';
+
+const SmogShaderCanvas = dynamic(
+  () => import('./SmogShaderCanvas').then((m) => m.SmogShaderCanvas),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="w-full h-full min-h-[190px] bg-neutral-900/40 animate-pulse rounded-xl" />
+    ),
+  }
+);
 import { 
   Wind, 
   Droplets, 

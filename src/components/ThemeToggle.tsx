@@ -70,14 +70,6 @@ export function ThemeToggle() {
     setIsOpen(false);
   };
 
-  if (!mounted) {
-    return (
-      <div className="inline-flex size-7.5 sm:size-9 items-center justify-center rounded-md border border-neutral-300 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300">
-        <Moon className="size-3.5 sm:size-4" />
-      </div>
-    );
-  }
-
   return (
     <div className="relative" ref={menuRef}>
       <button
