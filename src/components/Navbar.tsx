@@ -103,13 +103,13 @@ export function Navbar({
           <div className="flex size-7.5 sm:size-9 items-center justify-center rounded-lg border border-border bg-neutral-100 dark:bg-black/20 text-brand shadow-xs">
             <span className="font-brand text-sm sm:text-lg font-bold text-brand">A</span>
           </div>
-          <span className="font-brand text-base sm:text-xl font-bold tracking-tight text-foreground">
+          <span className="hidden min-[380px]:inline font-brand text-base sm:text-xl font-bold tracking-tight text-foreground">
             AirAstra
           </span>
         </div>
 
         {/* City selector in toolbar style */}
-        <div className="flex items-center gap-1.5 sm:gap-2 rounded-xl border border-neutral-300 dark:border-border/80 bg-white dark:bg-black/40 px-2 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm shadow-xs min-w-[140px] xs:min-w-[170px] sm:min-w-[210px] max-w-[240px] sm:max-w-none">
+        <div className="flex items-center gap-1.5 sm:gap-2 rounded-xl border border-neutral-300 dark:border-border/80 bg-white dark:bg-black/40 px-2 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm shadow-xs flex-1 min-w-0 max-w-[190px] sm:max-w-none">
           <Search className="size-3.5 sm:size-4 text-brand shrink-0" />
           <div className="relative flex-1 min-w-0 flex items-center">
             <select

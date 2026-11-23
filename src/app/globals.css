@@ -8,6 +8,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --breakpoint-xs: 400px;
   --font-sans: 'Manrope Variable', 'Manrope', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
   --font-brand: 'Onest', ui-sans-serif, system-ui, sans-serif;

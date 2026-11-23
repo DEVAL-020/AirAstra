@@ -41,8 +41,15 @@ export function AstraVoiceChat({ currentAQI, city }: AstraVoiceChatProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [ttsEnabled, setTtsEnabled] = useState(true);
+  const [voiceNotice, setVoiceNotice] = useState<string | null>(null);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!voiceNotice) return;
+    const timer = setTimeout(() => setVoiceNotice(null), 5000);
+    return () => clearTimeout(timer);
+  }, [voiceNotice]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -57,7 +64,7 @@ export function AstraVoiceChat({ currentAQI, city }: AstraVoiceChatProps) {
 
     const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     if (!SpeechRecognition) {
-      alert('Speech recognition is not supported in this browser. Please use Chrome or Edge.');
+      setVoiceNotice('Voice dictation is supported in Chrome & Edge browsers. You can type directly below.');
       return;
     }
 
@@ -72,13 +79,19 @@ export function AstraVoiceChat({ currentAQI, city }: AstraVoiceChatProps) {
       recognition.interimResults = false;
       recognition.maxAlternatives = 1;
 
-      recognition.onstart = () => setIsListening(true);
+      recognition.onstart = () => {
+        setIsListening(true);
+        setVoiceNotice(null);
+      };
       recognition.onresult = (event: any) => {
         const transcript = event.results[0][0].transcript;
         setInputValue(transcript);
         setIsListening(false);
       };
-      recognition.onerror = () => setIsListening(false);
+      recognition.onerror = () => {
+        setIsListening(false);
+        setVoiceNotice('Microphone access is unavailable. You can type your question directly below.');
+      };
       recognition.onend = () => setIsListening(false);
 
       recognition.start();
@@ -236,6 +249,18 @@ export function AstraVoiceChat({ currentAQI, city }: AstraVoiceChatProps) {
 
       {/* Input */}
       <div className="pt-3 border-t border-border/60 space-y-2">
+        {voiceNotice && (
+          <div className="flex items-center justify-between text-xs px-3 py-1.5 rounded-lg border border-amber-500/30 bg-amber-500/10 text-amber-900 dark:text-amber-200 animate-in fade-in duration-150">
+            <span>{voiceNotice}</span>
+            <button
+              type="button"
+              onClick={() => setVoiceNotice(null)}
+              className="ml-2 text-amber-500 hover:text-amber-300 font-bold"
+            >
+              ✕
+            </button>
+          </div>
+        )}
         <form
           onSubmit={(e) => {
             e.preventDefault();

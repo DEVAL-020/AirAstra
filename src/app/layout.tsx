@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Plus_Jakarta_Sans, Montserrat, Onest } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
@@ -23,6 +23,16 @@ const onest = Onest({
   variable: '--font-brand',
   display: 'swap',
 });
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: [
+    { media: '(prefers-color-scheme: dark)', color: '#090807' },
+    { media: '(prefers-color-scheme: light)', color: '#faf9f6' },
+  ],
+};
 
 export const metadata: Metadata = {
   title: 'AirAstra | Winter Smog & Community Clean Air OS',
@@ -60,7 +70,6 @@ export default function RootLayout({
         <link rel="icon" type="image/svg+xml" href="/icon.svg" />
         <link rel="alternate icon" href="/favicon.svg" />
         <link rel="apple-touch-icon" href="/icon.svg" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script
           dangerouslySetInnerHTML={{
             __html: `

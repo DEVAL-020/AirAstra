@@ -169,7 +169,7 @@ export const SmogShaderCanvas: React.FC<SmogShaderCanvasProps> = ({ aqi, inversi
     inversionPlane.position.y = 0.5;
     scene.add(inversionPlane);
 
-    // Mouse tracking
+    // Mouse & Touch tracking
     const mouse = new THREE.Vector2();
     const handleMouseMove = (event: MouseEvent) => {
       const rect = container.getBoundingClientRect();
@@ -178,7 +178,18 @@ export const SmogShaderCanvas: React.FC<SmogShaderCanvasProps> = ({ aqi, inversi
       uniforms.uMouse.value.copy(mouse);
     };
 
+    const handleTouchMove = (event: TouchEvent) => {
+      if (event.touches.length > 0) {
+        const touch = event.touches[0];
+        const rect = container.getBoundingClientRect();
+        mouse.x = ((touch.clientX - rect.left) / rect.width) * 2 - 1;
+        mouse.y = -((touch.clientY - rect.top) / rect.height) * 2 + 1;
+        uniforms.uMouse.value.copy(mouse);
+      }
+    };
+
     container.addEventListener('mousemove', handleMouseMove);
+    container.addEventListener('touchmove', handleTouchMove, { passive: true });
 
     // Animation Loop
     let animationFrameId: number;
@@ -216,6 +227,7 @@ export const SmogShaderCanvas: React.FC<SmogShaderCanvasProps> = ({ aqi, inversi
     return () => {
       cancelAnimationFrame(animationFrameId);
       container.removeEventListener('mousemove', handleMouseMove);
+      container.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('resize', handleResize);
       renderer.dispose();
       geometry.dispose();

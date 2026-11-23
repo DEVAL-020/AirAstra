@@ -202,33 +202,58 @@ export const Purifier3DModal: React.FC<Purifier3DModalProps> = ({ isOpen, onClos
     const particles = new THREE.Points(particleGeo, particleMaterial);
     scene.add(particles);
 
-    // Mouse drag rotation
+    // Mouse & Touch drag rotation
     let isDragging = false;
-    let previousMousePosition = { x: 0, y: 0 };
+    let previousPosition = { x: 0, y: 0 };
 
     const onMouseDown = (e: MouseEvent) => {
       isDragging = true;
-      previousMousePosition = { x: e.clientX, y: e.clientY };
+      previousPosition = { x: e.clientX, y: e.clientY };
     };
 
     const onMouseMove = (e: MouseEvent) => {
       if (!isDragging) return;
-      const deltaX = e.clientX - previousMousePosition.x;
-      const deltaY = e.clientY - previousMousePosition.y;
+      const deltaX = e.clientX - previousPosition.x;
+      const deltaY = e.clientY - previousPosition.y;
 
       assemblyGroup.rotation.y += deltaX * 0.01;
       assemblyGroup.rotation.x += deltaY * 0.01;
 
-      previousMousePosition = { x: e.clientX, y: e.clientY };
+      previousPosition = { x: e.clientX, y: e.clientY };
     };
 
     const onMouseUp = () => {
       isDragging = false;
     };
 
+    const onTouchStart = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        isDragging = true;
+        previousPosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      }
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      if (!isDragging || e.touches.length === 0) return;
+      const deltaX = e.touches[0].clientX - previousPosition.x;
+      const deltaY = e.touches[0].clientY - previousPosition.y;
+
+      assemblyGroup.rotation.y += deltaX * 0.01;
+      assemblyGroup.rotation.x += deltaY * 0.01;
+
+      previousPosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    };
+
+    const onTouchEnd = () => {
+      isDragging = false;
+    };
+
     container.addEventListener('mousedown', onMouseDown);
     window.addEventListener('mousemove', onMouseMove);
     window.addEventListener('mouseup', onMouseUp);
+    container.addEventListener('touchstart', onTouchStart, { passive: true });
+    window.addEventListener('touchmove', onTouchMove, { passive: true });
+    window.addEventListener('touchend', onTouchEnd);
 
     // Animation Loop
     let animId: number;
@@ -322,6 +347,9 @@ export const Purifier3DModal: React.FC<Purifier3DModalProps> = ({ isOpen, onClos
       container.removeEventListener('mousedown', onMouseDown);
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('mouseup', onMouseUp);
+      container.removeEventListener('touchstart', onTouchStart);
+      window.removeEventListener('touchmove', onTouchMove);
+      window.removeEventListener('touchend', onTouchEnd);
       renderer.dispose();
       fanFrameGeo.dispose();
       fanFrameMat.dispose();
@@ -375,8 +403,8 @@ export const Purifier3DModal: React.FC<Purifier3DModalProps> = ({ isOpen, onClos
           <div ref={mountRef} className="w-full h-full cursor-grab active:cursor-grabbing" />
 
           {/* Left HUD: CAD Metrics */}
-          <div className="absolute top-3 left-3 sm:top-4 sm:left-4 space-y-2 pointer-events-none">
-            <div className="rounded-xl border border-border/60 bg-black/80 backdrop-blur-md p-3.5 sm:p-4 text-xs sm:text-sm text-neutral-200 space-y-2.5 min-w-[210px] sm:min-w-[240px] max-w-[270px] shadow-xl">
+          <div className="absolute top-2.5 left-2.5 sm:top-4 sm:left-4 space-y-2 pointer-events-none">
+            <div className="rounded-xl border border-border/60 bg-black/80 backdrop-blur-md p-3 sm:p-4 text-xs sm:text-sm text-neutral-200 space-y-2 min-w-[190px] sm:min-w-[240px] max-w-[calc(100vw-40px)] sm:max-w-[270px] shadow-xl">
               <div className="flex items-center justify-between text-white font-bold gap-3 text-xs sm:text-sm">
                 <span>Clean air delivery</span>
                 <span className="font-mono text-sm sm:text-base font-extrabold text-brand shrink-0">{estimatedCadr} CFM</span>
@@ -408,7 +436,7 @@ export const Purifier3DModal: React.FC<Purifier3DModalProps> = ({ isOpen, onClos
         </div>
 
         {/* Interactive Controls Footer */}
-        <div className="px-5 sm:px-7 py-3.5 sm:py-4 bg-neutral-100 dark:bg-black/40 border-t border-border/60 flex flex-wrap items-center justify-between gap-4">
+        <div className="px-3 sm:px-7 py-3 sm:py-4 bg-neutral-100 dark:bg-black/40 border-t border-border/60 flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-3">
             <span className="text-xs sm:text-sm font-bold text-neutral-800 dark:text-neutral-200">Fan speed:</span>
             <div className="flex items-center gap-2">
