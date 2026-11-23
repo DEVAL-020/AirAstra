@@ -9,7 +9,10 @@ import {
   VolumeX, 
   Compass, 
   Search,
-  ChevronDown
+  ChevronDown,
+  Loader2,
+  Info,
+  X
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ThemeToggle } from '@/components/ThemeToggle';
@@ -27,6 +30,8 @@ export function Navbar({
 }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [isAmbientOn, setIsAmbientOn] = useState(false);
+  const [isLocating, setIsLocating] = useState(false);
+  const [geoNotice, setGeoNotice] = useState<string | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -35,6 +40,12 @@ export function Navbar({
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  useEffect(() => {
+    if (!geoNotice) return;
+    const timer = setTimeout(() => setGeoNotice(null), 6000);
+    return () => clearTimeout(timer);
+  }, [geoNotice]);
+
   const toggleSound = () => {
     const newState = soundFX.toggleHepaHum();
     setIsAmbientOn(newState);
@@ -42,11 +53,14 @@ export function Navbar({
 
   const handleGeoLocation = () => {
     if (!navigator.geolocation) {
-      alert('Geolocation is not supported by your browser');
+      setGeoNotice('Geolocation is not supported by your browser. Please select your city from the dropdown.');
       return;
     }
+    setIsLocating(true);
+    setGeoNotice(null);
     navigator.geolocation.getCurrentPosition(
       (pos) => {
+        setIsLocating(false);
         const customCity: CityPreset = {
           name: 'My Location',
           country: 'Local Coordinates',
@@ -58,8 +72,19 @@ export function Navbar({
         soundFX.playChime();
       },
       (err) => {
-        alert('Could not retrieve location: ' + err.message);
-      }
+        setIsLocating(false);
+        if (err.code === 1) {
+          // PERMISSION_DENIED
+          setGeoNotice('Location permission was denied. You can select your city from the dropdown or enable location in your browser address bar.');
+        } else if (err.code === 2) {
+          // POSITION_UNAVAILABLE
+          setGeoNotice('GPS position is currently unavailable. Please pick your city from the list.');
+        } else {
+          // TIMEOUT or other
+          setGeoNotice('Location request timed out. Please pick your city from the dropdown.');
+        }
+      },
+      { timeout: 10000, enableHighAccuracy: false }
     );
   };
 
@@ -121,11 +146,16 @@ export function Navbar({
           <button
             type="button"
             onClick={handleGeoLocation}
-            title="Detect my location"
+            disabled={isLocating}
+            title={isLocating ? 'Detecting your location...' : 'Detect my location'}
             aria-label="Detect my location"
-            className="rounded p-0.5 text-neutral-500 dark:text-neutral-400 hover:text-brand transition-colors cursor-pointer shrink-0"
+            className="rounded p-0.5 text-neutral-500 dark:text-neutral-400 hover:text-brand transition-colors cursor-pointer shrink-0 disabled:opacity-50"
           >
-            <Compass className="size-3.5 sm:size-4" />
+            {isLocating ? (
+              <Loader2 className="size-3.5 sm:size-4 animate-spin text-brand" />
+            ) : (
+              <Compass className="size-3.5 sm:size-4" />
+            )}
           </button>
         </div>
 
@@ -149,6 +179,24 @@ export function Navbar({
           <ThemeToggle />
         </div>
       </div>
+
+      {/* Gentle Geolocation Notice Toast */}
+      {geoNotice && (
+        <div className="border-b border-amber-500/20 bg-amber-500/10 px-3 sm:px-6 py-2 text-xs sm:text-sm text-amber-200 flex items-center justify-between gap-3 animate-in fade-in slide-in-from-top-1 duration-200">
+          <div className="flex items-center gap-2 max-w-4xl mx-auto flex-1">
+            <Info className="size-4 text-amber-400 shrink-0" />
+            <span className="leading-tight text-neutral-100">{geoNotice}</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => setGeoNotice(null)}
+            className="rounded p-1 text-amber-400/80 hover:text-amber-200 hover:bg-amber-500/20 transition-colors shrink-0"
+            aria-label="Dismiss notice"
+          >
+            <X className="size-3.5" />
+          </button>
+        </div>
+      )}
     </header>
   );
 }
