@@ -8,7 +8,8 @@ import {
   Volume2, 
   VolumeX, 
   Compass, 
-  Search
+  Search,
+  ChevronDown
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ThemeToggle } from '@/components/ThemeToggle';
@@ -83,27 +84,39 @@ export function Navbar({
         </div>
 
         {/* City selector in toolbar style */}
-        <div className="flex items-center gap-1 sm:gap-2 rounded-lg border border-neutral-300 dark:border-border bg-white dark:bg-black/20 px-1.5 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm shadow-xs min-w-0 max-w-[115px] xs:max-w-[150px] sm:max-w-none flex-1 sm:flex-initial">
-          <Search className="size-3 sm:size-4 text-neutral-500 dark:text-neutral-400 shrink-0" />
-          <select
-            value={currentCity.name}
-            onChange={(e) => {
-              const found = POPULAR_CITIES.find((c) => c.name === e.target.value);
-              if (found) onSelectCity(found);
-            }}
-            className="bg-transparent text-xs sm:text-sm font-bold text-foreground focus:outline-none cursor-pointer truncate min-w-0 w-0 flex-1"
-          >
-            {POPULAR_CITIES.map((c) => (
-              <option key={c.name} value={c.name} className="bg-white text-neutral-900 dark:bg-neutral-900 dark:text-white">
-                {c.name}, {c.country}
-              </option>
-            ))}
-            {currentCity.name === 'My Location' && (
-              <option value="My Location" className="bg-white text-neutral-900 dark:bg-neutral-900 dark:text-white">
-                My Location (GPS)
-              </option>
-            )}
-          </select>
+        <div className="flex items-center gap-1.5 sm:gap-2 rounded-xl border border-neutral-300 dark:border-border/80 bg-white dark:bg-black/40 px-2 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm shadow-xs min-w-[140px] xs:min-w-[170px] sm:min-w-[210px] max-w-[240px] sm:max-w-none">
+          <Search className="size-3.5 sm:size-4 text-brand shrink-0" />
+          <div className="relative flex-1 min-w-0 flex items-center">
+            <select
+              value={currentCity.name}
+              onChange={(e) => {
+                const found = POPULAR_CITIES.find((c) => c.name === e.target.value);
+                if (found) onSelectCity(found);
+              }}
+              className="w-full bg-transparent text-xs sm:text-sm font-bold text-foreground focus:outline-none cursor-pointer truncate appearance-none pr-4.5"
+            >
+              <optgroup label="India (Major Metros & Smog Zones)">
+                {POPULAR_CITIES.filter(c => c.country === 'India').map((c) => (
+                  <option key={c.name} value={c.name} className="bg-white text-neutral-900 dark:bg-neutral-900 dark:text-white py-1">
+                    {c.name}, {c.country}
+                  </option>
+                ))}
+              </optgroup>
+              <optgroup label="International Winter Inversion Cities">
+                {POPULAR_CITIES.filter(c => c.country !== 'India' && c.name !== 'My Location').map((c) => (
+                  <option key={c.name} value={c.name} className="bg-white text-neutral-900 dark:bg-neutral-900 dark:text-white py-1">
+                    {c.name}, {c.country}
+                  </option>
+                ))}
+              </optgroup>
+              {currentCity.name === 'My Location' && (
+                <option value="My Location" className="bg-white text-neutral-900 dark:bg-neutral-900 dark:text-white py-1">
+                  My Location (GPS)
+                </option>
+              )}
+            </select>
+            <ChevronDown className="pointer-events-none absolute right-0 size-3 sm:size-3.5 text-neutral-500 dark:text-neutral-400 shrink-0" />
+          </div>
 
           <button
             type="button"
@@ -112,7 +125,7 @@ export function Navbar({
             aria-label="Detect my location"
             className="rounded p-0.5 text-neutral-500 dark:text-neutral-400 hover:text-brand transition-colors cursor-pointer shrink-0"
           >
-            <Compass className="size-3 sm:size-4" />
+            <Compass className="size-3.5 sm:size-4" />
           </button>
         </div>
 
